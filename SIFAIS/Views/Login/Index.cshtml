@@ -1,0 +1,58 @@
+﻿@model SIFAIS.Modelos.Datos.TblUsuario
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" &amp;gt; />
+    <link rel="stylesheet" href="~/css/Login.css">
+    <title>Iniciar Sesión</title>
+</head>
+<body>
+    @using (Html.BeginForm("Access", "Login", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="contenedor">
+            <div class="contenedor-izquierdo">        
+                <img alt="SIFAIS" class="img" src="~/img/Login.jpg" />
+            </div>
+            <div class="contenedor-derecho">
+                <div>
+                    <img alt="Logo" class="logo" src="~/img/Logo-SIFAIS.webp" />
+                    <div class="contenedor-formulario">
+                        @Html.EditorFor(model => model.CorreoElectronico, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "txt-correo",
+                               placeholder = "Correo Electrónico",
+                               required = "required"
+                           }
+
+                       })
+                        @Html.EditorFor(model => model.Contraseña, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "txt-contraseña",
+                               placeholder = "Contraseña",
+                               required = "required",
+                               Type = "password"
+                           }
+                       })
+
+                        <button type="submit" class="btn-login">Iniciar Sesión</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</body>
+</html>
