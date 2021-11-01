@@ -28,6 +28,22 @@ namespace SIFAIS.Datos.Donante
             return oRespuesta;
         }
 
+        public Respuesta GetyById(ApplicationDbContext context, int id)
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = context.TblDonantes.Find(id);
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al filtrar!";
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
+        }
+
         public Respuesta ChangeStateDonante(ApplicationDbContext context, int id)
         {
             Respuesta oRespuesta = new Respuesta();
@@ -60,6 +76,7 @@ namespace SIFAIS.Datos.Donante
             {
                 var DonanteDB = context.TblDonantes.Find(id);
                 context.TblDonantes.Remove(DonanteDB);
+                context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)
@@ -85,6 +102,7 @@ namespace SIFAIS.Datos.Donante
                 DonanteDB.Telefono = oDonante.Telefono;
                 DonanteDB.Celular = oDonante.Celular;
                 DonanteDB.Estado = oDonante.Estado;
+                context.Update(DonanteDB).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
@@ -110,7 +128,7 @@ namespace SIFAIS.Datos.Donante
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                oRespuesta.Datos = context.TblDonantes.ToList();
+                oRespuesta.Datos = context.DonanteView.ToList();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)

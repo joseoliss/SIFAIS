@@ -34,7 +34,7 @@
 .contenedor-formulario {
     display: flex;
     flex-direction: column;
-    align-items: content-between;
+    justify-content: space-between;
     gap: 2em;
 }
 

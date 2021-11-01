@@ -12,20 +12,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" &amp;gt; />
     <link rel="stylesheet" href="~/css/Login.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <title>Iniciar Sesión</title>
 </head>
 <body>
-    @using (Html.BeginForm("Access", "Login", FormMethod.Post))
+
+    
+
+    @using (Html.BeginForm("Login", "Login", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
 
         <div class="contenedor">
-            <div class="contenedor-izquierdo">        
+            <div class="contenedor-izquierdo">
                 <img alt="SIFAIS" class="img" src="~/img/Login.jpg" />
             </div>
             <div class="contenedor-derecho">
                 <div>
                     <img alt="Logo" class="logo" src="~/img/Logo-SIFAIS.webp" />
+
+                    @if (ViewBag.error != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>@ViewBag.error</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+
                     <div class="contenedor-formulario">
                         @Html.EditorFor(model => model.CorreoElectronico, new
                        {
@@ -54,5 +69,8 @@
             </div>
         </div>
     }
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,0 +1,258 @@
+﻿
+/*********************************CONTENIDO PRINCIPAL************************************/
+
+.contenedor-contenido {
+    margin: 30px;
+    padding:20px;
+    background: #E5E5E5;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+}
+
+
+/**********************************LIST VIEW**************************************/
+
+/****CABECERA****/
+.contenedor-cabecera{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.btn-nuevo{
+    border-radius: 5px;
+    color: #fff;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size:18px;
+    outline: none;
+    padding:10px 12px;
+    background: #1A465F;
+}
+
+.btn-nuevo:hover {
+    text-decoration: none;
+    color: #fff;
+    background: #235e80;
+}
+
+.btn-nuevo:focus {
+    outline: none;
+    text-decoration: none;
+    color: #fff;
+    background: #235e80;
+}
+
+/*****BUSCADOR*****/
+
+.contenedor-buscador {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-bottom: 15px;
+}
+
+.contenedor-buscador label {
+    font-weight: bold;
+    padding-right: 8px;
+    font-size: 18px;
+}
+
+.txt-buscar {
+    border-radius: 5px;
+    outline: none;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.txt-buscar:hover {
+    transform: scale(1.05);
+    border: 1px solid #75426e;
+}
+
+.txt-buscar:focus {
+    transform: scale(1.05);
+    border: 1px solid #75426e;
+}
+
+/***TABLE*****/
+
+.t-head {
+    background: #1A465F;
+    color: #fff;
+}
+
+.btn-edit {
+    border-radius: 5px;
+    color: #fff;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size:18px;
+    outline: none;
+    padding:10px;
+    background: #763ca1;
+}
+
+.btn-details {
+    border-radius: 5px;
+    color: #fff;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 18px;
+    outline: none;
+    padding: 10px;
+    background: #24b700;
+}
+
+.btn-del {
+    border-radius: 5px;
+    color: #fff;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size:18px;
+    outline: none;
+    padding:10px 12px;
+    background: #991818;
+}
+
+.btn-edit:hover {
+    color:#fff;
+    background: #582d79;
+}
+
+.btn-details:hover {
+    color: #fff;
+    background: #1c8e00;
+}
+
+.btn-del:hover {
+    color:#fff;
+    background: #c51f1f;
+}
+
+.btn-edit:focus {
+    color:#fff;
+    background: #582d79;
+}
+
+.btn-details:focus {
+    color: #fff;
+    background: #1c8e00;
+}
+
+.btn-del:focus {
+    color:#fff;
+    background: #c51f1f;
+}
+
+
+
+/**********************************FORMS**************************************/
+
+/******BOTONES*******/
+
+.btn-crear {
+    border-radius: 5px;
+    color: #fff;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 18px;
+    outline: none;
+    background: #1A465F;
+}
+
+.btn-crear:hover {
+    color: #fff;
+    background: #235e80;
+}
+
+.btn-crear:focus {
+    color: #fff;
+    background: #235e80;
+}
+
+.btn-atras {
+    text-decoration: none;
+    text-align: center;
+    border-radius: 5px;
+    color: #fff;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 18px;
+    outline: none;
+    background: #d87f02;
+}
+
+.btn-atras:hover {
+    text-decoration: none;
+    color: #fff;
+    background: #bb6d00;
+}
+
+.btn-atras:focus {
+    text-decoration: none;
+    color: #fff;
+    background: #bb6d00;
+}
+
+.contenedor-botones {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+
+/***********TEXTBOX***********/
+.contenedor-form-group {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 25px;
+}
+
+.contenedor-form-group div{
+    width: 100%;
+}
+
+.txt-form {
+    border-radius: 5px;
+    outline: none;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    width:94%;
+}
+
+.txt-form-disabled {
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    pointer-events: none;
+    border-radius: 5px;
+    outline: none;
+    width: 94%;
+    background: none;
+}
+
+.txt-form-disabled-textarea {
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    pointer-events: none;
+    border-radius: 5px;
+    outline: none;
+    width: 94%;
+    background: none;
+    height: 100px;
+}
+
+.txt-form:hover {
+    transform: scale(1.05);
+    border: 1px solid #75426e;
+}
+
+.txt-form:focus {
+    transform: scale(1.05);
+    border: 1px solid #75426e;
+}
+
+.form-estado {
+    padding-top: 25px;
+    padding-left: 25px;
+}
+
+
+
+

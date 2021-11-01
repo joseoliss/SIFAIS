@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using SIFAIS.Modelos.Datos;
+using SIFAIS.Modelos.Views;
 
 #nullable disable
 
@@ -39,6 +40,7 @@ namespace SIFAIS.Datos
         public virtual DbSet<TblTipoGasto> TblTipoGastos { get; set; }
         public virtual DbSet<TblTipoResponsable> TblTipoResponsables { get; set; }
         public virtual DbSet<TblUsuario> TblUsuarios { get; set; }
+        public virtual DbSet<DonanteView> DonanteView { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -555,6 +557,38 @@ namespace SIFAIS.Datos
                     .HasForeignKey(d => d.IdSede)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Usuario_Sede");
+            });
+
+            modelBuilder.Entity<DonanteView>(entity =>
+            {
+                entity.ToTable("DonanteView");
+
+                entity.Property(e => e.CodigoExterno)
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CorreoElectronico)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Direccion)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(d => d.TipoDonante)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
             });
 
             OnModelCreatingPartial(modelBuilder);

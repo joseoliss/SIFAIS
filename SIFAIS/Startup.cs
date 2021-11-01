@@ -7,10 +7,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SIFAIS.Datos;
 using SIFAIS.Datos.Donaciones;
+using SIFAIS.Datos.TipoDonacion;
+using SIFAIS.Datos.Login;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using SIFAIS.Datos.TipoDonante;
+using SIFAIS.Datos.Donante;
 
 namespace SIFAIS
 {
@@ -33,13 +38,27 @@ namespace SIFAIS
             services.AddRazorPages();
 
 
+            //autenticación
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(option =>
+                {
+                    option.LoginPath = "/Login/Index/";
+                });
+
+
             //injectando las dependencias
-            services.AddSingleton<IDonacionesBLL, DonacionesBLL>();
+            services.AddSingleton<ILoginBLL, LoginBLL>();
+            services.AddSingleton<ITipoDonacionBLL, TipoDonacionBLL>();
+            services.AddSingleton<ITipoDonanteBLL, TipoDonanteBLL>();
+            services.AddSingleton<IDonanteBLL, DonanteBLL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

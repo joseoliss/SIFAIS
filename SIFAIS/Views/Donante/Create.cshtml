@@ -1,0 +1,107 @@
+﻿@model SIFAIS.Models.DonanteVM
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (ViewBag.error != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.error</strong> Pongase en contacto con el administrador.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="contenedor-contenido">
+    <h4 class="text-muted">Donante</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donante.Nombre"></label>
+                        <br />
+                        <input asp-for="Donante.Nombre" class="txt-form" />
+                        <br />
+                        <span asp-validation-for="Donante.Nombre" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donante.IdTipoDonante"></label>
+                        <div>
+                            @Html.DropDownListFor(m => m.Donante.IdTipoDonante, Model.LstTipoDonante, new { @class = "txt-form" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donante.Descripcion"></label>
+                        <br />
+                        <textarea asp-for="Donante.Descripcion" class="txt-form"></textarea>
+                        <br />
+                        <span asp-validation-for="Donante.Descripcion" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donante.Direccion"></label>
+                        <br />
+                        <textarea asp-for="Donante.Direccion" class="txt-form"></textarea>
+                        <br />
+                        <span asp-validation-for="Donante.Direccion" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donante.CorreoElectronico"></label>
+                        <br />
+                        <input asp-for="Donante.CorreoElectronico" class="txt-form" />
+                        <br />
+                        <span asp-validation-for="Donante.CorreoElectronico" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donante.Telefono"></label>
+                        <br />
+                        <input asp-for="Donante.Telefono" class="txt-form" />
+                        <br />
+                        <span asp-validation-for="Donante.Telefono" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donante.Celular"></label>
+                        <br />
+                        <input asp-for="Donante.Celular" class="txt-form" />
+                        <br />
+                        <span asp-validation-for="Donante.Celular" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donante.CodigoExterno"></label>
+                        <br />
+                        <input asp-for="Donante.CodigoExterno" class="txt-form" />
+                        <br />
+                        <span asp-validation-for="Donante.CodigoExterno" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="form-estado font-weight-bold">
+                            <input class="form-check-input" asp-for="Donante.Estado" /> @Html.DisplayNameFor(model => model.Donante.Estado)
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group col-sm-12 contenedor-botones">
+                    <div class="col-md-3">
+                        <a asp-action="Index" class="btn-atras form-control">Atrás</a>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="submit" value="Crear" class="btn-crear form-control" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -53,6 +53,22 @@ namespace SIFAIS.Datos.TipoDonacion
             return oRespuesta;
         }
 
+        public Respuesta GetyById(ApplicationDbContext context, int id)
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = context.TblTipoDonacions.Find(id);
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al filtrar!";
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
+        }
+
         public Respuesta DeleteTipoDonacion(ApplicationDbContext context, int id)
         {
             Respuesta oRespuesta = new Respuesta();
@@ -60,6 +76,7 @@ namespace SIFAIS.Datos.TipoDonacion
             {
                 var tipoDonacionDB = context.TblTipoDonacions.Find(id);
                 context.TblTipoDonacions.Remove(tipoDonacionDB);
+                context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)
@@ -79,6 +96,7 @@ namespace SIFAIS.Datos.TipoDonacion
                 tipoDonacionDB.Descripcion = oTipoDonacion.Descripcion;
                 tipoDonacionDB.Detalles = oTipoDonacion.Detalles;
                 tipoDonacionDB.Estado = oTipoDonacion.Estado;
+                context.Update(tipoDonacionDB).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChanges();
                 oRespuesta.Estado = 1;
             }

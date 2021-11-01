@@ -6,44 +6,67 @@
     <title>@ViewData["Title"] - SIFAIS</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/sidebar.css" />
+    <link rel="stylesheet" href="~/css/layout.css" />
+    <link rel="stylesheet" href="~/css/contenido-principal.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SIFAIS</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <div class="contenedor">
+        <div class="contenedor-sidebar">
+            <div class="contenedor-logo">
+                <img alt="SIFAIS" src="~/img/Logo-SIFAIS.webp" />
+                <div class="text-center">
+                    <p class="linea"></p>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+            <div class="contenedor-logout">
+                <a class="logout" href="#"><i class="fa fa-user" aria-hidden="true"></i></a>
+                <a class="logout" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+            </div>
+            <div class="contenedor-opciones">
+                <p>
+                    <a class="boton-expandible" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fa fa-list-ul" aria-hidden="true"></i> Donaciones
+                    </a>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <div class="contenedor-expandible">
+                        <a asp-action="Index" asp-controller="TipoDonacion">Tipo de Donación</a>
+                        <a asp-action="Index" asp-controller="TipoDonante">Tipo de Donante</a>
+                        <a asp-action="Index" asp-controller="Donante">Donante</a>
+                        <a href="#">Tipo de Donación</a>
+                        <a href="#">Tipo de Donación</a>
+                    </div>
+                </div>
+                <p>
+                    <a class="boton-expandible" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
+                        <i class="fa fa-list-ul" aria-hidden="true"></i> Activos
+                    </a>
+                </p>
+                <div class="collapse" id="collapseExample2">
+                    <div class="contenedor-expandible">
+                        <a href="#">Tipo de Donación</a>
+                        <a href="#">Tipo de Donación</a>
+                        <a href="#">Tipo de Donación</a>
+                        <a href="#">Tipo de Donación</a>
+                        <a href="#">Tipo de Donación</a>
+                        <a href="#">Tipo de Donación</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contenedor-principal">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - SIFAIS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @*FONT AWESOME*@
+    <script src="https://kit.fontawesome.com/40b7719c81.js" crossorigin="anonymous"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -15,6 +15,7 @@ namespace SIFAIS.Datos.Donante
         Respuesta AddDonante(ApplicationDbContext context, TblDonante oDonante);
         Respuesta EditDonante(ApplicationDbContext context, TblDonante oDonante);
         Respuesta DeleteDonante(ApplicationDbContext context, int id);
+        Respuesta GetyById(ApplicationDbContext context, int id);
 
         /// <summary>
         /// Metodo para cambiar el estado

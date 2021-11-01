@@ -28,6 +28,22 @@ namespace SIFAIS.Datos.TipoDonante
             return oRespuesta;
         }
 
+        public Respuesta GetyById(ApplicationDbContext context, int id)
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = context.TblTipoDonantes.Find(id);
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al filtrar!";
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
+        }
+
         public Respuesta ChangeStateTipoDonante(ApplicationDbContext context, int id)
         {
             Respuesta oRespuesta = new Respuesta();
@@ -60,6 +76,7 @@ namespace SIFAIS.Datos.TipoDonante
             {
                 var tipoDonanteDB = context.TblTipoDonantes.Find(id);
                 context.TblTipoDonantes.Remove(tipoDonanteDB);
+                context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)
@@ -79,6 +96,7 @@ namespace SIFAIS.Datos.TipoDonante
                 tipoDonanteDB.Descripcion = oTipoDonante.Descripcion;
                 tipoDonanteDB.Detalles = oTipoDonante.Detalles;
                 tipoDonanteDB.Estado = oTipoDonante.Estado;
+                context.Update(tipoDonanteDB).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
@@ -92,11 +110,13 @@ namespace SIFAIS.Datos.TipoDonante
 
         public IEnumerable<SelectListItem> GetListTipoDonante(ApplicationDbContext context)
         {
-            return context.TblTipoDonantes.Select(i => new SelectListItem()
-            {
-                Text = i.Descripcion,
-                Value = i.Id.ToString()
-            });
+            return (from d in context.TblTipoDonantes
+                    where d.Estado == true
+                    select d).Select(i => new SelectListItem()
+                    {
+                        Text = i.Descripcion,
+                        Value = i.Id.ToString()
+                    });
         }
 
         public Respuesta ListTipoDonante(ApplicationDbContext context)

@@ -15,6 +15,7 @@ namespace SIFAIS.Datos.TipoDonante
         Respuesta AddTipoDonante(ApplicationDbContext context, TblTipoDonante oTipoDonante);
         Respuesta EditTipoDonante(ApplicationDbContext context, TblTipoDonante oTipoDonante);
         Respuesta DeleteTipoDonante(ApplicationDbContext context, int id);
+        Respuesta GetyById(ApplicationDbContext context, int id);
 
         /// <summary>
         /// Metodo para cambiar el estado
