@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SIFAIS.Datos.ResponsableDonacion
 {
-    public class ResponsableBLL : IResponsableBLL
+    public class ResponsableDonacionBLL : IResponsableDonacionBLL
     {
         public Respuesta AddResponsableDonacion(ApplicationDbContext context, TblResponsableDonacion oResponsableDonacion)
         {
@@ -23,6 +23,24 @@ namespace SIFAIS.Datos.ResponsableDonacion
             catch (Exception ex)
             {
                 oRespuesta.Mensaje = "¡Ha ocurrido un error agregar!";
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
+        }
+
+        public Respuesta GetyById(ApplicationDbContext context, int id)
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = (from d in context.TblResponsableDonacions
+                                    where d.Id == id
+                                    select d).FirstOrDefault();
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al filtrar!";
                 oRespuesta.Estado = 0;
             }
             return oRespuesta;
@@ -60,6 +78,7 @@ namespace SIFAIS.Datos.ResponsableDonacion
             {
                 var ResponsableDonacionDB = context.TblResponsableDonacions.Find(id);
                 context.TblResponsableDonacions.Remove(ResponsableDonacionDB);
+                context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)

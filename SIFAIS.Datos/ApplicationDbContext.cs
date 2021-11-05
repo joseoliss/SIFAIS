@@ -41,6 +41,7 @@ namespace SIFAIS.Datos
         public virtual DbSet<TblTipoResponsable> TblTipoResponsables { get; set; }
         public virtual DbSet<TblUsuario> TblUsuarios { get; set; }
         public virtual DbSet<DonanteView> DonanteView { get; set; }
+        public virtual DbSet<DonacionesView> DonacionesView { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -589,6 +590,56 @@ namespace SIFAIS.Datos
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
+            });
+
+            modelBuilder.Entity<DonacionesView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("DonacionesView");
+
+                entity.Property(e => e.Cantidad)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DocumentacionSifais)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false)
+                    .HasColumnName("DocumentacionSIFAIS");
+
+                entity.Property(e => e.Donante)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Espacio)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FechaDonacion).HasColumnType("datetime");
+
+                entity.Property(e => e.Mensajero)
+                    .IsRequired()
+                    .HasMaxLength(51)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ResponsableDonacion)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TipoDonacion)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);

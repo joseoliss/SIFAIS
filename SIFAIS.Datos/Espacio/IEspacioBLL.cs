@@ -15,6 +15,7 @@ namespace SIFAIS.Datos.Espacio
         Respuesta AddEspacio(ApplicationDbContext context, TblEspacio oEspacio);
         Respuesta EditEspacio(ApplicationDbContext context, TblEspacio oEspacio);
         Respuesta DeleteEspacio(ApplicationDbContext context, int id);
+        Respuesta GetyById(ApplicationDbContext context, int id);
 
         /// <summary>
         /// Metodo para cambiar el estado

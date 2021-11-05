@@ -24,32 +24,62 @@
             </div>
             <div class="contenedor-opciones">
                 <p>
+                    <a class="boton-expandible" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">
+                        <i class="fa fa-line-chart" aria-hidden="true"></i> Admi. Donaciones
+                    </a>
+                </p>
+                <div class="collapse" id="collapseExample3">
+                    <div class="contenedor-expandible">
+                        <a asp-action="Index" asp-controller="Donacion">Ver Donaciones</a>
+                        <a asp-action="Index" asp-controller="Donante">Ver Donantes</a>
+                        <a asp-action="Index" asp-controller="Espacio">Var Espacios</a>
+                        <a asp-action="Index" asp-controller="Mensajero">Ver Mensajeros</a>
+                        <a asp-action="Index" asp-controller="ResponsableDonacion">Ver Responsables</a>
+                        <a asp-action="Index" asp-controller="DocumentacionSifais">Ver Documentación SIFAIS</a>
+                    </div>
+                </div>
+                <p>
+                    <a class="boton-expandible" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4">
+                        <i class="fa fa-line-chart" aria-hidden="true"></i> Admi. Activos
+                    </a>
+                </p>
+                <div class="collapse" id="collapseExample4">
+                    <div class="contenedor-expandible">
+                        <a href="#">Tipo de Donación</a>
+
+                    </div>
+                </div>
+                <p>
                     <a class="boton-expandible" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        <i class="fa fa-list-ul" aria-hidden="true"></i> Donaciones
+                        <i class="fa fa-cog" aria-hidden="true"></i> Config. Donaciones
                     </a>
                 </p>
                 <div class="collapse" id="collapseExample">
                     <div class="contenedor-expandible">
                         <a asp-action="Index" asp-controller="TipoDonacion">Tipo de Donación</a>
                         <a asp-action="Index" asp-controller="TipoDonante">Tipo de Donante</a>
-                        <a asp-action="Index" asp-controller="Donante">Donante</a>
-                        <a href="#">Tipo de Donación</a>
-                        <a href="#">Tipo de Donación</a>
                     </div>
                 </div>
                 <p>
                     <a class="boton-expandible" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
-                        <i class="fa fa-list-ul" aria-hidden="true"></i> Activos
+                        <i class="fa fa-cog" aria-hidden="true"></i> Config. Activos
                     </a>
                 </p>
                 <div class="collapse" id="collapseExample2">
                     <div class="contenedor-expandible">
                         <a href="#">Tipo de Donación</a>
+
+                    </div>
+                </div>
+                <p>
+                    <a class="boton-expandible" data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample5">
+                        <i class="fa fa-cogs" aria-hidden="true"></i> Config. General
+                    </a>
+                </p>
+                <div class="collapse" id="collapseExample5">
+                    <div class="contenedor-expandible">
                         <a href="#">Tipo de Donación</a>
-                        <a href="#">Tipo de Donación</a>
-                        <a href="#">Tipo de Donación</a>
-                        <a href="#">Tipo de Donación</a>
-                        <a href="#">Tipo de Donación</a>
+
                     </div>
                 </div>
             </div>

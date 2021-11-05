@@ -16,6 +16,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using SIFAIS.Datos.TipoDonante;
 using SIFAIS.Datos.Donante;
+using SIFAIS.Datos.DocumentacionSIFAIS;
+using SIFAIS.Datos.Mensajero;
+using SIFAIS.Datos.Espacio;
+using SIFAIS.Datos.ResponsableDonacion;
+using SIFAIS.Datos.Sede;
 
 namespace SIFAIS
 {
@@ -51,6 +56,12 @@ namespace SIFAIS
             services.AddSingleton<ITipoDonacionBLL, TipoDonacionBLL>();
             services.AddSingleton<ITipoDonanteBLL, TipoDonanteBLL>();
             services.AddSingleton<IDonanteBLL, DonanteBLL>();
+            services.AddSingleton<IDocumentacionSIFAISBLL, DocumentacionSIFAISBLL>();
+            services.AddSingleton<IMensajeroBLL, MensajeroBLL>();
+            services.AddSingleton<IEspacioBLL, EspacioBLL>();
+            services.AddSingleton<IResponsableDonacionBLL, ResponsableDonacionBLL>();
+            services.AddSingleton<IDonacionesBLL, DonacionesBLL>();
+            services.AddSingleton<ISedeBLL, SedeBLL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

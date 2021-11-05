@@ -28,6 +28,23 @@ namespace SIFAIS.Datos.Sede
             return oRespuesta;
         }
 
+        public Respuesta GetyById(ApplicationDbContext context, int id)
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = (from d in context.TblSedes
+                                    where d.Id == id
+                                    select d).FirstOrDefault();
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al filtrar!";
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
+        }
         public Respuesta ChangeStateSede(ApplicationDbContext context, int id)
         {
             Respuesta oRespuesta = new Respuesta();
@@ -60,6 +77,7 @@ namespace SIFAIS.Datos.Sede
             {
                 var SedeDB = context.TblSedes.Find(id);
                 context.TblSedes.Remove(SedeDB);
+                context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)
@@ -82,6 +100,7 @@ namespace SIFAIS.Datos.Sede
                 SedeDB.CorreoElectronico = oSede.CorreoElectronico;
                 SedeDB.Telefono = oSede.Telefono;
                 SedeDB.Estado = oSede.Estado;
+                context.Update(SedeDB).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
@@ -95,7 +114,9 @@ namespace SIFAIS.Datos.Sede
 
         public IEnumerable<SelectListItem> GetListSede(ApplicationDbContext context)
         {
-            return context.TblSedes.Select(i => new SelectListItem()
+            return (from s in context.TblSedes 
+                   where s.Estado == true
+                   select s).Select(i => new SelectListItem()
             {
                 Text = i.Nombre,
                 Value = i.Id.ToString()

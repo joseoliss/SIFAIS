@@ -15,7 +15,7 @@ namespace SIFAIS.Datos.Responsable
         Respuesta AddResponsable(ApplicationDbContext context, TblResponsable oResponsable);
         Respuesta EditResponsable(ApplicationDbContext context, TblResponsable oResponsable);
         Respuesta DeleteResponsable(ApplicationDbContext context, int id);
-
+        Respuesta GetyById(ApplicationDbContext context, int id);
         /// <summary>
         /// Metodo para cambiar el estado
         /// </summary>

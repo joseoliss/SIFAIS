@@ -110,8 +110,7 @@ namespace SIFAIS.Views
         {
             var oResultado = _Donante.DeleteDonante(_context, id);
             if (oResultado.Estado == 1) return RedirectToAction(nameof(Index), "Donante", new { mensaje = "Donante eliminado con éxito!" });
-            ViewBag.error = oResultado.Mensaje;
-            return View();
+            return RedirectToAction(nameof(Index), "Donante", new { mensaje = oResultado.Mensaje });
         }
     }
 }

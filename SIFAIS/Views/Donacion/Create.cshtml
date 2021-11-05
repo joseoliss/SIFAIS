@@ -1,0 +1,128 @@
+﻿@model SIFAIS.Models.DonacionVM
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (ViewBag.error != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.error</strong> Pongase en contacto con el administrador.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="contenedor-contenido">
+    <h4 class="text-muted">Donaciones</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donacion.IdTipoDonacion"></label>
+                        <div>
+                            @Html.DropDownListFor(m => m.Donacion.IdTipoDonacion, Model.lstTipoDonacion, new { @class = "txt-form" })
+                        </div>
+                        <span asp-validation-for="Donacion.IdTipoDonacion" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donacion.IdDonante"></label>
+                        <div>
+                            @Html.DropDownListFor(m => m.Donacion.IdDonante, Model.lstDonante, new { @class = "txt-form" })
+                        </div>
+                        <span asp-validation-for="Donacion.IdDonante" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donacion.IdDocSifais"></label>
+                        <div>
+                            @Html.DropDownListFor(m => m.Donacion.IdDocSifais, Model.lstDocumentacionSifais, new { @class = "txt-form" })
+                        </div>
+                        <span asp-validation-for="Donacion.IdDocSifais" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donacion.IdMensajero"></label>
+                        <div>
+                            @Html.DropDownListFor(m => m.Donacion.IdMensajero, Model.lstMensajero, new { @class = "txt-form" })
+                        </div>
+                        <span asp-validation-for="Donacion.IdMensajero" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donacion.IdEspacio"></label>
+                        <div>
+                            @Html.DropDownListFor(m => m.Donacion.IdEspacio, Model.lstEspacio, new { @class = "txt-form" })
+                        </div>
+                        <span asp-validation-for="Donacion.IdEspacio" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donacion.IdResponsableDonacion"></label>
+                        <div>
+                            @Html.DropDownListFor(m => m.Donacion.IdResponsableDonacion, Model.lstResponsable, new { @class = "txt-form" })
+                        </div>
+                        <span asp-validation-for="Donacion.IdResponsableDonacion" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donacion.IdSede"></label>
+                        <div>
+                            @Html.DropDownListFor(m => m.Donacion.IdSede, Model.lstSede, new { @class = "txt-form" })
+                        </div>
+                        <span asp-validation-for="Donacion.IdSede" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donacion.FechaDonacion"></label>
+                        <br />
+                        <input type="date" asp-for="Donacion.FechaDonacion" class="txt-form" />
+                        <br />
+                        <span asp-validation-for="Donacion.FechaDonacion" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donacion.Descripcion"></label>
+                        <br />
+                        <input type="text" asp-for="Donacion.Descripcion" class="txt-form" />
+                        <br />
+                        <span asp-validation-for="Donacion.Descripcion" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donacion.Cantidad"></label>
+                        <br />
+                        <input type="text" asp-for="Donacion.Cantidad" class="txt-form" />
+                        <br />
+                        <span asp-validation-for="Donacion.Cantidad" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Donacion.Detalles"></label>
+                        <br />
+                        <textarea asp-for="Donacion.Detalles" class="txt-form"></textarea>
+                        <br />
+                        <span asp-validation-for="Donacion.Detalles" class="text-danger"></span>
+                    </div>
+                    <div></div>
+                </div>
+                <div class="form-group col-sm-12 contenedor-botones">
+                    <div class="col-md-3">
+                        <a asp-action="Index" class="btn-atras form-control">Atrás</a>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="submit" value="Crear" class="btn-crear form-control" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

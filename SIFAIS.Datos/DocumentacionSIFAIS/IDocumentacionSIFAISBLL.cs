@@ -15,7 +15,7 @@ namespace SIFAIS.Datos.DocumentacionSIFAIS
         Respuesta AddDocumentacionSIFAIS(ApplicationDbContext context, TblDocumentacionSifai oDocumentacionSIFAIS);
         Respuesta EditDocumentacionSIFAIS(ApplicationDbContext context, TblDocumentacionSifai oDocumentacionSIFAIS);
         Respuesta DeleteDocumentacionSIFAIS(ApplicationDbContext context, int id);
-
+        Respuesta GetyById(ApplicationDbContext context, int id);
         /// <summary>
         /// Metodo para cambiar el estado
         /// </summary>

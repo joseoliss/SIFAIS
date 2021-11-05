@@ -81,7 +81,11 @@ namespace SIFAIS.Datos.Donante
             }
             catch (Exception ex)
             {
-                oRespuesta.Mensaje = "¡Ha ocurrido un error al eliminar!";
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al eliminar! " ;
+                if (ex.GetType().ToString() == "Microsoft.EntityFrameworkCore.DbUpdateException")
+                {
+                    oRespuesta.Mensaje = "¡No se puede eliminar ya que existe una relación con otra entidad! ";
+                }
                 oRespuesta.Estado = 0;
             }
             return oRespuesta;
@@ -116,9 +120,11 @@ namespace SIFAIS.Datos.Donante
 
         public IEnumerable<SelectListItem> GetListDonante(ApplicationDbContext context)
         {
-            return context.TblDonantes.Select(i => new SelectListItem()
-            {
-                Text = i.Descripcion,
+            return (from s in context.TblDonantes
+                    where s.Estado == true
+                    select s).Select(i => new SelectListItem()
+                    {
+                Text = i.Nombre,
                 Value = i.Id.ToString()
             });
         }

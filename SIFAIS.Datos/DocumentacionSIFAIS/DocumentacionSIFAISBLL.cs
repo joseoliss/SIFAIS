@@ -60,6 +60,7 @@ namespace SIFAIS.Datos.DocumentacionSIFAIS
             {
                 var documentacionSIFAISDB = context.TblDocumentacionSifais.Find(id);
                 context.TblDocumentacionSifais.Remove(documentacionSIFAISDB);
+                context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)
@@ -78,6 +79,7 @@ namespace SIFAIS.Datos.DocumentacionSIFAIS
                 var documentacionSIFAISDB = context.TblDocumentacionSifais.Find(oDocumentacionSIFAIS.Id);
                 documentacionSIFAISDB.Descripcion = oDocumentacionSIFAIS.Descripcion;
                 documentacionSIFAISDB.Estado = oDocumentacionSIFAIS.Estado;
+                context.Update(documentacionSIFAISDB).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
@@ -91,11 +93,31 @@ namespace SIFAIS.Datos.DocumentacionSIFAIS
 
         public IEnumerable<SelectListItem> GetListDocumentacionSIFAIS(ApplicationDbContext context)
         {
-            return context.TblDocumentacionSifais.Select(i => new SelectListItem()
-            {
+            return (from d in context.TblDocumentacionSifais
+                    where d.Estado == true
+                    select d).Select(i => new SelectListItem()
+                    {
                 Text = i.Descripcion,
                 Value = i.Id.ToString()
             });
+        }
+
+        public Respuesta GetyById(ApplicationDbContext context, int id)
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = (from d in context.TblDocumentacionSifais
+                                    where d.Id == id
+                                    select d).FirstOrDefault();
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al filtrar!";
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
         }
 
         public Respuesta ListDocumentacionSIFAIS(ApplicationDbContext context)

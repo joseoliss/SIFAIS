@@ -2,8 +2,9 @@
 /*********************************CONTENIDO PRINCIPAL************************************/
 
 .contenedor-contenido {
+    min-width: 1000px;
     margin: 30px;
-    padding:20px;
+    padding: 20px;
     background: #E5E5E5;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
@@ -32,14 +33,14 @@
 .btn-nuevo:hover {
     text-decoration: none;
     color: #fff;
-    background: #235e80;
+    background: #123142;
 }
 
 .btn-nuevo:focus {
     outline: none;
     text-decoration: none;
     color: #fff;
-    background: #235e80;
+    background: #123142;
 }
 
 /*****BUSCADOR*****/
@@ -105,10 +106,10 @@
     border-radius: 5px;
     color: #fff;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-    font-size:18px;
+    font-size: 18px;
     outline: none;
-    padding:10px 12px;
-    background: #991818;
+    padding: 10px 12px;
+    background: #c51f1f;
 }
 
 .btn-edit:hover {
@@ -122,8 +123,8 @@
 }
 
 .btn-del:hover {
-    color:#fff;
-    background: #c51f1f;
+    color: #fff;
+    background: #991818;
 }
 
 .btn-edit:focus {
@@ -137,8 +138,8 @@
 }
 
 .btn-del:focus {
-    color:#fff;
-    background: #c51f1f;
+    color: #fff;
+    background: #991818;
 }
 
 

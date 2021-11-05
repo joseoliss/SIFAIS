@@ -15,6 +15,7 @@ namespace SIFAIS.Datos.Mensajero
         Respuesta AddMensajero(ApplicationDbContext context, TblMensajero oMensajero);
         Respuesta EditMensajero(ApplicationDbContext context, TblMensajero oMensajero);
         Respuesta DeleteMensajero(ApplicationDbContext context, int id);
+        Respuesta GetyById(ApplicationDbContext context, int id);
 
         /// <summary>
         /// Metodo para cambiar el estado

@@ -15,6 +15,11 @@ namespace SIFAIS.Datos.Donaciones
             Respuesta oRespuesta = new Respuesta();
             try
             {
+                if (oDonacion.FechaDonacion.Year < 1900 || oDonacion.FechaDonacion.Year > 9999)
+                {
+                    throw new Exception();
+                }
+                oDonacion.Estado = true;
                 context.Add(oDonacion);
                 context.SaveChanges();
                 oRespuesta.Estado = 1;
@@ -22,6 +27,28 @@ namespace SIFAIS.Datos.Donaciones
             catch (Exception ex)
             {
                 oRespuesta.Mensaje = "¡Ha ocurrido un error agregar!";
+                if (oDonacion.FechaDonacion.Year < 1900 || oDonacion.FechaDonacion.Year > 9999)
+                {
+                    oRespuesta.Mensaje = "¡La fecha debe estar entre el año 1900 y 9999!";
+                }
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
+        }
+
+        public Respuesta GetById(ApplicationDbContext context, int id)
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = (from d in context.TblDonaciones
+                                    where d.Id == id
+                                    select d).FirstOrDefault();
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al filtrar!";
                 oRespuesta.Estado = 0;
             }
             return oRespuesta;
@@ -63,6 +90,7 @@ namespace SIFAIS.Datos.Donaciones
                 oDonacionDB.FechaDonacion = oDonacion.FechaDonacion;
                 oDonacionDB.Cantidad = oDonacion.Cantidad;
                 oDonacionDB.Estado = oDonacion.Estado;
+                context.Update(oDonacionDB).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
@@ -74,30 +102,12 @@ namespace SIFAIS.Datos.Donaciones
             return oRespuesta;
         }
 
-        public Respuesta GetDonacionById(ApplicationDbContext context, int id)
-        {
-            Respuesta oRespuesta = new Respuesta();
-            try
-            {
-                oRespuesta.Datos = (from d in context.TblDonaciones
-                                    where d.Id == id
-                                    select d).FirstOrDefault();
-                oRespuesta.Estado = 1;
-            }
-            catch (Exception ex)
-            {
-                oRespuesta.Mensaje = "¡Ha ocurrido un error al filtrar!";
-                oRespuesta.Estado = 0;
-            }
-            return oRespuesta;
-        }
-
         public Respuesta ListDonaciones(ApplicationDbContext context)
         {
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                oRespuesta.Datos = context.TblDonaciones.ToList();
+                oRespuesta.Datos = context.DonacionesView.ToList();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)

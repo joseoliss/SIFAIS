@@ -13,7 +13,7 @@ namespace SIFAIS.Datos.Donaciones
         Respuesta ListDonaciones(ApplicationDbContext context);
         Respuesta AddDonacion(ApplicationDbContext context, TblDonacione oDonacion);
         Respuesta EditDonacion(ApplicationDbContext context, TblDonacione oDonacion);
-        Respuesta GetDonacionById(ApplicationDbContext context, int id);
         Respuesta DeleteDonacion(ApplicationDbContext context, int id);
+        Respuesta GetById(ApplicationDbContext context, int id);
     }
 }

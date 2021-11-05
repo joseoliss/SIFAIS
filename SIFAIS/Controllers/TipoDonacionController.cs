@@ -78,8 +78,7 @@ namespace SIFAIS.Controllers
         {
             var oResultado = _tipoDonacion.DeleteTipoDonacion(_context, id);
             if (oResultado.Estado == 1) return RedirectToAction(nameof(Index), "TipoDonacion", new { mensaje = "Tipo de donación eliminada con éxito!" });
-            ViewBag.error = oResultado.Mensaje;
-            return View();
+            return RedirectToAction(nameof(Index), "TipoDonacion", new { mensaje = oResultado.Mensaje });
         }
     }
 }

@@ -28,6 +28,24 @@ namespace SIFAIS.Datos.Espacio
             return oRespuesta;
         }
 
+        public Respuesta GetyById(ApplicationDbContext context, int id)
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = (from d in context.TblEspacios
+                                    where d.Id == id
+                                    select d).FirstOrDefault();
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al filtrar!";
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
+        }
+
         public Respuesta ChangeStateEspacio(ApplicationDbContext context, int id)
         {
             Respuesta oRespuesta = new Respuesta();
@@ -60,6 +78,7 @@ namespace SIFAIS.Datos.Espacio
             {
                 var EspacioDB = context.TblEspacios.Find(id);
                 context.TblEspacios.Remove(EspacioDB);
+                context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)
@@ -80,6 +99,7 @@ namespace SIFAIS.Datos.Espacio
                 EspacioDB.Detalles = oEspacio.Detalles;
                 EspacioDB.Direccion = oEspacio.Direccion;
                 EspacioDB.Estado = oEspacio.Estado;
+                context.Update(EspacioDB).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
@@ -93,8 +113,10 @@ namespace SIFAIS.Datos.Espacio
 
         public IEnumerable<SelectListItem> GetListEspacio(ApplicationDbContext context)
         {
-            return context.TblEspacios.Select(i => new SelectListItem()
-            {
+            return (from s in context.TblEspacios
+                    where s.Estado == true
+                    select s).Select(i => new SelectListItem()
+                    {
                 Text = i.Descripcion,
                 Value = i.Id.ToString()
             });

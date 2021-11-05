@@ -28,6 +28,24 @@ namespace SIFAIS.Datos.Mensajero
             return oRespuesta;
         }
 
+        public Respuesta GetyById(ApplicationDbContext context, int id)
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = (from d in context.TblMensajeros
+                                    where d.Id == id
+                                    select d).FirstOrDefault();
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al filtrar!";
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
+        }
+
         public Respuesta ChangeStateMensajero(ApplicationDbContext context, int id)
         {
             Respuesta oRespuesta = new Respuesta();
@@ -60,6 +78,7 @@ namespace SIFAIS.Datos.Mensajero
             {
                 var MensajeroDB = context.TblMensajeros.Find(id);
                 context.TblMensajeros.Remove(MensajeroDB);
+                context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)
@@ -82,6 +101,7 @@ namespace SIFAIS.Datos.Mensajero
                 MensajeroDB.Celular = oMensajero.Celular;
                 MensajeroDB.CorreoElectronico = oMensajero.CorreoElectronico;
                 MensajeroDB.Estado = oMensajero.Estado;
+                context.Update(MensajeroDB).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
@@ -95,7 +115,9 @@ namespace SIFAIS.Datos.Mensajero
 
         public IEnumerable<SelectListItem> GetListMensajero(ApplicationDbContext context)
         {
-            return context.TblMensajeros.Select(i => new SelectListItem()
+            return (from s in context.TblMensajeros
+                    where s.Estado == true
+                    select s).Select(i => new SelectListItem()
             {
                 Text = i.Nombre + " " + i.Apellido,
                 Value = i.Id.ToString()

@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 
 namespace SIFAIS.Datos.ResponsableDonacion
 {
-    public interface IResponsableBLL
+    public interface IResponsableDonacionBLL
     {
         Respuesta ListResponsableDonacion(ApplicationDbContext context);
         Respuesta AddResponsableDonacion(ApplicationDbContext context, TblResponsableDonacion oResponsableDonacion);
         Respuesta EditResponsableDonacion(ApplicationDbContext context, TblResponsableDonacion oResponsableDonacion);
         Respuesta DeleteResponsableDonacion(ApplicationDbContext context, int id);
+        Respuesta GetyById(ApplicationDbContext context, int id);
 
         /// <summary>
         /// Metodo para cambiar el estado

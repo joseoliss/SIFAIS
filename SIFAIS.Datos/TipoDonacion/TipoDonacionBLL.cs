@@ -110,8 +110,10 @@ namespace SIFAIS.Datos.TipoDonacion
 
         public IEnumerable<SelectListItem> GetListTipoDonaciones(ApplicationDbContext context)
         {
-            return context.TblTipoDonacions.Select(i => new SelectListItem()
-            {
+            return (from s in context.TblTipoDonacions
+                    where s.Estado == true
+                    select s).Select(i => new SelectListItem()
+                    {
                 Text = i.Descripcion,
                 Value = i.Id.ToString()
             });

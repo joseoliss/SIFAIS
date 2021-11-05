@@ -1,0 +1,81 @@
+﻿@model SIFAIS.Modelos.Datos.TblResponsableDonacion
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.error != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.error</strong> Pongase en contacto con el administrador.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="contenedor-contenido">
+    <h4 class="text-muted">Responsable de la Donación</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Nombre"></label>
+                        <br />
+                        <input asp-for="Nombre" class="txt-form" />
+                        <br />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Apellido"></label>
+                        <br />
+                        <input asp-for="Apellido" class="txt-form" />
+                        <br />
+                        <span asp-validation-for="Apellido" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Cedula"></label>
+                        <br />
+                        <input asp-for="Cedula" class="txt-form" />
+                        <br />
+                        <span asp-validation-for="Cedula" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Celular"></label>
+                        <br />
+                        <input asp-for="Celular" class="txt-form" />
+                        <br />
+                        <span asp-validation-for="Celular" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="CorreoElectronico"></label>
+                        <br />
+                        <input asp-for="CorreoElectronico" class="txt-form" />
+                        <br />
+                        <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="form-estado font-weight-bold">
+                            <input class="form-check-input" asp-for="Estado" /> @Html.DisplayNameFor(model => model.Estado)
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group col-sm-12 contenedor-botones">
+                    <div class="col-md-3">
+                        <a asp-action="Index" class="btn-atras form-control">Atrás</a>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="submit" value="Modificar" class="btn-crear form-control" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

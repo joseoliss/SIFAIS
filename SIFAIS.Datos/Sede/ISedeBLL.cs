@@ -15,6 +15,7 @@ namespace SIFAIS.Datos.Sede
         Respuesta AddSede(ApplicationDbContext context, TblSede oSede);
         Respuesta EditSede(ApplicationDbContext context, TblSede oSede);
         Respuesta DeleteSede(ApplicationDbContext context, int id);
+        Respuesta GetyById(ApplicationDbContext context, int id);
 
         /// <summary>
         /// Metodo para cambiar el estado

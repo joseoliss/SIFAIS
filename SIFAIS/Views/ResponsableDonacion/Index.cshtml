@@ -1,0 +1,115 @@
+﻿@model IEnumerable<SIFAIS.Modelos.Datos.TblResponsableDonacion>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (ViewBag.exito != null)
+{
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.exito</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="contenedor-contenido">
+    <p class="contenedor-cabecera">
+        <a class="h4 text-muted">Responsable de la Donación</a>
+        <a class="btn-nuevo" asp-action="Create"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Nuevo</a>
+    </p>
+    <div class="contenedor-buscador">
+        <label class="lbl-buscar">Bascar</label>
+        <input type="text" id="txt_buscar" class="txt-buscar" />
+    </div>
+    <table class="table table-hover table-bordered">
+        <thead class="t-head" id="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Apellido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cedula)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Celular)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CorreoElectronico)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estado)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @if (ViewBag.error != null)
+            {
+
+            }
+            else
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Apellido)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cedula)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Celular)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CorreoElectronico)
+                        </td>
+                        <td>
+                            @if (@item.Estado)
+                            {
+                                <p>Activo</p>
+                            }
+                            else
+                            {
+                                <p>Inactivo</p>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                            <a onclick="return confirm('¿Estas seguro que quieres eliminar este registro?')"
+                               asp-action="Delete"
+                               asp-route-id="@item.Id"
+                               class="btn-del"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $("#txt_buscar").on("keyup", function () {
+                let value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+}
