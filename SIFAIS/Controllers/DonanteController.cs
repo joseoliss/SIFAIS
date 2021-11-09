@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SIFAIS.Datos;
 using SIFAIS.Datos.Donante;
 using SIFAIS.Datos.TipoDonante;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace SIFAIS.Views
 {
+    [Authorize]
     public class DonanteController : Controller
     {
         #region CONSTRUCTOR

@@ -1,0 +1,112 @@
+﻿@model SIFAIS.Models.UsuarioVM
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.error != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.error</strong> Pongase en contacto con el administrador.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="contenedor-contenido">
+    <h4 class="text-muted">Usuarios</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Usuario.Id" />
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Usuario.IdRolUsuario"></label>
+                        <div>
+                            @Html.DropDownListFor(m => m.Usuario.IdRolUsuario, Model.LstRolUsuario, new { @class = "txt-form-disabled" })
+                        </div>
+                        <span asp-validation-for="Usuario.IdRolUsuario" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Usuario.IdSede"></label>
+                        <div>
+                            @Html.DropDownListFor(m => m.Usuario.IdSede, Model.LstSede, new { @class = "txt-form-disabled" })
+                        </div>
+                        <span asp-validation-for="Usuario.IdSede" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Usuario.Nombre"></label>
+                        <br />
+                        <input type="text" asp-for="Usuario.Nombre" class="txt-form-disabled" />
+                        <br />
+                        <span asp-validation-for="Usuario.Nombre" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Usuario.Apellido"></label>
+                        <br />
+                        <input type="text" asp-for="Usuario.Apellido" class="txt-form-disabled" />
+                        <br />
+                        <span asp-validation-for="Usuario.Apellido" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Usuario.CorreoElectronico"></label>
+                        <br />
+                        <input type="text" asp-for="Usuario.CorreoElectronico" class="txt-form-disabled" />
+                        <br />
+                        <span asp-validation-for="Usuario.CorreoElectronico" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Usuario.Contraseña"></label>
+                        <br />
+                        <input type="password" asp-for="Usuario.Contraseña" class="txt-form-disabled" />
+                        <br />
+                        <span asp-validation-for="Usuario.Contraseña" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Usuario.Telefono"></label>
+                        <br />
+                        <input asp-for="Usuario.Telefono" class="txt-form-disabled" />
+                        <br />
+                        <span asp-validation-for="Usuario.Telefono" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Usuario.Celular"></label>
+                        <br />
+                        <input asp-for="Usuario.Celular" class="txt-form-disabled" />
+                        <br />
+                        <span asp-validation-for="Usuario.Celular" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Usuario.CodigoExterno"></label>
+                        <br />
+                        <input asp-for="Usuario.CodigoExterno" class="txt-form-disabled" />
+                        <br />
+                        <span asp-validation-for="Usuario.CodigoExterno" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="form-estado font-weight-bold">
+                            <input class="form-check-input" asp-for="Usuario.Estado" /> @Html.DisplayNameFor(model => model.Usuario.Estado)
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group col-sm-12 contenedor-botones">
+                    <div class="col-md-3">
+                        <a asp-action="Index" class="btn-atras form-control">Atrás</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

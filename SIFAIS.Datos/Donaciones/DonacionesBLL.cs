@@ -107,7 +107,9 @@ namespace SIFAIS.Datos.Donaciones
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                oRespuesta.Datos = context.DonacionesView.ToList();
+                oRespuesta.Datos = (from d in context.DonacionesView
+                                    orderby d.FechaDonacion descending
+                                    select d).ToList();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)

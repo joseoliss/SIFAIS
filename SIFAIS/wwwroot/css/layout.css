@@ -6,6 +6,7 @@
 /**************************SIDEBAR****************************/
 .contenedor .contenedor-sidebar {
     background: #0A1D2F;
+    width:250px;
     min-width: 250px;
     min-height: 100vh;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);

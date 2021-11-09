@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SIFAIS.Datos;
 using SIFAIS.Datos.Sede;
 using SIFAIS.Modelos.Datos;
@@ -9,12 +10,13 @@ using System.Threading.Tasks;
 
 namespace SIFAIS.Controllers
 {
-    public class SedeController : Controller
+    [Authorize]
+    public class SedesController : Controller
     {
         #region CONSTRUCTOR
         private readonly ApplicationDbContext _context;
         private ISedeBLL _sedeBLL;
-        public SedeController(ApplicationDbContext context, ISedeBLL sedeBLL)
+        public SedesController(ApplicationDbContext context, ISedeBLL sedeBLL)
         {
             _context = context;
             _sedeBLL = sedeBLL;
@@ -46,7 +48,7 @@ namespace SIFAIS.Controllers
             if (ModelState.IsValid)
             {
                 var oResultado = _sedeBLL.AddSede(_context, oSede);
-                if (oResultado.Estado == 1) return RedirectToAction(nameof(Index), "Sede", new { mensaje = oSede.Nombre + " almacenado con éxito!" });
+                if (oResultado.Estado == 1) return RedirectToAction(nameof(Index), "Sedes", new { mensaje = oSede.Nombre + " almacenado con éxito!" });
                 ViewBag.error = oResultado.Mensaje;
             }
             return View(oSede);
@@ -67,7 +69,7 @@ namespace SIFAIS.Controllers
             if (ModelState.IsValid)
             {
                 var oResultado = _sedeBLL.EditSede(_context, oSede);
-                if (oResultado.Estado == 1) return RedirectToAction(nameof(Index), "Sede", new { mensaje = oSede.Nombre + " modificada con éxito!" });
+                if (oResultado.Estado == 1) return RedirectToAction(nameof(Index), "Sedes", new { mensaje = oSede.Nombre + " modificada con éxito!" });
                 ViewBag.error = oResultado.Mensaje;
             }
             return View(oSede);
@@ -77,8 +79,8 @@ namespace SIFAIS.Controllers
         public IActionResult Delete(int id)
         {
             var oResultado = _sedeBLL.DeleteSede(_context, id);
-            if (oResultado.Estado == 1) return RedirectToAction(nameof(Index), "Sede", new { mensaje = "Sede de la donación eliminado con éxito!" });
-            return RedirectToAction(nameof(Index), "Sede", new { mensaje = oResultado.Mensaje });
+            if (oResultado.Estado == 1) return RedirectToAction(nameof(Index), "Sedes", new { mensaje = "Sede eliminada con éxito!" });
+            return RedirectToAction(nameof(Index), "Sedes", new { mensaje = oResultado.Mensaje });
         }
     }
 }

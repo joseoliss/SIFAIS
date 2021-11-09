@@ -15,6 +15,7 @@ namespace SIFAIS.Datos.Usuario
         Respuesta AddUsuario(ApplicationDbContext context, TblUsuario oUsuario);
         Respuesta EditUsuario(ApplicationDbContext context, TblUsuario oUsuario);
         Respuesta DeleteUsuario(ApplicationDbContext context, int id);
+        Respuesta GetyById(ApplicationDbContext context, int id);
 
         /// <summary>
         /// Metodo para cambiar el estado

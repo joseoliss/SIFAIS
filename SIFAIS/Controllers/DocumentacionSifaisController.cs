@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SIFAIS.Datos;
 using SIFAIS.Datos.DocumentacionSIFAIS;
 using SIFAIS.Modelos.Datos;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace SIFAIS.Controllers
 {
+    [Authorize]
     public class DocumentacionSifaisController : Controller
     {
         #region CONSTRUCTOR

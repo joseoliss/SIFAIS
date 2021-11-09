@@ -21,6 +21,8 @@ using SIFAIS.Datos.Mensajero;
 using SIFAIS.Datos.Espacio;
 using SIFAIS.Datos.ResponsableDonacion;
 using SIFAIS.Datos.Sede;
+using SIFAIS.Datos.Usuario;
+using SIFAIS.Datos.RolUsuario;
 
 namespace SIFAIS
 {
@@ -62,6 +64,8 @@ namespace SIFAIS
             services.AddSingleton<IResponsableDonacionBLL, ResponsableDonacionBLL>();
             services.AddSingleton<IDonacionesBLL, DonacionesBLL>();
             services.AddSingleton<ISedeBLL, SedeBLL>();
+            services.AddSingleton<IUsuarioBLL, UsuarioBLL>();
+            services.AddSingleton<IRolUsuarioBLL, RolUsuarioBLL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,7 +95,7 @@ namespace SIFAIS
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}");
             });
         }
     }

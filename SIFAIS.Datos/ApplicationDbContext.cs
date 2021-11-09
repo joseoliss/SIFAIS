@@ -42,6 +42,7 @@ namespace SIFAIS.Datos
         public virtual DbSet<TblUsuario> TblUsuarios { get; set; }
         public virtual DbSet<DonanteView> DonanteView { get; set; }
         public virtual DbSet<DonacionesView> DonacionesView { get; set; }
+        public virtual DbSet<UsuarioView> UsuarioViews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -637,6 +638,37 @@ namespace SIFAIS.Datos
                     .IsUnicode(false);
 
                 entity.Property(e => e.TipoDonacion)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<UsuarioView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("UsuarioView");
+
+                entity.Property(e => e.Apellido)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CorreoElectronico)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Rol)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Sede)
                     .IsRequired()
                     .HasMaxLength(25)
                     .IsUnicode(false);

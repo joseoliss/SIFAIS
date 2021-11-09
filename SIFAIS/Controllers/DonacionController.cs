@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SIFAIS.Datos;
 using SIFAIS.Datos.DocumentacionSIFAIS;
 using SIFAIS.Datos.Donaciones;
@@ -18,6 +19,7 @@ using System.Threading.Tasks;
 
 namespace SIFAIS.Controllers
 {
+    [Authorize]
     public class DonacionController : Controller
     {
         #region CONSTRUCTOR
@@ -61,7 +63,6 @@ namespace SIFAIS.Controllers
                 ViewBag.exito = mensaje;
             }
             var oRespuesta = _donacion.ListDonaciones(_context);
-            var lstDonaciones = (List<DonacionesView>)oRespuesta.Datos;
             if (oRespuesta.Estado == 1) return View(oRespuesta.Datos);
             ViewBag.error = oRespuesta.Mensaje;
             return View();

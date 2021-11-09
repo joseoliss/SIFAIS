@@ -15,13 +15,45 @@ namespace SIFAIS.Datos.Usuario
             Respuesta oRespuesta = new Respuesta();
             try
             {
+                var correoUnico = (from u in context.TblUsuarios
+                                   where u.CorreoElectronico == oUsuario.CorreoElectronico
+                                   select u.CorreoElectronico).FirstOrDefault();
+
+                if (correoUnico != null)
+                {
+                    throw new UriFormatException();
+                }
+
                 context.TblUsuarios.Add(oUsuario);
                 context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
+            catch (UriFormatException ex)
+            {
+                oRespuesta.Mensaje = "¡El correo electrónico ya existe!";
+                oRespuesta.Estado = 0;
+            }
             catch (Exception ex)
             {
                 oRespuesta.Mensaje = "¡Ha ocurrido un error agregar!";
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
+        }
+
+        public Respuesta GetyById(ApplicationDbContext context, int id)
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = (from d in context.TblUsuarios
+                                    where d.Id == id
+                                    select d).FirstOrDefault();
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al filtrar!";
                 oRespuesta.Estado = 0;
             }
             return oRespuesta;
@@ -59,6 +91,7 @@ namespace SIFAIS.Datos.Usuario
             {
                 var usuarioDB = context.TblUsuarios.Find(id);
                 context.TblUsuarios.Remove(usuarioDB);
+                context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)
@@ -86,6 +119,7 @@ namespace SIFAIS.Datos.Usuario
                 usuarioDB.Telefono = oUsuario.Telefono;
                 usuarioDB.Celular = oUsuario.Celular;
                 usuarioDB.Estado = oUsuario.Estado;
+                context.Update(usuarioDB).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
@@ -102,7 +136,7 @@ namespace SIFAIS.Datos.Usuario
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                oRespuesta.Datos = context.TblUsuarios.ToList();
+                oRespuesta.Datos = context.UsuarioViews.ToList();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)

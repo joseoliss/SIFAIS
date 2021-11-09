@@ -19,8 +19,8 @@
                 </div>
             </div>
             <div class="contenedor-logout">
-                <a class="logout" href="#"><i class="fa fa-user" aria-hidden="true"></i></a>
-                <a class="logout" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                <a class="logout" asp-action="Edit" asp-controller="Usuario" asp-route-id="@User.Identity.GetUserId()"><i class="fa fa-user" aria-hidden="true"></i></a>
+                <a class="logout" asp-action="LogOut" asp-controller="Login"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
             </div>
             <div class="contenedor-opciones">
                 <p>
@@ -35,6 +35,8 @@
                         <a asp-action="Index" asp-controller="Espacio">Var Espacios</a>
                         <a asp-action="Index" asp-controller="Mensajero">Ver Mensajeros</a>
                         <a asp-action="Index" asp-controller="ResponsableDonacion">Ver Responsables</a>
+                        <a asp-action="Index" asp-controller="TipoDonante">Ver Tipo de Donante</a>
+                        <a asp-action="Index" asp-controller="TipoDonacion">Ver Tipo de Donación</a>
                         <a asp-action="Index" asp-controller="DocumentacionSifais">Ver Documentación SIFAIS</a>
                     </div>
                 </div>
@@ -50,35 +52,14 @@
                     </div>
                 </div>
                 <p>
-                    <a class="boton-expandible" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        <i class="fa fa-cog" aria-hidden="true"></i> Config. Donaciones
-                    </a>
-                </p>
-                <div class="collapse" id="collapseExample">
-                    <div class="contenedor-expandible">
-                        <a asp-action="Index" asp-controller="TipoDonacion">Tipo de Donación</a>
-                        <a asp-action="Index" asp-controller="TipoDonante">Tipo de Donante</a>
-                    </div>
-                </div>
-                <p>
-                    <a class="boton-expandible" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
-                        <i class="fa fa-cog" aria-hidden="true"></i> Config. Activos
-                    </a>
-                </p>
-                <div class="collapse" id="collapseExample2">
-                    <div class="contenedor-expandible">
-                        <a href="#">Tipo de Donación</a>
-
-                    </div>
-                </div>
-                <p>
                     <a class="boton-expandible" data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample5">
                         <i class="fa fa-cogs" aria-hidden="true"></i> Config. General
                     </a>
                 </p>
                 <div class="collapse" id="collapseExample5">
                     <div class="contenedor-expandible">
-                        <a href="#">Tipo de Donación</a>
+                        <a asp-action="Index" asp-controller="Usuario">Usuarios</a>
+                        <a asp-action="Index" asp-controller="Sedes">Sedes</a>
 
                     </div>
                 </div>

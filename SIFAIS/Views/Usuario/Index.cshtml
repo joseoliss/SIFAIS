@@ -1,5 +1,4 @@
-﻿@model IEnumerable<SIFAIS.Modelos.Views.DonacionesView>
-
+﻿@model IEnumerable<SIFAIS.Modelos.Views.UsuarioView>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -28,7 +27,7 @@
 
 <div class="contenedor-contenido">
     <p class="contenedor-cabecera">
-        <a class="h4 text-muted">Donante</a>
+        <a class="h4 text-muted">Usuarios</a>
         <a class="btn-nuevo" asp-action="Create"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Nuevo</a>
     </p>
     <div class="contenedor-buscador">
@@ -39,33 +38,22 @@
         <thead class="t-head" id="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.FechaDonacion)
+                    @Html.DisplayNameFor(model => model.Nombre)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Donante)
+                    @Html.DisplayNameFor(model => model.Rol)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Mensajero)
+                    @Html.DisplayNameFor(model => model.CorreoElectronico)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DocumentacionSifais)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.TipoDonacion)
+                    @Html.DisplayNameFor(model => model.Sede)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Descripcion)
+                    @Html.DisplayNameFor(model => model.Celular)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Cantidad)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.Espacio)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ResponsableDonacion)
+                    @Html.DisplayNameFor(model => model.Estado)
                 </th>
                 <th></th>
             </tr>
@@ -75,36 +63,31 @@
             {
             <tr>
                 <td>
-                    @{
-                        var fecha = item.FechaDonacion.ToShortDateString();
-                        <p>@fecha</p>
+                    @Html.DisplayFor(modelItem => item.Nombre)  @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rol)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CorreoElectronico)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sede)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Celular)
+                </td>
+                <td>
+                    @if (@item.Estado)
+                    {
+                        <p>Activo</p>
+                    }
+                    else
+                    {
+                        <p>Inactivo</p>
                     }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Donante)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Mensajero)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DocumentacionSifais)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TipoDonacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cantidad)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Espacio)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ResponsableDonacion)
-                </td>
-                <td style="display:flex; flex-direction:row; gap: 4px;">
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn-details"><i class="fa fa-info" aria-hidden="true"></i></a>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     <a onclick="return confirm('¿Estas seguro que quieres eliminar este registro?')"
@@ -133,4 +116,3 @@
     </script>
 
 }
-

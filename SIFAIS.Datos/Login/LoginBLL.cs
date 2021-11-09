@@ -17,7 +17,8 @@ namespace SIFAIS.Datos.Login
             {
                 var oUsuarioDB = (from u in context.TblUsuarios
                                   where u.CorreoElectronico == oUsuario.CorreoElectronico &&
-                                  u.Contraseña == oUsuario.Contraseña
+                                  u.Contraseña == oUsuario.Contraseña &&
+                                  u.Estado == true
                                   select u).FirstOrDefault();
                 oRespuesta.Datos = oUsuarioDB;
                 oRespuesta.Estado = 1;

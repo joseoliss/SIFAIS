@@ -1,9 +1,11 @@
-﻿@model SIFAIS.Modelos.Datos.TblTipoDonante
+﻿@model SIFAIS.Modelos.Datos.TblSede
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
 
 @if (ViewBag.error != null)
 {
@@ -16,30 +18,51 @@
 }
 
 <div class="contenedor-contenido">
-    <h4 class="text-muted">Tipo De Donante</h4>
-
+    <h4 class="text-muted">Sede</h4>
     <div class="row">
         <div class="col-md-12">
-            <form asp-action="Edit">
+            <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="Id"/>
                 <div class="contenedor-form-group">
                     <div>
-                        <label class="font-weight-bold" asp-for="Descripcion"></label>
+                        <label class="font-weight-bold" asp-for="Nombre"></label>
                         <br />
-                        <input asp-for="Descripcion" class="txt-form" />
+                        <input asp-for="Nombre" class="txt-form" />
                         <br />
-                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="CorreoElectronico"></label>
+                        <br />
+                        <input asp-for="CorreoElectronico" class="txt-form" />
+                        <br />
+                        <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Direccion"></label>
+                        <br />
+                        <textarea asp-for="Direccion" class="txt-form"></textarea>
+                        <br />
+                        <span asp-validation-for="Direccion" class="text-danger"></span>
                     </div>
                     <div>
                         <label class="font-weight-bold" asp-for="Detalles"></label>
                         <br />
-                        <textarea type="textarea" asp-for="Detalles" class="txt-form"></textarea>
+                        <textarea asp-for="Detalles" class="txt-form"></textarea>
                         <br />
                         <span asp-validation-for="Detalles" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Telefono"></label>
+                        <br />
+                        <input asp-for="Telefono" class="txt-form" />
+                        <br />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
                     <div>
                         <label class="form-estado font-weight-bold">
                             <input class="form-check-input" asp-for="Estado" /> @Html.DisplayNameFor(model => model.Estado)
@@ -51,13 +74,14 @@
                         <a asp-action="Index" class="btn-atras form-control">Atrás</a>
                     </div>
                     <div class="col-md-3">
-                        <input type="submit" value="Modificar" class="btn-crear form-control" />
+                        <input type="submit" value="Crear" class="btn-crear form-control" />
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 
 
 

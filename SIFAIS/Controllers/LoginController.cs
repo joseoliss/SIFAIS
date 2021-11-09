@@ -35,6 +35,12 @@ namespace SIFAIS.Controllers
             return View();
         }
 
+        public async Task<IActionResult> LogOut(string mensaje)
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
         [HttpPost]
         public async Task<IActionResult> Login(TblUsuario oUsuario)
         {
@@ -56,7 +62,7 @@ namespace SIFAIS.Controllers
 
                     await HttpContext.SignInAsync(principal);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Donacion");
                 }
                 else
                 {
