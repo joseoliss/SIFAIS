@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SIFAIS.Datos.EstadoPrestamo
 {
-    public class EstadoPrestamo : IEstadoPrestamo
+    public class EstadoPrestamoBLL : IEstadoPrestamoBLL
     {
         public Respuesta AddEstadoPrestamo(ApplicationDbContext context, TblEstadoPrestamo oEstadoPrestamo)
         {
@@ -22,12 +22,28 @@ namespace SIFAIS.Datos.EstadoPrestamo
             }
             catch (Exception ex)
             {
-                oRespuesta.Mensaje = "¡Ha ocurrido un error agregar!";
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al agregar!";
                 oRespuesta.Estado = 0;
             }
             return oRespuesta;
         }
-
+        public Respuesta GetyById(ApplicationDbContext context, int id)
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = (from d in context.TblEstadoPrestamos
+                                    where d.Id == id
+                                    select d).FirstOrDefault();
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al filtrar!";
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
+        }
         public Respuesta ChangeStateEstadoPrestamo(ApplicationDbContext context, int id)
         {
             Respuesta oRespuesta = new Respuesta();
@@ -60,6 +76,7 @@ namespace SIFAIS.Datos.EstadoPrestamo
             {
                 var estadoPrestamoDB = context.TblEstadoPrestamos.Find(id);
                 context.TblEstadoPrestamos.Remove(estadoPrestamoDB);
+                context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)
@@ -79,6 +96,7 @@ namespace SIFAIS.Datos.EstadoPrestamo
                 estadoPrestamoDB.Descripcion = oEstadoPrestamo.Descripcion;
                 estadoPrestamoDB.Detalles = oEstadoPrestamo.Detalles;
                 estadoPrestamoDB.Estado = oEstadoPrestamo.Estado;
+                context.Update(estadoPrestamoDB).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChanges();
                 oRespuesta.Estado = 1;
             }

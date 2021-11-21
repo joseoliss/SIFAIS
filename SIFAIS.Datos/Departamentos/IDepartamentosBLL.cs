@@ -15,6 +15,7 @@ namespace SIFAIS.Datos.Departamentos
         Respuesta AddDepartamento(ApplicationDbContext context, TblDepartamento oDepartamento);
         Respuesta EditDepartamento(ApplicationDbContext context, TblDepartamento oDepartamento);
         Respuesta DeleteDepartamento(ApplicationDbContext context, int id);
+        Respuesta GetyById(ApplicationDbContext context, int id);
 
         /// <summary>
         /// Metodo para cambiar el estado

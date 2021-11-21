@@ -15,6 +15,7 @@ namespace SIFAIS.Datos.TipoResponsable
         Respuesta AddTipoResponsable(ApplicationDbContext context, TblTipoResponsable oTipoResponsable);
         Respuesta EditTipoResponsable(ApplicationDbContext context, TblTipoResponsable oTipoResponsable);
         Respuesta DeleteTipoResponsable(ApplicationDbContext context, int id);
+        Respuesta GetyById(ApplicationDbContext context, int id);
 
         /// <summary>
         /// Metodo para cambiar el estado

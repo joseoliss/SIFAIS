@@ -28,6 +28,24 @@ namespace SIFAIS.Datos.TipoActivo
             return oRespuesta;
         }
 
+        public Respuesta GetyById(ApplicationDbContext context, int id)
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = (from d in context.TblTipoActivos
+                                    where d.Id == id
+                                    select d).FirstOrDefault();
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al filtrar!";
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
+        }
+
         public Respuesta ChangeStateTipoActivo(ApplicationDbContext context, int id)
         {
             Respuesta oRespuesta = new Respuesta();
@@ -60,6 +78,7 @@ namespace SIFAIS.Datos.TipoActivo
             {
                 var tipoActivoDB = context.TblTipoActivos.Find(id);
                 context.TblTipoActivos.Remove(tipoActivoDB);
+                context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)
@@ -79,6 +98,7 @@ namespace SIFAIS.Datos.TipoActivo
                 tipoActivoDB.Descripcion = oTipoActivo.Descripcion;
                 tipoActivoDB.Detalles = oTipoActivo.Detalles;
                 tipoActivoDB.Estado = oTipoActivo.Estado;
+                context.Update(tipoActivoDB).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChanges();
                 oRespuesta.Estado = 1;
             }

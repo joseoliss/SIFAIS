@@ -37,10 +37,10 @@ namespace SIFAIS.Modelos.Datos
         public string CorreoElectronico { get; set; }
 
         [Display(Name = "Teléfono fijo")]
-        public int? Telefono { get; set; }
+        public string Telefono { get; set; }
 
         [Display(Name = "Teléfono celular")]
-        public int? Celular { get; set; }
+        public string Celular { get; set; }
 
         [Display(Name = "Dirección")]
         public string Direccion { get; set; }

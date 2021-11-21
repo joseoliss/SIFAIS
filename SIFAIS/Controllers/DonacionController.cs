@@ -166,12 +166,5 @@ namespace SIFAIS.Controllers
             return View(oDonacionVM);
         }
 
-        [HttpGet]
-        public IActionResult Delete(int id)
-        {
-            var oResultado = _donacion.DeleteDonacion(_context, id);
-            if (oResultado.Estado == 1) return RedirectToAction(nameof(Index), "Donacion", new { mensaje = "Donacion eliminada con éxito!" });
-            return RedirectToAction(nameof(Index), "Donacion", new { mensaje = oResultado.Mensaje });
-        }
     }
 }

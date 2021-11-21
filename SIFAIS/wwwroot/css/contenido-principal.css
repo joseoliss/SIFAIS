@@ -92,6 +92,16 @@
     background: #763ca1;
 }
 
+.btn-share {
+    border-radius: 5px;
+    color: #fff;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 18px;
+    outline: none;
+    padding: 10px;
+    background: #bb6d00;
+}
+
 .btn-details {
     border-radius: 5px;
     color: #fff;
@@ -117,6 +127,11 @@
     background: #582d79;
 }
 
+.btn-share:hover {
+    color: #fff;
+    background: #9c5b00;
+}
+
 .btn-details:hover {
     color: #fff;
     background: #1c8e00;
@@ -130,6 +145,11 @@
 .btn-edit:focus {
     color:#fff;
     background: #582d79;
+}
+
+.btn-share:focus {
+    color: #fff;
+    background: #9c5b00;
 }
 
 .btn-details:focus {

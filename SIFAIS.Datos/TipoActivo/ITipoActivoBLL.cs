@@ -15,6 +15,7 @@ namespace SIFAIS.Datos.TipoActivo
         Respuesta AddTipoActivo(ApplicationDbContext context, TblTipoActivo oTipoActivo);
         Respuesta EditTipoActivo(ApplicationDbContext context, TblTipoActivo oTipoActivo);
         Respuesta DeleteTipoActivo(ApplicationDbContext context, int id);
+        Respuesta GetyById(ApplicationDbContext context, int id);
 
         /// <summary>
         /// Metodo para cambiar el estado

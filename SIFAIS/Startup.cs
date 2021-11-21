@@ -23,6 +23,14 @@ using SIFAIS.Datos.ResponsableDonacion;
 using SIFAIS.Datos.Sede;
 using SIFAIS.Datos.Usuario;
 using SIFAIS.Datos.RolUsuario;
+using SIFAIS.Datos.EstadoActivos;
+using SIFAIS.Datos.TipoActivo;
+using SIFAIS.Datos.Departamentos;
+using SIFAIS.Datos.TipoResponsable;
+using SIFAIS.Datos.EstadoPrestamo;
+using SIFAIS.Datos.ActivosFisicos;
+using SIFAIS.Datos.Responsable;
+using SIFAIS.Datos.ActivosPrestados;
 
 namespace SIFAIS
 {
@@ -66,6 +74,14 @@ namespace SIFAIS
             services.AddSingleton<ISedeBLL, SedeBLL>();
             services.AddSingleton<IUsuarioBLL, UsuarioBLL>();
             services.AddSingleton<IRolUsuarioBLL, RolUsuarioBLL>();
+            services.AddSingleton<IEstadoActivosBLL, EstadoActivoBLL>();
+            services.AddSingleton<ITipoActivoBLL, TipoActivoBLL>();
+            services.AddSingleton<IDepartamentosBLL, DepartamentosBLL>();
+            services.AddSingleton<ITipoResponsableBLL, TipoResponsableBLL>();
+            services.AddSingleton<IEstadoPrestamoBLL, EstadoPrestamoBLL>();
+            services.AddSingleton<IActivosFisicosBLL, ActivosFisicosBLL>();
+            services.AddSingleton<IResponsableBLL, ResponsableBLL>();
+            services.AddSingleton<IActivosPrestadosBLL, ActivosPrestadosBLL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

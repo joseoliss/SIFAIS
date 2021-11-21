@@ -11,7 +11,8 @@
 </head>
 <body>
     <div class="contenedor">
-        <div class="contenedor-sidebar">
+        <div class="contenedor-sidebar" id="contenedor-sidebar">
+            <input type="button" id="btnOcultar" class="btnOcultar" value="ocultar"/>
             <div class="contenedor-logo">
                 <img alt="SIFAIS" src="~/img/Logo-SIFAIS.webp" />
                 <div class="text-center">
@@ -32,7 +33,7 @@
                     <div class="contenedor-expandible">
                         <a asp-action="Index" asp-controller="Donacion">Ver Donaciones</a>
                         <a asp-action="Index" asp-controller="Donante">Ver Donantes</a>
-                        <a asp-action="Index" asp-controller="Espacio">Var Espacios</a>
+                        <a asp-action="Index" asp-controller="Espacio">Ver Espacios</a>
                         <a asp-action="Index" asp-controller="Mensajero">Ver Mensajeros</a>
                         <a asp-action="Index" asp-controller="ResponsableDonacion">Ver Responsables</a>
                         <a asp-action="Index" asp-controller="TipoDonante">Ver Tipo de Donante</a>
@@ -47,8 +48,14 @@
                 </p>
                 <div class="collapse" id="collapseExample4">
                     <div class="contenedor-expandible">
-                        <a href="#">Tipo de Donación</a>
-
+                        <a asp-action="Index" asp-controller="Activos">Ver Activos</a>
+                        <a asp-action="Index" asp-controller="ActivosPrestados">Ver Prestamos</a>
+                        <a asp-action="Index" asp-controller="ResponsableActivo">Ver Responsables</a>
+                        <a asp-action="Index" asp-controller="TipoActivo">Ver Tipo Activos</a>
+                        <a asp-action="Index" asp-controller="Departamento">Ver Departamentos</a>
+                        <a asp-action="Index" asp-controller="EstadoActivos">Ver Estados Activos</a>
+                        <a asp-action="Index" asp-controller="EstadoPrestamo">Ver Estado Prestamos</a>
+                        <a asp-action="Index" asp-controller="TipoResponsable">Ver Tipo Responsables</a>
                     </div>
                 </div>
                 <p>
@@ -72,6 +79,7 @@
         </div>
     </div>
 
+    <script src="~/js/JavaScript.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

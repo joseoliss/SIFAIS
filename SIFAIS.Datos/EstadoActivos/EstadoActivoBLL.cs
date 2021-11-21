@@ -28,6 +28,22 @@ namespace SIFAIS.Datos.EstadoActivos
             return oRespuesta;
         }
 
+        public Respuesta GetyById(ApplicationDbContext context, int id)
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = context.TblEstadoActivos.Find(id);
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al filtrar!";
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
+        }
+
         public Respuesta ChangeStateEstadoActivo(ApplicationDbContext context, int id)
         {
             Respuesta oRespuesta = new Respuesta();
@@ -60,6 +76,7 @@ namespace SIFAIS.Datos.EstadoActivos
             {
                 var estadoActivoDB = context.TblEstadoActivos.Find(id);
                 context.TblEstadoActivos.Remove(estadoActivoDB);
+                context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)
@@ -79,6 +96,7 @@ namespace SIFAIS.Datos.EstadoActivos
                 estadoActivoDB.Descripcion = oEstadoActivo.Descripcion;
                 estadoActivoDB.Detalles = oEstadoActivo.Detalles;
                 estadoActivoDB.Estado = oEstadoActivo.Estado;
+                context.Update(estadoActivoDB).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
@@ -92,7 +110,9 @@ namespace SIFAIS.Datos.EstadoActivos
 
         public IEnumerable<SelectListItem> GetListEstadoActivo(ApplicationDbContext context)
         {
-            return context.TblEstadoActivos.Select(i => new SelectListItem()
+            return (from s in context.TblEstadoActivos
+                    where s.Estado == true
+                    select s).Select(i => new SelectListItem()
             {
                 Text = i.Descripcion,
                 Value = i.Id.ToString()

@@ -11,16 +11,18 @@ namespace SIFAIS.Datos.ActivosPrestados
     public interface IActivosPrestadosBLL
     {
         Respuesta ListActivosPrestados(ApplicationDbContext context);
+        Respuesta ListHistorialPrestamos(ApplicationDbContext context);
         Respuesta AddActivosPrestados(ApplicationDbContext context, TblActivosPrestado oActivosPrestados);
         Respuesta EditActivosPrestados(ApplicationDbContext context, TblActivosPrestado oActivosPrestados);
         Respuesta DeleteActivosPrestados(ApplicationDbContext context, int id);
+        Respuesta GetyById(ApplicationDbContext context, int id);
 
         /// <summary>
-        /// Metodo para cambiar el estado
+        /// Metodo para devolver los activos prestados.
         /// </summary>
-        /// <param name="context">Contexto de bd</param>
-        /// <param name="id">llave primaria del ActivosPrestados</param>
+        /// <param name="context">ApplicationDbContext</param>
+        /// <param name="data">Id activo - Id activoPrestado</param>
         /// <returns></returns>
-        Respuesta ChangeStateActivosPrestados(ApplicationDbContext context, int id);
+        Respuesta DevolverActivoPrestado(ApplicationDbContext context, string data);
     }
 }

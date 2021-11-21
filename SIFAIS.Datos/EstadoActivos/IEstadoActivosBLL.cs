@@ -15,6 +15,7 @@ namespace SIFAIS.Datos.EstadoActivos
         Respuesta AddEstadoActivo(ApplicationDbContext context, TblEstadoActivo oEstadoActivo);
         Respuesta EditEstadoActivo(ApplicationDbContext context, TblEstadoActivo oEstadoActivo);
         Respuesta DeleteEstadoActivo(ApplicationDbContext context, int id);
+        Respuesta GetyById(ApplicationDbContext context, int id);
 
         /// <summary>
         /// Metodo para cambiar el estado

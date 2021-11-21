@@ -8,16 +8,35 @@ using System.Threading.Tasks;
 
 namespace SIFAIS.Datos.ActivosFisicos
 {
-    public class ActivosFisicos : IActivosFisicos
+    public class ActivosFisicosBLL : IActivosFisicosBLL
     {
         public Respuesta AddActivosFisicos(ApplicationDbContext context, TblActivosFisico oActivosFisicos)
         {
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                context.TblActivosFisicos.Add(oActivosFisicos);
-                context.SaveChanges();
-                oRespuesta.Estado = 1;
+                if (oActivosFisicos.FechaDeIngreso.Year < 1900 || oActivosFisicos.FechaDeIngreso.Year > 9999)
+                {
+                    oRespuesta.Mensaje = "¡La fecha debe estar entre el año 1900 y 9999!";
+                }
+                else
+                {
+                    if (oActivosFisicos.Cantidad < 1)
+                    {
+                        oRespuesta.Mensaje = "¡La cantidad no puede ser menor a 1!";
+                        oRespuesta.Estado = 0;
+
+                    }
+                    else
+                    {
+                        oActivosFisicos.Estado = true;
+                        oActivosFisicos.Prestado = false;
+                        context.TblActivosFisicos.Add(oActivosFisicos);
+                        context.SaveChanges();
+                        oRespuesta.Estado = 1;
+                    }
+                }
+                
             }
             catch (Exception ex)
             {
@@ -27,20 +46,32 @@ namespace SIFAIS.Datos.ActivosFisicos
             return oRespuesta;
         }
 
-        public Respuesta ChangeStateActivosFisicos(ApplicationDbContext context, int id)
+        public Respuesta GetyById(ApplicationDbContext context, int id)
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = (from d in context.TblActivosFisicos
+                                    where d.Id == id
+                                    select d).FirstOrDefault();
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al filtrar!";
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
+        }
+
+        public Respuesta PrestarDevolverActivo(ApplicationDbContext context, int id, bool estado)
         {
             Respuesta oRespuesta = new Respuesta();
             try
             {
                 var activosFisicosDB = context.TblActivosFisicos.Find(id);
-                if (activosFisicosDB.Estado)
-                {
-                    activosFisicosDB.Estado = false;
-                }
-                else
-                {
-                    activosFisicosDB.Estado = true;
-                }
+                activosFisicosDB.Prestado = estado;
+                context.Update(activosFisicosDB).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
@@ -59,6 +90,7 @@ namespace SIFAIS.Datos.ActivosFisicos
             {
                 var activosFisicosDB = context.TblActivosFisicos.Find(id);
                 context.TblActivosFisicos.Remove(activosFisicosDB);
+                context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)
@@ -102,7 +134,10 @@ namespace SIFAIS.Datos.ActivosFisicos
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                oRespuesta.Datos = context.TblActivosFisicos.ToList();
+                oRespuesta.Datos = (from a in context.ActivosFisicosViews
+                                    where a.Prestado == false
+                                    select a).ToList();
+
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)
@@ -112,5 +147,6 @@ namespace SIFAIS.Datos.ActivosFisicos
             }
             return oRespuesta;
         }
+
     }
 }

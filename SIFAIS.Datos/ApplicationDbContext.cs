@@ -43,10 +43,206 @@ namespace SIFAIS.Datos
         public virtual DbSet<DonanteView> DonanteView { get; set; }
         public virtual DbSet<DonacionesView> DonacionesView { get; set; }
         public virtual DbSet<UsuarioView> UsuarioViews { get; set; }
+        public virtual DbSet<ActivosFisicosView> ActivosFisicosViews { get; set; }
+        public virtual DbSet<ResponsableActivoView> ResponsableActivoViews { get; set; }
+        public virtual DbSet<ActivosPrestadosView> ActivosPrestadosViews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1253_CI_AS");
+
+            modelBuilder.Entity<ActivosFisicosView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("ActivosFisicosView");
+
+                entity.Property(e => e.CodArticulo)
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Condicion)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Departamento)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Sede)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Tipo)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<ActivosPrestadosView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("ActivosPrestadosView");
+
+                entity.Property(e => e.Departamento)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DescripcionActivo)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EstadoActivo)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FechaFin).HasColumnType("datetime");
+
+                entity.Property(e => e.FechaInicio).HasColumnType("datetime");
+
+                entity.Property(e => e.LugarPrestamo)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NombreActivo)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Responsable)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TipoActivo)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<DonacionesView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("DonacionesView");
+
+                entity.Property(e => e.Cantidad)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DocumentacionSifais)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false)
+                    .HasColumnName("DocumentacionSIFAIS");
+
+                entity.Property(e => e.Donante)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Espacio)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FechaDonacion).HasColumnType("datetime");
+
+                entity.Property(e => e.Mensajero)
+                    .IsRequired()
+                    .HasMaxLength(51)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ResponsableDonacion)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TipoDonacion)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<DonanteView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("DonanteView");
+
+                entity.Property(e => e.CodigoExterno)
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CorreoElectronico)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Direccion)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TipoDonante)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<ResponsableActivoView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("ResponsableActivoView");
+
+                entity.Property(e => e.Celular)
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CorreoElectronico)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
 
             modelBuilder.Entity<TblActivosFisico>(entity =>
             {
@@ -365,6 +561,10 @@ namespace SIFAIS.Datos
                     .HasMaxLength(25)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Celular)
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.CodigoExterno)
                     .HasMaxLength(25)
                     .IsUnicode(false);
@@ -379,6 +579,10 @@ namespace SIFAIS.Datos
 
                 entity.Property(e => e.Nombre)
                     .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Telefono)
                     .HasMaxLength(25)
                     .IsUnicode(false);
 
@@ -536,10 +740,12 @@ namespace SIFAIS.Datos
                     .IsUnicode(false);
 
                 entity.Property(e => e.Contraseña)
+                    .IsRequired()
                     .HasMaxLength(25)
                     .IsUnicode(false);
 
                 entity.Property(e => e.CorreoElectronico)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -561,88 +767,6 @@ namespace SIFAIS.Datos
                     .HasConstraintName("FK_Usuario_Sede");
             });
 
-            modelBuilder.Entity<DonanteView>(entity =>
-            {
-                entity.ToTable("DonanteView");
-
-                entity.Property(e => e.CodigoExterno)
-                    .HasMaxLength(25)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CorreoElectronico)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Descripcion)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Direccion)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Nombre)
-                    .IsRequired()
-                    .HasMaxLength(25)
-                    .IsUnicode(false);
-
-                entity.Property(d => d.TipoDonante)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-            });
-
-            modelBuilder.Entity<DonacionesView>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToView("DonacionesView");
-
-                entity.Property(e => e.Cantidad)
-                    .IsRequired()
-                    .HasMaxLength(25)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Descripcion)
-                    .IsRequired()
-                    .HasMaxLength(25)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.DocumentacionSifais)
-                    .IsRequired()
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("DocumentacionSIFAIS");
-
-                entity.Property(e => e.Donante)
-                    .IsRequired()
-                    .HasMaxLength(25)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Espacio)
-                    .IsRequired()
-                    .HasMaxLength(25)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.FechaDonacion).HasColumnType("datetime");
-
-                entity.Property(e => e.Mensajero)
-                    .IsRequired()
-                    .HasMaxLength(51)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ResponsableDonacion)
-                    .IsRequired()
-                    .HasMaxLength(25)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.TipoDonacion)
-                    .IsRequired()
-                    .HasMaxLength(25)
-                    .IsUnicode(false);
-            });
-
             modelBuilder.Entity<UsuarioView>(entity =>
             {
                 entity.HasNoKey();
@@ -655,6 +779,7 @@ namespace SIFAIS.Datos
                     .IsUnicode(false);
 
                 entity.Property(e => e.CorreoElectronico)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 

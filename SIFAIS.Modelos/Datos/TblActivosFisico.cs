@@ -37,6 +37,8 @@ namespace SIFAIS.Modelos.Datos
         [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
 
+        public int Cantidad { get; set; }
+
         [Required(ErrorMessage = "Fecha ingreso es requerido")]
         [Display(Name = "Fecha de ingreso")]
         public DateTime FechaDeIngreso { get; set; }
@@ -52,5 +54,6 @@ namespace SIFAIS.Modelos.Datos
         public virtual TblSede IdSedeNavigation { get; set; }
         public virtual TblTipoActivo IdTipoActivoNavigation { get; set; }
         public virtual ICollection<TblActivosPrestado> TblActivosPrestados { get; set; }
+
     }
 }

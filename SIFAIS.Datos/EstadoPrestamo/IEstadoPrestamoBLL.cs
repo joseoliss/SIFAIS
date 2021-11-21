@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 
 namespace SIFAIS.Datos.EstadoPrestamo
 {
-    public interface IEstadoPrestamo
+    public interface IEstadoPrestamoBLL
     {
         Respuesta ListEstadoPrestamo(ApplicationDbContext context);
         Respuesta AddEstadoPrestamo(ApplicationDbContext context, TblEstadoPrestamo oEstadoPrestamo);
         Respuesta EditEstadoPrestamo(ApplicationDbContext context, TblEstadoPrestamo oEstadoPrestamo);
         Respuesta DeleteEstadoPrestamo(ApplicationDbContext context, int id);
+        Respuesta GetyById(ApplicationDbContext context, int id);
 
         /// <summary>
         /// Metodo para cambiar el estado

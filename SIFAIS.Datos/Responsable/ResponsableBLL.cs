@@ -115,7 +115,7 @@ namespace SIFAIS.Datos.Responsable
 
         public IEnumerable<SelectListItem> GetListResponsable(ApplicationDbContext context)
         {
-            return (from s in context.TblResponsableDonacions
+            return (from s in context.TblResponsables
                     where s.Estado == true
                     select s).Select(i => new SelectListItem()
                     {
@@ -129,7 +129,7 @@ namespace SIFAIS.Datos.Responsable
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                oRespuesta.Datos = context.TblResponsables.ToList();
+                oRespuesta.Datos = context.ResponsableActivoViews.ToList();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)

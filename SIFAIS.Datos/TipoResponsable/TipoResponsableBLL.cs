@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SIFAIS.Datos.TipoResponsable
 {
-    public class TipoResponsable : ITipoResponsableBLL
+    public class TipoResponsableBLL : ITipoResponsableBLL
     {
         public Respuesta AddTipoResponsable(ApplicationDbContext context, TblTipoResponsable oTipoResponsable)
         {
@@ -27,7 +27,23 @@ namespace SIFAIS.Datos.TipoResponsable
             }
             return oRespuesta;
         }
-
+        public Respuesta GetyById(ApplicationDbContext context, int id)
+        {
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = (from d in context.TblTipoResponsables
+                                    where d.Id == id
+                                    select d).FirstOrDefault();
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al filtrar!";
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
+        }
         public Respuesta ChangeStateTipoResponsable(ApplicationDbContext context, int id)
         {
             Respuesta oRespuesta = new Respuesta();
@@ -60,6 +76,7 @@ namespace SIFAIS.Datos.TipoResponsable
             {
                 var tipoResponsableDB = context.TblTipoResponsables.Find(id);
                 context.TblTipoResponsables.Remove(tipoResponsableDB);
+                context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)
@@ -79,6 +96,7 @@ namespace SIFAIS.Datos.TipoResponsable
                 tipoResponsableDB.Descripcion = oTipoResponsable.Descripcion;
                 tipoResponsableDB.Detalles = oTipoResponsable.Detalles;
                 tipoResponsableDB.Estado = oTipoResponsable.Estado;
+                context.Update(tipoResponsableDB).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChanges();
                 oRespuesta.Estado = 1;
             }
@@ -92,8 +110,10 @@ namespace SIFAIS.Datos.TipoResponsable
 
         public IEnumerable<SelectListItem> GetListTipoResponsable(ApplicationDbContext context)
         {
-            return context.TblTipoResponsables.Select(i => new SelectListItem()
-            {
+            return (from d in context.TblTipoResponsables
+                    where d.Estado == true
+                    select d).Select(i => new SelectListItem()
+                    {
                 Text = i.Descripcion,
                 Value = i.Id.ToString()
             });

@@ -89,10 +89,18 @@ namespace SIFAIS.Datos.Usuario
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                var usuarioDB = context.TblUsuarios.Find(id);
-                context.TblUsuarios.Remove(usuarioDB);
-                context.SaveChanges();
-                oRespuesta.Estado = 1;
+                if (id != 1)
+                {
+                    var usuarioDB = context.TblUsuarios.Find(id);
+                    context.TblUsuarios.Remove(usuarioDB);
+                    context.SaveChanges();
+                    oRespuesta.Estado = 1;
+                }
+                else
+                {
+                    oRespuesta.Mensaje = "¡No puede eliminar el usuario por defecto!";
+                    oRespuesta.Estado = 0;
+                }
             }
             catch (Exception ex)
             {

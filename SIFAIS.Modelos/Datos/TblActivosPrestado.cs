@@ -40,5 +40,6 @@ namespace SIFAIS.Modelos.Datos
         public virtual TblEstadoPrestamo IdActivo1 { get; set; }
         public virtual TblActivosFisico IdActivoNavigation { get; set; }
         public virtual TblResponsable IdResponsableNavigation { get; set; }
+
     }
 }

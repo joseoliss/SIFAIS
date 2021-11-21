@@ -1,0 +1,155 @@
+﻿@model IEnumerable<SIFAIS.Modelos.Views.ActivosPrestadosView>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (ViewBag.error != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.error</strong> Pongase en contacto con el administrador.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+@if (ViewBag.exito != null)
+{
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.exito</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="contenedor-contenido">
+    <p class="contenedor-cabecera">
+        <a class="h4 text-muted">Préstamos de ACTIVOS</a>
+    </p>
+    <div class="contenedor-buscador">
+        <label class="lbl-buscar">Bascar</label>
+        <input type="text" id="txt_buscar" class="txt-buscar" />
+    </div>
+    <table class="table table-hover table-bordered">
+        <thead class="t-head" id="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdArticulo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NombreActivo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DescripcionActivo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TipoActivo)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Departamento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LugarPrestamo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EstadoActivo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cantidad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaInicio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaFin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Responsable)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdArticulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreActivo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescripcionActivo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoActivo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Departamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LugarPrestamo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstadoActivo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @{
+                        var fechaIni = item.FechaInicio.ToShortDateString();
+                        <p>@fechaIni</p>
+                    }
+                </td>
+                <td>
+                    @{
+                        var fechaFin = item.FechaFin.ToShortDateString();
+                        <p>@fechaFin</p>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Responsable)
+                </td>
+                <td style="display:flex; flex-direction:row; gap: 4px;">
+                    <a asp-action="Details" asp-route-id="@item.IdArticulo" class="btn-details"><i class="fa fa-info" aria-hidden="true"></i></a>
+                    <a asp-action="Edit" asp-route-id="@item.IdArticulo" class="btn-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    @{ 
+                        string dataUrl = @item.IdArticulo + "~" + item.Id;
+                    }
+                    <a onclick="return confirm('¿Estas seguro que este activo se va a devolver?')"
+                       asp-controller="ActivosPrestados"
+                       asp-action="Devolver"
+                       asp-route-data="@dataUrl"
+                       class="btn-del"><i class="fa fa-share-square-o" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $("#txt_buscar").on("keyup", function () {
+                let value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+}
+
+
+
+

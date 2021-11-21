@@ -1,0 +1,108 @@
+﻿@model SIFAIS.Models.ActivoPrestadoVM
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (ViewBag.error != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.error</strong> Pongase en contacto con el administrador.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="contenedor-contenido">
+    <h4 class="text-muted">Nuevo Préstamo</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="IdActivo" asp-all-route-data=""/>
+
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="ActivosPrestados.IdResponsable"></label>
+                        <div>
+                            @Html.DropDownListFor(m => m.ActivosPrestados.IdResponsable, Model.lstResponsable, new { @class = "txt-form" })
+                        </div>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="ActivosPrestados.Cantidad"></label>
+                        <br />
+                        <input asp-for="ActivosPrestados.Cantidad" class="txt-form" />
+                        <br />
+                        <span asp-validation-for="ActivosPrestados.Cantidad" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="ActivosPrestados.FechaInicio"></label>
+                        <br />
+                        <input type="date" asp-for="ActivosPrestados.FechaInicio" class="txt-form" />
+                        <br />
+                        <span asp-validation-for="ActivosPrestados.FechaInicio" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="ActivosPrestados.FechaFin"></label>
+                        <br />
+                        <input type="date" asp-for="ActivosPrestados.FechaFin" class="txt-form" />
+                        <br />
+                        <span asp-validation-for="ActivosPrestados.FechaFin" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="ActivosPrestados.Detalle"></label>
+                        <br />
+                        <textarea asp-for="ActivosPrestados.Detalle" class="txt-form"></textarea>
+                        <br />
+                        <span asp-validation-for="ActivosPrestados.Detalle" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="ActivosPrestados.LugarPrestamo"></label>
+                        <br />
+                        <textarea asp-for="ActivosPrestados.LugarPrestamo" class="txt-form"></textarea>
+                        <br />
+                        <span asp-validation-for="ActivosPrestados.LugarPrestamo" class="text-danger"></span>
+                    </div>
+                </div>
+
+                
+
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="ActivosPrestados.IdEstadoPrestamo"></label>
+                        <div>
+                            @Html.DropDownListFor(m => m.ActivosPrestados.IdEstadoPrestamo, Model.lstEstadoPrestamo, new { @class = "txt-form" })
+                        </div>
+                    </div>
+                    <div></div>
+                </div>
+
+                <div class="form-group col-sm-12 contenedor-botones">
+                    <div class="col-md-3">
+                        <a asp-action="Index" asp-controller="Activos" class="btn-atras form-control">Atrás</a>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="submit" value="Crear" class="btn-crear form-control" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{ 
+    <script>
+        function setRouteParameter() {
+            var newhref = $("#addActivityPrice").attr('href') + '/' + id;
+            $("#addActivityPrice").attr("href", newhref);
+        }
+    </script>
+}

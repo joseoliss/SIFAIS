@@ -1,0 +1,111 @@
+﻿@model SIFAIS.Models.ActivoVM
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (ViewBag.error != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.error</strong> Pongase en contacto con el administrador.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="contenedor-contenido">
+    <h4 class="text-muted">Activos</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Activos.IdEstadoActivo"></label>
+                        <div>
+                            @Html.DropDownListFor(m => m.Activos.IdEstadoActivo, Model.lstEstadoActivo, new { @class = "txt-form-disabled" })
+                        </div>
+                        <span asp-validation-for="Activos.IdEstadoActivo" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Activos.IdTipoActivo"></label>
+                        <div>
+                            @Html.DropDownListFor(m => m.Activos.IdTipoActivo, Model.lstTipoActivo, new { @class = "txt-form-disabled" })
+                        </div>
+                        <span asp-validation-for="Activos.IdTipoActivo" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Activos.IdSede"></label>
+                        <div>
+                            @Html.DropDownListFor(m => m.Activos.IdSede, Model.lstSede, new { @class = "txt-form-disabled" })
+                        </div>
+                        <span asp-validation-for="Activos.IdSede" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Activos.IdDepartamento"></label>
+                        <div>
+                            @Html.DropDownListFor(m => m.Activos.IdDepartamento, Model.lstDepartamento, new { @class = "txt-form-disabled" })
+                        </div>
+                        <span asp-validation-for="Activos.IdDepartamento" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Activos.Nombre"></label>
+                        <br />
+                        <input type="text" asp-for="Activos.Nombre" class="txt-form-disabled" />
+                        <br />
+                        <span asp-validation-for="Activos.Nombre" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Activos.Cantidad"></label>
+                        <br />
+                        <input type="text" asp-for="Activos.Cantidad" class="txt-form-disabled" />
+                        <br />
+                        <span asp-validation-for="Activos.Cantidad" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Activos.FechaDeIngreso"></label>
+                        <br />
+                        <input type="date" asp-for="Activos.FechaDeIngreso" class="txt-form-disabled" />
+                        <br />
+                        <span asp-validation-for="Activos.FechaDeIngreso" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="Activos.Descripcion"></label>
+                        <br />
+                        <input type="text" asp-for="Activos.Descripcion" class="txt-form-disabled" />
+                        <br />
+                        <span asp-validation-for="Activos.Descripcion" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="Activos.CodArticulo"></label>
+                        <br />
+                        <input type="text" asp-for="Activos.CodArticulo" class="txt-form-disabled" />
+                        <br />
+                        <span asp-validation-for="Activos.CodArticulo" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="form-estado font-weight-bold">
+                            <input disabled class="form-check-input" asp-for="Activos.Estado" /> @Html.DisplayNameFor(model => model.Activos.Estado)
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group col-sm-12 contenedor-botones">
+                    <div class="col-md-3">
+                        <a asp-action="Index" class="btn-atras form-control">Atrás</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

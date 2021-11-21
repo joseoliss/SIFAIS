@@ -1,0 +1,105 @@
+﻿@model IEnumerable<SIFAIS.Modelos.Datos.TblEstadoActivo>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (ViewBag.error != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.error</strong> Pongase en contacto con el administrador.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+@if (ViewBag.exito != null)
+{
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.exito</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="contenedor-contenido">
+    <p class="contenedor-cabecera">
+        <a class="h4 text-muted">Estado de Activos</a>
+        <a class="btn-nuevo" asp-action="Create"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Nuevo</a>
+    </p>
+    <div class="contenedor-buscador">
+        <label class="lbl-buscar">Bascar</label>
+        <input type="text" id="txt_buscar" class="txt-buscar" />
+    </div>
+    <table class="table table-hover table-bordered">
+        <thead class="t-head" id="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Detalles)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estado)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @if (ViewBag.error != null)
+            {
+
+            }
+            else
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Detalles)
+                        </td>
+                        <td>
+                            @if (@item.Estado)
+                            {
+                                <p>Activo</p>
+                            }
+                            else
+                            {
+                                <p>Inactivo</p>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                            <a onclick="return confirm('¿Estas seguro que quieres eliminar este registro?')"
+                               asp-action="Delete"
+                               asp-route-id="@item.Id"
+                               class="btn-del"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $("#txt_buscar").on("keyup", function () {
+                let value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+}

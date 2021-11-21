@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace SIFAIS.Datos.ActivosFisicos
 {
-    public interface IActivosFisicos
+    public interface IActivosFisicosBLL
     {
         Respuesta ListActivosFisicos(ApplicationDbContext context);
         Respuesta AddActivosFisicos(ApplicationDbContext context, TblActivosFisico oActivosFisicos);
         Respuesta EditActivosFisicos(ApplicationDbContext context, TblActivosFisico oActivosFisicos);
         Respuesta DeleteActivosFisicos(ApplicationDbContext context, int id);
+        Respuesta GetyById(ApplicationDbContext context, int id);
 
         /// <summary>
         /// Metodo para cambiar el estado
@@ -21,6 +22,6 @@ namespace SIFAIS.Datos.ActivosFisicos
         /// <param name="context">Contexto de bd</param>
         /// <param name="id">llave primaria del ActivosFisicos</param>
         /// <returns></returns>
-        Respuesta ChangeStateActivosFisicos(ApplicationDbContext context, int id);
+        Respuesta PrestarDevolverActivo(ApplicationDbContext context, int id, bool estado);
     }
 }
