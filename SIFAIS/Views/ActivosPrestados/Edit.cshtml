@@ -16,13 +16,13 @@
 }
 
 <div class="contenedor-contenido">
-    <h4 class="text-muted">Nuevo Préstamo</h4>
+    <h4 class="text-muted">Modificar Préstamo</h4>
     <div class="row">
         <div class="col-md-12">
-            <form asp-action="Create">
+            <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="IdActivo" asp-all-route-data=""/>
-
+                <input type="hidden" asp-for="ActivosPrestados.Id" />
+                <input type="hidden" asp-for="ActivosPrestados.IdActivo" />
                 <div class="contenedor-form-group">
                     <div>
                         <label class="font-weight-bold" asp-for="ActivosPrestados.IdResponsable"></label>
@@ -33,7 +33,7 @@
                     <div>
                         <label class="font-weight-bold" asp-for="ActivosPrestados.Cantidad"></label>
                         <br />
-                        <input asp-for="ActivosPrestados.Cantidad" class="txt-form" />
+                        <input asp-for="ActivosPrestados.Cantidad" class="txt-form-disabled" />
                         <br />
                         <span asp-validation-for="ActivosPrestados.Cantidad" class="text-danger"></span>
                     </div>
@@ -73,7 +73,7 @@
                     </div>
                 </div>
 
-                
+
 
                 <div class="contenedor-form-group">
                     <div>
@@ -87,10 +87,10 @@
 
                 <div class="form-group col-sm-12 contenedor-botones">
                     <div class="col-md-3">
-                        <a asp-action="Index" asp-controller="Activos" class="btn-atras form-control">Atrás</a>
+                        <a asp-action="Index" class="btn-atras form-control">Atrás</a>
                     </div>
                     <div class="col-md-3">
-                        <input type="submit" value="Crear" class="btn-crear form-control" />
+                        <input type="submit" value="Modificar" class="btn-crear form-control" />
                     </div>
                 </div>
             </form>

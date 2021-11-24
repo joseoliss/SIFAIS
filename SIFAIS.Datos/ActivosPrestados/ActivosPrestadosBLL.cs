@@ -46,17 +46,25 @@ namespace SIFAIS.Datos.ActivosPrestados
                             }
                             else
                             {
-                                context.TblActivosPrestados.Add(oActivosPrestados);
-                                context.SaveChanges();
-                                oRespuesta.Estado = 1;
-                                estadoTransaccion = oRespuesta.Estado == 1 ? true : false;
-
-                                if (estadoTransaccion)
+                                var activoCount = (TblActivosFisico)_activo.GetyById(context,oActivosPrestados.IdActivo).Datos;
+                                if (activoCount.Cantidad < oActivosPrestados.Cantidad)
                                 {
-                                    var resActivo = _activo.PrestarDevolverActivo(context, oActivosPrestados.IdActivo, true);
-                                    estadoTransaccion = resActivo.Estado == 1 ? true : false;
+                                    oRespuesta.Estado = 0;
+                                    oRespuesta.Mensaje = "¡La cantidad a prestar es mayor que las existencias totales!";
                                 }
-                                
+                                else
+                                {
+                                    context.TblActivosPrestados.Add(oActivosPrestados);
+                                    context.SaveChanges();
+                                    oRespuesta.Estado = 1;
+                                    estadoTransaccion = oRespuesta.Estado == 1 ? true : false;
+
+                                    if (estadoTransaccion)
+                                    {
+                                        var resActivo = _activo.PrestarDevolverActivo(context, oActivosPrestados.IdActivo, oActivosPrestados.Cantidad, "restar");
+                                        estadoTransaccion = resActivo.Estado == 1 ? true : false;
+                                    }
+                                }                                
                             }
                         }
                     }
@@ -68,7 +76,11 @@ namespace SIFAIS.Datos.ActivosPrestados
                     else
                     {
                         dbTransacction.Rollback();
-                        throw new Exception();
+                        if (oRespuesta.Mensaje == "")
+                        {
+                            oRespuesta.Mensaje = "¡Ha ocurrido un error agregar!";
+                            oRespuesta.Estado = 0;
+                        }
                     }
                 }
             }
@@ -115,7 +127,7 @@ namespace SIFAIS.Datos.ActivosPrestados
 
                     if (estadoTransaccion)
                     {
-                        var resActivo = _activo.PrestarDevolverActivo(context, IdActivo, false);
+                        var resActivo = _activo.PrestarDevolverActivo(context, IdActivo, ActivosPrestadosDB.Cantidad, "sumar");
                         estadoTransaccion = resActivo.Estado == 1 ? true : false;
                     }
 
@@ -126,7 +138,11 @@ namespace SIFAIS.Datos.ActivosPrestados
                     else
                     {
                         dbTransacction.Rollback();
-                        throw new Exception();
+                        if (oRespuesta.Mensaje == "")
+                        {
+                            oRespuesta.Mensaje = "¡Ha ocurrido un error agregar!";
+                            oRespuesta.Estado = 0;
+                        }
                     }
                 }
             }
@@ -161,19 +177,35 @@ namespace SIFAIS.Datos.ActivosPrestados
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                var ActivosPrestadosDB = context.TblActivosPrestados.Find(oActivosPrestados.Id);
-                ActivosPrestadosDB.IdActivo = oActivosPrestados.IdActivo;
-                ActivosPrestadosDB.IdResponsable = oActivosPrestados.IdResponsable;
-                ActivosPrestadosDB.Detalle = oActivosPrestados.Detalle;
-                ActivosPrestadosDB.Cantidad = oActivosPrestados.Cantidad;
-                ActivosPrestadosDB.LugarPrestamo = oActivosPrestados.LugarPrestamo;
-                ActivosPrestadosDB.FechaInicio = oActivosPrestados.FechaInicio;
-                ActivosPrestadosDB.FechaFin = oActivosPrestados.FechaFin;
-                ActivosPrestadosDB.DiasTranscurridos = oActivosPrestados.DiasTranscurridos;
-                ActivosPrestadosDB.Estado = oActivosPrestados.Estado;
-                context.Update(ActivosPrestadosDB).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                context.SaveChanges();
-                oRespuesta.Estado = 1;
+                if (oActivosPrestados.FechaInicio.Year < 1900 || oActivosPrestados.FechaInicio.Year > 9999 || oActivosPrestados.FechaFin.Year < 1900 || oActivosPrestados.FechaFin.Year > 9999)
+                {
+                    oRespuesta.Mensaje = "¡Las fechas deben estar entre el año 1900 y 9999!";
+                    oRespuesta.Estado = 0;
+                }
+                else
+                {
+                    if (oActivosPrestados.FechaInicio > oActivosPrestados.FechaFin)
+                    {
+                        oRespuesta.Estado = 0;
+                        oRespuesta.Mensaje = "¡La fecha de inicio debe ser menor a la fecha final!";
+                    }
+                    else
+                    {
+                        var ActivosPrestadosDB = context.TblActivosPrestados.Find(oActivosPrestados.Id);
+                        ActivosPrestadosDB.IdActivo = oActivosPrestados.IdActivo;
+                        ActivosPrestadosDB.IdResponsable = oActivosPrestados.IdResponsable;
+                        ActivosPrestadosDB.Detalle = oActivosPrestados.Detalle;
+                        ActivosPrestadosDB.Cantidad = oActivosPrestados.Cantidad;
+                        ActivosPrestadosDB.LugarPrestamo = oActivosPrestados.LugarPrestamo;
+                        ActivosPrestadosDB.FechaInicio = oActivosPrestados.FechaInicio;
+                        ActivosPrestadosDB.FechaFin = oActivosPrestados.FechaFin;
+                        ActivosPrestadosDB.DiasTranscurridos = oActivosPrestados.DiasTranscurridos;
+                        ActivosPrestadosDB.Estado = oActivosPrestados.Estado;
+                        context.Update(ActivosPrestadosDB).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                        context.SaveChanges();
+                        oRespuesta.Estado = 1;
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -190,7 +222,6 @@ namespace SIFAIS.Datos.ActivosPrestados
             {
                 oRespuesta.Datos = (from a in context.ActivosPrestadosViews
                                     where a.Estado == true
-                                    && a.Prestado == true
                                     select a).ToList();
                 oRespuesta.Estado = 1;
             }

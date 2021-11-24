@@ -8,6 +8,7 @@ namespace SIFAIS.Modelos.Views
 {
     public partial class ActivosFisicosView
     {
+        [Display(Name = "Id Act")]
         public int Id { get; set; }
         public string Sede { get; set; }
         public string Nombre { get; set; }

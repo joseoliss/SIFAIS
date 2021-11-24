@@ -22,6 +22,6 @@ namespace SIFAIS.Datos.ActivosFisicos
         /// <param name="context">Contexto de bd</param>
         /// <param name="id">llave primaria del ActivosFisicos</param>
         /// <returns></returns>
-        Respuesta PrestarDevolverActivo(ApplicationDbContext context, int id, bool estado);
+        Respuesta PrestarDevolverActivo(ApplicationDbContext context, int id, int cantidad, string accion);
     }
 }

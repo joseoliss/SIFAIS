@@ -27,7 +27,7 @@
 
 <div class="contenedor-contenido">
     <p class="contenedor-cabecera">
-        <a class="h4 text-muted">Préstamos de ACTIVOS</a>
+        <a class="h4 text-muted">Historial de Activos Prestados</a>
     </p>
     <div class="contenedor-buscador">
         <label class="lbl-buscar">Bascar</label>
@@ -70,67 +70,52 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Responsable)
                 </th>
-                <th></th>
             </tr>
         </thead>
         <tbody id="myTable">
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdArticulo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NombreActivo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DescripcionActivo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TipoActivo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Departamento)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LugarPrestamo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EstadoActivo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cantidad)
-                </td>
-                <td>
-                    @{
-                        var fechaIni = item.FechaInicio.ToShortDateString();
-                        <p>@fechaIni</p>
-                    }
-                </td>
-                <td>
-                    @{
-                        var fechaFin = item.FechaFin.ToShortDateString();
-                        <p>@fechaFin</p>
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Responsable)
-                </td>
-                <td style="display:flex; flex-direction:row; gap: 4px;">
-                    @{
-                        string dataDeleteUpdate = @item.IdArticulo + "~" + item.Id;
-                        string dataDetails = @item.Id + "~" + item.NombreActivo + "~" + item.DescripcionActivo 
-                                             + "~" + item.TipoActivo + "~" + item.Departamento;
-                    }
-                    <a asp-action="Details" asp-route-data="@dataDetails" class="btn-details"><i class="fa fa-info" aria-hidden="true"></i></a>
-                    <a asp-action="Edit" asp-route-data="@dataDeleteUpdate" class="btn-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                    <a onclick="return confirm('¿Estas seguro que este activo se va a devolver?')"
-                       asp-controller="ActivosPrestados"
-                       asp-action="Devolver"
-                       asp-route-data="@dataDeleteUpdate"
-                       class="btn-del"><i class="fa fa-share-square-o" aria-hidden="true"></i></a>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdArticulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreActivo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DescripcionActivo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoActivo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Departamento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LugarPrestamo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EstadoActivo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cantidad)
+                    </td>
+                    <td>
+                        @{
+                            var fechaIni = item.FechaInicio.ToShortDateString();
+                            <p>@fechaIni</p>
+                        }
+                    </td>
+                    <td>
+                        @{
+                            var fechaFin = item.FechaFin.ToShortDateString();
+                            <p>@fechaFin</p>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Responsable)
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

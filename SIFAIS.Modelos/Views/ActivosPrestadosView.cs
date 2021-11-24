@@ -8,7 +8,7 @@ namespace SIFAIS.Modelos.Views
 {
     public partial class ActivosPrestadosView
     {
-        [Display(Name = "Id")]
+        [Display(Name = "Id Act")]
         public int IdArticulo { get; set; }
 
         [Display(Name = "Nombre")]

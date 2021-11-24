@@ -64,13 +64,20 @@ namespace SIFAIS.Datos.ActivosFisicos
             return oRespuesta;
         }
 
-        public Respuesta PrestarDevolverActivo(ApplicationDbContext context, int id, bool estado)
+        public Respuesta PrestarDevolverActivo(ApplicationDbContext context, int id, int cantidad, string accion)
         {
             Respuesta oRespuesta = new Respuesta();
             try
             {
                 var activosFisicosDB = context.TblActivosFisicos.Find(id);
-                activosFisicosDB.Prestado = estado;
+                if (accion == "sumar")
+                {
+                    activosFisicosDB.Cantidad = activosFisicosDB.Cantidad + cantidad;
+                }
+                else if (accion == "restar")
+                {
+                    activosFisicosDB.Cantidad = activosFisicosDB.Cantidad - cantidad;
+                }
                 context.Update(activosFisicosDB).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChanges();
                 oRespuesta.Estado = 1;
@@ -113,6 +120,7 @@ namespace SIFAIS.Datos.ActivosFisicos
                 activosFisicosDB.IdDepartamento = oActivosFisicos.IdDepartamento;
                 activosFisicosDB.Nombre = oActivosFisicos.Nombre;
                 activosFisicosDB.Descripcion = oActivosFisicos.Descripcion;
+                activosFisicosDB.Cantidad = oActivosFisicos.Cantidad;
                 activosFisicosDB.FechaDeIngreso = oActivosFisicos.FechaDeIngreso;
                 activosFisicosDB.Foto = oActivosFisicos.Foto;
                 activosFisicosDB.CodArticulo = oActivosFisicos.CodArticulo;
@@ -135,7 +143,7 @@ namespace SIFAIS.Datos.ActivosFisicos
             try
             {
                 oRespuesta.Datos = (from a in context.ActivosFisicosViews
-                                    where a.Prestado == false
+                                    where a.Cantidad > 0
                                     select a).ToList();
 
                 oRespuesta.Estado = 1;

@@ -103,6 +103,7 @@ namespace SIFAIS.Controllers
                 lstDonante = _donante.GetListDonante(_context),
                 lstSede = _sede.GetListSede(_context)
             };
+            oDoncionVM.Donacion.FechaDonacion = DateTime.Now;
             return View(oDoncionVM);
         }
 

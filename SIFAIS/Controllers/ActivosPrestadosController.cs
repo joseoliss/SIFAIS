@@ -51,6 +51,19 @@ namespace SIFAIS.Controllers
         }
 
         [HttpGet]
+        public IActionResult History(string mensaje)
+        {
+            if (mensaje != null)
+            {
+                ViewBag.exito = mensaje;
+            }
+            var oRespuesta = _ActivoPrestado.ListHistorialPrestamos(_context);
+            if (oRespuesta.Estado == 1) return View(oRespuesta.Datos);
+            ViewBag.error = oRespuesta.Mensaje;
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult Create(int Id)
         {
             ActivoPrestadoVM oActivoPrestadoVM = new ActivoPrestadoVM()
@@ -60,6 +73,8 @@ namespace SIFAIS.Controllers
                 lstEstadoPrestamo = _estadoPrestamo.GetListEstadoPrestamo(_context),
                 IdActivo = Id
             };
+            oActivoPrestadoVM.ActivosPrestados.FechaInicio = DateTime.Now;
+            oActivoPrestadoVM.ActivosPrestados.FechaFin = DateTime.Now;
             return View(oActivoPrestadoVM);
         }
 
@@ -80,9 +95,11 @@ namespace SIFAIS.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Details(string data)
         {
-            var oResultado = _ActivoPrestado.GetyById(_context, id);
+            var idPrestamo = Convert.ToInt32(data.Split("~")[0]);
+
+            var oResultado = _ActivoPrestado.GetyById(_context, idPrestamo);
             ActivoPrestadoVM oActivoPrestadoVM = new ActivoPrestadoVM()
             {
                 ActivosPrestados = new TblActivosPrestado(),
@@ -90,6 +107,28 @@ namespace SIFAIS.Controllers
                 lstEstadoPrestamo = _estadoPrestamo.GetListEstadoPrestamo(_context)
             };
             oActivoPrestadoVM.ActivosPrestados = (TblActivosPrestado)oResultado.Datos;
+            oActivoPrestadoVM.NombreActivo = data.Split("~")[1];
+            oActivoPrestadoVM.DescripcionActivo = data.Split("~")[2];
+            oActivoPrestadoVM.TipoActivo = data.Split("~")[3];
+            oActivoPrestadoVM.DepartamentoActivo = data.Split("~")[4];
+            if (oResultado.Estado == 1) return View(oActivoPrestadoVM);
+            ViewBag.error = oResultado.Mensaje;
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Edit(string data)
+        {
+            var idPrestamo = Convert.ToInt32(data.Split("~")[1]);
+            var oResultado = _ActivoPrestado.GetyById(_context, idPrestamo);
+            ActivoPrestadoVM oActivoPrestadoVM = new ActivoPrestadoVM()
+            {
+                ActivosPrestados = new TblActivosPrestado(),
+                lstResponsable = _responsable.GetListResponsable(_context),
+                lstEstadoPrestamo = _estadoPrestamo.GetListEstadoPrestamo(_context)
+            };
+            oActivoPrestadoVM.ActivosPrestados = (TblActivosPrestado)oResultado.Datos;
+            oActivoPrestadoVM.ActivosPrestados.IdActivo = Convert.ToInt32(data.Split("~")[0]);
             if (oResultado.Estado == 1) return View(oActivoPrestadoVM);
             ViewBag.error = oResultado.Mensaje;
             return View();
@@ -98,6 +137,7 @@ namespace SIFAIS.Controllers
         [HttpPost]
         public IActionResult Edit(ActivoPrestadoVM oActivoPrestadoVM)
         {
+            oActivoPrestadoVM.ActivosPrestados.Estado = true;
             if (ModelState.IsValid)
             {
                 var oResultado = _ActivoPrestado.EditActivosPrestados(_context, oActivoPrestadoVM.ActivosPrestados);

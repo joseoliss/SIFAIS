@@ -84,6 +84,7 @@ namespace SIFAIS.Controllers
                 lstTipoActivo = _tipoActivo.GetListTipoActivo(_context),
                 lstSede = _sede.GetListSede(_context)
             };
+            oActivoVM.Activos.FechaDeIngreso = DateTime.Now;
             return View(oActivoVM);
         }
 

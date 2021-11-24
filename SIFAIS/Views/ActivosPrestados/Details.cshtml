@@ -16,24 +16,56 @@
 }
 
 <div class="contenedor-contenido">
-    <h4 class="text-muted">Nuevo Préstamo</h4>
+    <h4 class="text-muted">Prestamos</h4>
     <div class="row">
         <div class="col-md-12">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="IdActivo" asp-all-route-data=""/>
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="NombreActivo"></label>
+                        <br />
+                        <input asp-for="NombreActivo" class="txt-form-disabled" />
+                        <br />
+                        <span asp-validation-for="NombreActivo" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="DescripcionActivo"></label>
+                        <br />
+                        <textarea asp-for="DescripcionActivo" class="txt-form-disabled"></textarea>
+                        <br />
+                        <span asp-validation-for="DescripcionActivo" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="contenedor-form-group">
+                    <div>
+                        <label class="font-weight-bold" asp-for="TipoActivo"></label>
+                        <br />
+                        <input asp-for="TipoActivo" class="txt-form-disabled" />
+                        <br />
+                        <span asp-validation-for="TipoActivo" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label class="font-weight-bold" asp-for="DepartamentoActivo"></label>
+                        <br />
+                        <input asp-for="DepartamentoActivo" class="txt-form-disabled" />
+                        <br />
+                        <span asp-validation-for="DepartamentoActivo" class="text-danger"></span>
+                    </div>
+                </div>
 
                 <div class="contenedor-form-group">
                     <div>
                         <label class="font-weight-bold" asp-for="ActivosPrestados.IdResponsable"></label>
                         <div>
-                            @Html.DropDownListFor(m => m.ActivosPrestados.IdResponsable, Model.lstResponsable, new { @class = "txt-form" })
+                            @Html.DropDownListFor(m => m.ActivosPrestados.IdResponsable, Model.lstResponsable, new { @class = "txt-form-disabled" })
                         </div>
                     </div>
                     <div>
                         <label class="font-weight-bold" asp-for="ActivosPrestados.Cantidad"></label>
                         <br />
-                        <input asp-for="ActivosPrestados.Cantidad" class="txt-form" />
+                        <input asp-for="ActivosPrestados.Cantidad" class="txt-form-disabled" />
                         <br />
                         <span asp-validation-for="ActivosPrestados.Cantidad" class="text-danger"></span>
                     </div>
@@ -43,14 +75,14 @@
                     <div>
                         <label class="font-weight-bold" asp-for="ActivosPrestados.FechaInicio"></label>
                         <br />
-                        <input type="date" asp-for="ActivosPrestados.FechaInicio" class="txt-form" />
+                        <input type="date" asp-for="ActivosPrestados.FechaInicio" class="txt-form-disabled" />
                         <br />
                         <span asp-validation-for="ActivosPrestados.FechaInicio" class="text-danger"></span>
                     </div>
                     <div>
                         <label class="font-weight-bold" asp-for="ActivosPrestados.FechaFin"></label>
                         <br />
-                        <input type="date" asp-for="ActivosPrestados.FechaFin" class="txt-form" />
+                        <input type="date" asp-for="ActivosPrestados.FechaFin" class="txt-form-disabled" />
                         <br />
                         <span asp-validation-for="ActivosPrestados.FechaFin" class="text-danger"></span>
                     </div>
@@ -60,26 +92,26 @@
                     <div>
                         <label class="font-weight-bold" asp-for="ActivosPrestados.Detalle"></label>
                         <br />
-                        <textarea asp-for="ActivosPrestados.Detalle" class="txt-form"></textarea>
+                        <textarea asp-for="ActivosPrestados.Detalle" class="txt-form-disabled"></textarea>
                         <br />
                         <span asp-validation-for="ActivosPrestados.Detalle" class="text-danger"></span>
                     </div>
                     <div>
                         <label class="font-weight-bold" asp-for="ActivosPrestados.LugarPrestamo"></label>
                         <br />
-                        <textarea asp-for="ActivosPrestados.LugarPrestamo" class="txt-form"></textarea>
+                        <textarea asp-for="ActivosPrestados.LugarPrestamo" class="txt-form-disabled"></textarea>
                         <br />
                         <span asp-validation-for="ActivosPrestados.LugarPrestamo" class="text-danger"></span>
                     </div>
                 </div>
 
-                
+
 
                 <div class="contenedor-form-group">
                     <div>
                         <label class="font-weight-bold" asp-for="ActivosPrestados.IdEstadoPrestamo"></label>
                         <div>
-                            @Html.DropDownListFor(m => m.ActivosPrestados.IdEstadoPrestamo, Model.lstEstadoPrestamo, new { @class = "txt-form" })
+                            @Html.DropDownListFor(m => m.ActivosPrestados.IdEstadoPrestamo, Model.lstEstadoPrestamo, new { @class = "txt-form-disabled" })
                         </div>
                     </div>
                     <div></div>
@@ -87,14 +119,10 @@
 
                 <div class="form-group col-sm-12 contenedor-botones">
                     <div class="col-md-3">
-                        <a asp-action="Index" asp-controller="Activos" class="btn-atras form-control">Atrás</a>
-                    </div>
-                    <div class="col-md-3">
-                        <input type="submit" value="Crear" class="btn-crear form-control" />
+                        <a asp-action="Index" class="btn-atras form-control">Atrás</a>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
