@@ -10,10 +10,9 @@
     min-width: 250px;
     min-height: 100vh;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-} 
+}
 
 /************************LOGO********************************/
-
 .contenedor .contenedor-sidebar .contenedor-logo img {
     margin-top: -40px;
     width: 100%;
@@ -107,8 +106,17 @@
 
 .btnOcultar {
     position: absolute;
-    transform: translateX(180px);
+    transform: translate(5px, 0px);
+    width: 20px;
+    height: 20px;
+    color:#000000;
+    font-size: 20px;
 }
+
+.btnOcultar:hover {
+    color:#808080;
+}
+
 /************************CONTENEDOR PRINCIPAL*****************************/
 .contenedor-principal {
     min-height: 100vh;

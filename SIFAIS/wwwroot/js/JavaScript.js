@@ -1,5 +1,1 @@
-﻿
-$("#btnOcultar").click(function () {
-    alert("fdsds")
-    $("#contenedor-sidebar").addClass("ocultar");
-});
+﻿document.getElementById('btnOcultar').classList.toggle('active');
