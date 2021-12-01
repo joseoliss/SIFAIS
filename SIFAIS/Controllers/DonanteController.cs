@@ -58,6 +58,10 @@ namespace SIFAIS.Views
         [HttpGet]
         public IActionResult Create()
         {
+            if (Convert.ToInt32(User.Identity.GetUserRolId()) != 1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             DonanteVM oDonanteVM = new DonanteVM()
             {
                 Donante = new TblDonante(),
@@ -82,6 +86,10 @@ namespace SIFAIS.Views
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            if (Convert.ToInt32(User.Identity.GetUserRolId()) != 1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var oResultado = _Donante.GetyById(_context, id);
             DonanteVM oDonanteVM = new DonanteVM()
             {

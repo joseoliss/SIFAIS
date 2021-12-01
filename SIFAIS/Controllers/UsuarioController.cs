@@ -62,6 +62,10 @@ namespace SIFAIS.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            if (Convert.ToInt32(User.Identity.GetUserRolId()) != 1)
+            {
+                return RedirectToAction("Index","Home");
+            }
             UsuarioVM oUsuarioVM = new UsuarioVM()
             {
                 Usuario = new TblUsuario(),
@@ -88,6 +92,10 @@ namespace SIFAIS.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            if (Convert.ToInt32(User.Identity.GetUserRolId()) != 1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var oResultado = _usuarioBLL.GetyById(_context, id);
             UsuarioVM oUsuarioVM = new UsuarioVM()
             {

@@ -27,7 +27,10 @@
 <div class="contenedor-contenido">
     <p class="contenedor-cabecera">
         <a class="h4 text-muted">Estado de Activos</a>
-        <a class="btn-nuevo" asp-action="Create"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Nuevo</a>
+        @if (Convert.ToInt32(User.Identity.GetUserRolId()) == 1)
+        {
+            <a class="btn-nuevo" asp-action="Create"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Nuevo</a>
+        }
     </p>
     <div class="contenedor-buscador">
         <label class="lbl-buscar">Bascar</label>
@@ -45,7 +48,11 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Estado)
                 </th>
-                <th></th>
+                @if (Convert.ToInt32(User.Identity.GetUserRolId()) == 1)
+                {
+                    <th></th>
+                }
+                
             </tr>
         </thead>
         <tbody id="myTable">
@@ -57,31 +64,35 @@
             {
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Descripcion)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Detalles)
-                        </td>
-                        <td>
-                            @if (@item.Estado)
-                            {
-                                <p>Activo</p>
-                            }
-                            else
-                            {
-                                <p>Inactivo</p>
-                            }
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                            <a onclick="return confirm('¿Estas seguro que quieres eliminar este registro?')"
-                               asp-action="Delete"
-                               asp-route-id="@item.Id"
-                               class="btn-del"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                        </td>
-                    </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Detalles)
+                </td>
+                <td>
+                    @if (@item.Estado)
+                    {
+                        <p>Activo</p>
+                    }
+                    else
+                    {
+                        <p>Inactivo</p>
+                    }
+                </td>
+                @if (Convert.ToInt32(User.Identity.GetUserRolId()) == 1)
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        <a onclick="return confirm('¿Estas seguro que quieres eliminar este registro?')"
+                           asp-action="Delete"
+                           asp-route-id="@item.Id"
+                           class="btn-del"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    </td>
+                }
+                
+            </tr>
                 }
             }
         </tbody>

@@ -66,6 +66,10 @@ namespace SIFAIS.Controllers
         [HttpGet]
         public IActionResult Create(int Id)
         {
+            if (Convert.ToInt32(User.Identity.GetUserRolId()) != 1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             ActivoPrestadoVM oActivoPrestadoVM = new ActivoPrestadoVM()
             {
                 ActivosPrestados = new TblActivosPrestado(),
@@ -119,6 +123,10 @@ namespace SIFAIS.Controllers
         [HttpGet]
         public IActionResult Edit(string data)
         {
+            if (Convert.ToInt32(User.Identity.GetUserRolId()) != 1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var idPrestamo = Convert.ToInt32(data.Split("~")[1]);
             var oResultado = _ActivoPrestado.GetyById(_context, idPrestamo);
             ActivoPrestadoVM oActivoPrestadoVM = new ActivoPrestadoVM()

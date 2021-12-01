@@ -39,6 +39,10 @@ namespace SIFAIS.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            if (Convert.ToInt32(User.Identity.GetUserRolId()) != 1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -57,6 +61,10 @@ namespace SIFAIS.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            if (Convert.ToInt32(User.Identity.GetUserRolId()) != 1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var oResultado = _tipoResponsable.GetyById(_context, id);
             if (oResultado.Estado == 1) return View(oResultado.Datos);
             ViewBag.error = oResultado.Mensaje;

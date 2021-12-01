@@ -29,7 +29,10 @@
 <div class="contenedor-contenido">
     <p class="contenedor-cabecera">
         <a class="h4 text-muted">Donaciones</a>
-        <a class="btn-nuevo" asp-action="Create"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Nuevo</a>
+        @if (Convert.ToInt32(User.Identity.GetUserRolId()) == 1)
+        {
+            <a class="btn-nuevo" asp-action="Create"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Nuevo</a>
+        }
     </p>
     <div class="contenedor-buscador">
         <label class="lbl-buscar">Bascar</label>
@@ -67,7 +70,11 @@
                 <th>
                     @Html.DisplayNameFor(model => model.ResponsableDonacion)
                 </th>
-                <th></th>
+
+                @if (Convert.ToInt32(User.Identity.GetUserRolId()) == 1)
+                {
+                    <th></th>
+                }
             </tr>
         </thead>
         <tbody id="myTable">
@@ -104,10 +111,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.ResponsableDonacion)
                 </td>
-                <td style="display:flex; flex-direction:row; gap: 4px;">
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn-details"><i class="fa fa-info" aria-hidden="true"></i></a>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                </td>
+                @if (Convert.ToInt32(User.Identity.GetUserRolId()) == 1)
+                {
+                    <td style="display:flex; flex-direction:row; gap: 4px;">
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn-details"><i class="fa fa-info" aria-hidden="true"></i></a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    </td>
+                }
+
             </tr>
             }
         </tbody>

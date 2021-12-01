@@ -41,6 +41,10 @@ namespace SIFAIS.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            if (Convert.ToInt32(User.Identity.GetUserRolId()) != 1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             ResponsableVM oResponsableVM = new ResponsableVM()
             {
                 Responsable = new TblResponsable(),
@@ -65,6 +69,10 @@ namespace SIFAIS.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            if (Convert.ToInt32(User.Identity.GetUserRolId()) != 1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var oResultado = _responsableBLL.GetyById(_context, id);
             ResponsableVM oResponsableVM = new ResponsableVM()
             {

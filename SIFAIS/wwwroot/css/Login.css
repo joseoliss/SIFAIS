@@ -84,3 +84,16 @@
     transform: scale(1.05);
     background: #5a009e;
 }
+
+
+
+
+
+/**************************SIN PERMISO***************************/
+.contenedor-sinpermiso {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color:red;
+}

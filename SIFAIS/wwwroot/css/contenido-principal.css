@@ -276,4 +276,17 @@
 
 
 
+/*************************SIN PERMISO****************************/
+
+
+.contenedor-sinpermiso {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.contenedor-sinpermiso div{
+    width:100%;
+}
+
 

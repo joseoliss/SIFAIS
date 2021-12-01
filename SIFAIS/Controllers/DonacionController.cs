@@ -92,6 +92,10 @@ namespace SIFAIS.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            if (Convert.ToInt32(User.Identity.GetUserRolId()) != 1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             DonacionVM oDoncionVM = new DonacionVM()
             {
                 Donacion = new TblDonacione(),
@@ -129,6 +133,10 @@ namespace SIFAIS.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            if (Convert.ToInt32(User.Identity.GetUserRolId()) != 1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var oResultado = _donacion.GetById(_context, id);
             DonacionVM oDoncionVM = new DonacionVM()
             {

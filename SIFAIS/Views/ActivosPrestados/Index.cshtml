@@ -119,16 +119,20 @@
                 <td style="display:flex; flex-direction:row; gap: 4px;">
                     @{
                         string dataDeleteUpdate = @item.IdArticulo + "~" + item.Id;
-                        string dataDetails = @item.Id + "~" + item.NombreActivo + "~" + item.DescripcionActivo 
+                        string dataDetails = @item.Id + "~" + item.NombreActivo + "~" + item.DescripcionActivo
                                              + "~" + item.TipoActivo + "~" + item.Departamento;
                     }
                     <a asp-action="Details" asp-route-data="@dataDetails" class="btn-details"><i class="fa fa-info" aria-hidden="true"></i></a>
-                    <a asp-action="Edit" asp-route-data="@dataDeleteUpdate" class="btn-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                    <a onclick="return confirm('¿Estas seguro que este activo se va a devolver?')"
-                       asp-controller="ActivosPrestados"
-                       asp-action="Devolver"
-                       asp-route-data="@dataDeleteUpdate"
-                       class="btn-del"><i class="fa fa-share-square-o" aria-hidden="true"></i></a>
+                    @if (Convert.ToInt32(User.Identity.GetUserRolId()) == 1)
+                    {
+                        <a asp-action="Edit" asp-route-data="@dataDeleteUpdate" class="btn-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        <a onclick="return confirm('¿Estas seguro que este activo se va a devolver?')"
+                           asp-controller="ActivosPrestados"
+                           asp-action="Devolver"
+                           asp-route-data="@dataDeleteUpdate"
+                           class="btn-del"><i class="fa fa-share-square-o" aria-hidden="true"></i></a>
+                    }
+
                 </td>
             </tr>
             }

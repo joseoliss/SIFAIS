@@ -14,5 +14,11 @@ namespace SIFAIS
             var claim = ((ClaimsIdentity)identity).FindFirst("UserId");
             return (claim != null) ? claim.Value : identity.Name;
         }
+
+        public static string GetUserRolId(this IIdentity identity)
+        {
+            var claim = ((ClaimsIdentity)identity).FindFirst("UserRole");
+            return (claim != null) ? claim.Value : identity.Name;
+        }
     }
 }
