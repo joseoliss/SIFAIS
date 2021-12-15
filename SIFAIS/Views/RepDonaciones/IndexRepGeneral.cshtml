@@ -1,0 +1,48 @@
+﻿@model SIFAIS.Models.RepDonacionGenVM
+@{
+    Layout = null;
+    int cantidadDonaciones = 0;
+    int cantidadDonantes = 0;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte General Donaciones</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div style="font-size: 18px; font-family:sans-serif">
+        <img src="~/img/logo.png" style="width: 120px; height:50px;" />
+        <h2 style="text-align:center; padding-bottom: 25px;">Reporte General de Donaciones</h2>
+        <h5>Generado por: <b>@Model.Creador</b></h5>
+        <h5 style="padding-bottom: 25px;">Fecha de creación: <b>@Model.FechaCreacion.ToShortDateString()</b></h5>
+        <h4>Listado de donaciones por tipo:</h4>
+        @foreach (var donacion in Model.lstDonacionesXTipo)
+        {
+            <div>
+                <h5 style="padding-left: 25px;">@donacion.Descripcion - @donacion.Cantidad</h5>
+            </div>
+            cantidadDonaciones = cantidadDonaciones + Convert.ToInt32(donacion.Cantidad);
+        }
+        <h5>TOTAL: @cantidadDonaciones</h5>
+        <h4 style="padding-top: 25px;">Listado de donantes por tipo:</h4>
+        @foreach (var donante in Model.lstDonantesXTipo)
+        {
+            <div>
+                <h5 style="padding-left: 25px;">@donante.Descripcion - @donante.Cantidad</h5>
+            </div>
+            cantidadDonantes = cantidadDonantes + Convert.ToInt32(donante.Cantidad);
+        }
+        <h5>TOTAL: @cantidadDonantes</h5>
+    </div>
+</body>
+</html>
+
+
+
+
+
+

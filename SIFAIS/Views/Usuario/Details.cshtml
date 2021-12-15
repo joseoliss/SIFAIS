@@ -42,14 +42,14 @@
                     <div>
                         <label class="font-weight-bold" asp-for="Usuario.Nombre"></label>
                         <br />
-                        <input type="text" asp-for="Usuario.Nombre" class="txt-form-disabled" />
+                        <input type="text" asp-for="Usuario.Nombre" maxlength="50" class="txt-form-disabled" />
                         <br />
                         <span asp-validation-for="Usuario.Nombre" class="text-danger"></span>
                     </div>
                     <div>
                         <label class="font-weight-bold" asp-for="Usuario.Apellido"></label>
                         <br />
-                        <input type="text" asp-for="Usuario.Apellido" class="txt-form-disabled" />
+                        <input type="text" asp-for="Usuario.Apellido" maxlength="50" class="txt-form-disabled" />
                         <br />
                         <span asp-validation-for="Usuario.Apellido" class="text-danger"></span>
                     </div>
@@ -58,14 +58,14 @@
                     <div>
                         <label class="font-weight-bold" asp-for="Usuario.CorreoElectronico"></label>
                         <br />
-                        <input type="text" asp-for="Usuario.CorreoElectronico" class="txt-form-disabled" />
+                        <input type="text" asp-for="Usuario.CorreoElectronico" maxlength="50" class="txt-form-disabled" />
                         <br />
                         <span asp-validation-for="Usuario.CorreoElectronico" class="text-danger"></span>
                     </div>
                     <div>
                         <label class="font-weight-bold" asp-for="Usuario.Contraseña"></label>
                         <br />
-                        <input type="password" asp-for="Usuario.Contraseña" class="txt-form-disabled" />
+                        <input type="password" asp-for="Usuario.Contraseña" maxlength="50" class="txt-form-disabled" />
                         <br />
                         <span asp-validation-for="Usuario.Contraseña" class="text-danger"></span>
                     </div>
@@ -74,14 +74,14 @@
                     <div>
                         <label class="font-weight-bold" asp-for="Usuario.Telefono"></label>
                         <br />
-                        <input asp-for="Usuario.Telefono" class="txt-form-disabled" />
+                        <input asp-for="Usuario.Telefono" maxlength="50" class="txt-form-disabled" />
                         <br />
                         <span asp-validation-for="Usuario.Telefono" class="text-danger"></span>
                     </div>
                     <div>
                         <label class="font-weight-bold" asp-for="Usuario.Celular"></label>
                         <br />
-                        <input asp-for="Usuario.Celular" class="txt-form-disabled" />
+                        <input asp-for="Usuario.Celular" maxlength="50" class="txt-form-disabled" />
                         <br />
                         <span asp-validation-for="Usuario.Celular" class="text-danger"></span>
                     </div>
@@ -90,7 +90,7 @@
                     <div>
                         <label class="font-weight-bold" asp-for="Usuario.CodigoExterno"></label>
                         <br />
-                        <input asp-for="Usuario.CodigoExterno" class="txt-form-disabled" />
+                        <input asp-for="Usuario.CodigoExterno" maxlength="50" class="txt-form-disabled" />
                         <br />
                         <span asp-validation-for="Usuario.CodigoExterno" class="text-danger"></span>
                     </div>

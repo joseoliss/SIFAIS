@@ -134,7 +134,9 @@ namespace SIFAIS.Datos.Donante
             Respuesta oRespuesta = new Respuesta();
             try
             {
-                oRespuesta.Datos = context.DonanteView.ToList();
+                oRespuesta.Datos = (from d in context.DonanteView
+                                    orderby d.TipoDonante
+                                    select d).ToList();
                 oRespuesta.Estado = 1;
             }
             catch (Exception ex)

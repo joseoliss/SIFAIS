@@ -1,0 +1,72 @@
+﻿@model SIFAIS.Models.RepDonantesVM
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte Listado de Donantes</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div style="font-size: 18px; font-family:sans-serif">
+        <img src="~/img/logo.png" style="width: 120px; height:50px;"/>
+        <h2 class="text-center pb-3">Listado de Donantes</h2>
+        <h5>Generado por: <b>@Model.Creador</b></h5>
+        <h5 style="padding-bottom: 25px;">Fecha de creación: <b>@Model.FechaCreacion.ToShortDateString()</b></h5>
+        <table class="table">
+            <thead class="t-head" id="table">
+                <tr>
+                    <th>
+                        <h5><b>Descripción</b></h5>
+                    </th>
+                    <th>
+                        <h5><b>Tipo</b></h5>
+                    </th>
+                    <th>
+                        <h5><b>Código externo</b></h5>
+                    </th>
+                    <th>
+                        <h5><b>Estado</b></h5>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.lstDonantes)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TipoDonante)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CodigoExterno)
+                        </td>
+                        <td>
+                            @if (@item.Estado)
+                            {
+                                <p>Activo</p>
+                            }
+                            else
+                            {
+                                <p>Inactivo</p>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
+
+
+
+

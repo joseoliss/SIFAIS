@@ -33,7 +33,7 @@
                     <div>
                         <label class="font-weight-bold" asp-for="ActivosPrestados.Cantidad"></label>
                         <br />
-                        <input asp-for="ActivosPrestados.Cantidad" class="txt-form-disabled" />
+                        <input asp-for="ActivosPrestados.Cantidad" maxlength="50" class="txt-form-disabled" />
                         <br />
                         <span asp-validation-for="ActivosPrestados.Cantidad" class="text-danger"></span>
                     </div>
@@ -60,14 +60,14 @@
                     <div>
                         <label class="font-weight-bold" asp-for="ActivosPrestados.Detalle"></label>
                         <br />
-                        <textarea asp-for="ActivosPrestados.Detalle" class="txt-form"></textarea>
+                        <textarea asp-for="ActivosPrestados.Detalle" maxlength="500" class="txt-form"></textarea>
                         <br />
                         <span asp-validation-for="ActivosPrestados.Detalle" class="text-danger"></span>
                     </div>
                     <div>
                         <label class="font-weight-bold" asp-for="ActivosPrestados.LugarPrestamo"></label>
                         <br />
-                        <textarea asp-for="ActivosPrestados.LugarPrestamo" class="txt-form"></textarea>
+                        <textarea asp-for="ActivosPrestados.LugarPrestamo" maxlength="500" class="txt-form"></textarea>
                         <br />
                         <span asp-validation-for="ActivosPrestados.LugarPrestamo" class="text-danger"></span>
                     </div>

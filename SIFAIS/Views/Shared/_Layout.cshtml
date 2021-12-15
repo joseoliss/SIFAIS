@@ -25,6 +25,17 @@
             </div>
             <div class="contenedor-opciones">
                 <p>
+                    <a class="boton-expandible" data-toggle="collapse" href="#collapseExample6" role="button" aria-expanded="false" aria-controls="collapseExample6">
+                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reportes
+                    </a>
+                </p>
+                <div class="collapse" id="collapseExample6">
+                    <div class="contenedor-expandible">
+                        <a asp-action="Index" asp-controller="RepActivos">Activos</a>
+                        <a asp-action="Index" asp-controller="RepDonaciones">Donaciones</a>
+                    </div>
+                </div>
+                <p>
                     <a class="boton-expandible" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">
                         <i class="fa fa-line-chart" aria-hidden="true"></i> Admi. Donaciones
                     </a>
@@ -71,9 +82,10 @@
 
                     </div>
                 </div>
+
             </div>
         </div>
-        <div class="contenedor-principal">
+        <div class="contenedor-principal" id="contenedor-principal">
             <main role="main" class="pb-3">
                 @RenderBody()
             </main>

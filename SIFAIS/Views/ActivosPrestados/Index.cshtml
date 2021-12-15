@@ -30,131 +30,133 @@
         <a class="h4 text-muted">Préstamos de ACTIVOS</a>
     </p>
     <div class="contenedor-buscador">
-        <label class="lbl-buscar">Bascar</label>
+        <label class="lbl-buscar">Buscar</label>
         <input type="text" id="txt_buscar" class="txt-buscar" />
     </div>
-    <table class="table table-hover table-bordered">
-        <thead class="t-head" id="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.IdArticulo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NombreActivo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DescripcionActivo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TipoActivo)
-                </th>
+    <div style="overflow:scroll; height: 400px;">
+        <table class="table table-hover table-bordered">
+            <thead class="t-head" id="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdArticulo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NombreActivo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DescripcionActivo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TipoActivo)
+                    </th>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.Departamento)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LugarPrestamo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EstadoActivo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Cantidad)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FechaInicio)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FechaFin)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Responsable)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody id="myTable">
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdArticulo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NombreActivo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DescripcionActivo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TipoActivo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Departamento)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LugarPrestamo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EstadoActivo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cantidad)
-                </td>
-                <td>
-                    @{
-                        var fechaIni = item.FechaInicio.ToShortDateString();
-                        <p>@fechaIni</p>
-                    }
-                </td>
-                <td>
-                    @{
-                        var fechaFin = item.FechaFin.ToShortDateString();
-                        <p>@fechaFin</p>
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Responsable)
-                </td>
-                <td style="display:flex; flex-direction:row; gap: 4px;">
-                    @{
-                        string dataDeleteUpdate = @item.IdArticulo + "~" + item.Id;
-                        string dataDetails = @item.Id + "~" + item.NombreActivo + "~" + item.DescripcionActivo
-                                             + "~" + item.TipoActivo + "~" + item.Departamento;
-                    }
-                    <a asp-action="Details" asp-route-data="@dataDetails" class="btn-details"><i class="fa fa-info" aria-hidden="true"></i></a>
-                    @if (Convert.ToInt32(User.Identity.GetUserRolId()) == 1)
-                    {
-                        <a asp-action="Edit" asp-route-data="@dataDeleteUpdate" class="btn-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                        <a onclick="return confirm('¿Estas seguro que este activo se va a devolver?')"
-                           asp-controller="ActivosPrestados"
-                           asp-action="Devolver"
-                           asp-route-data="@dataDeleteUpdate"
-                           class="btn-del"><i class="fa fa-share-square-o" aria-hidden="true"></i></a>
-                    }
+                    <th>
+                        @Html.DisplayNameFor(model => model.Departamento)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LugarPrestamo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EstadoActivo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cantidad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaInicio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaFin)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Responsable)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdArticulo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreActivo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DescripcionActivo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TipoActivo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Departamento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LugarPrestamo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EstadoActivo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cantidad)
+                        </td>
+                        <td>
+                            @{
+                                var fechaIni = item.FechaInicio.ToShortDateString();
+                                <p>@fechaIni</p>
+                            }
+                        </td>
+                        <td>
+                            @{
+                                var fechaFin = item.FechaFin.ToShortDateString();
+                                <p>@fechaFin</p>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Responsable)
+                        </td>
+                        <td style="display:flex; flex-direction:row; gap: 4px;">
+                            @{
+                                string dataDeleteUpdate = @item.IdArticulo + "~" + item.Id;
+                                string dataDetails = @item.Id + "~" + item.NombreActivo + "~" + item.DescripcionActivo
+                                                     + "~" + item.TipoActivo + "~" + item.Departamento;
+                            }
+                            <a asp-action="Details" asp-route-data="@dataDetails" class="btn-details"><i class="fa fa-info" aria-hidden="true"></i></a>
+                            @if (Convert.ToInt32(User.Identity.GetUserRolId()) == 1)
+                            {
+                                <a asp-action="Edit" asp-route-data="@dataDeleteUpdate" class="btn-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                <a onclick="return confirm('¿Estas seguro que este activo se va a devolver?')"
+                                   asp-controller="ActivosPrestados"
+                                   asp-action="Devolver"
+                                   asp-route-data="@dataDeleteUpdate"
+                                   class="btn-del"><i class="fa fa-share-square-o" aria-hidden="true"></i></a>
+                            }
 
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
-</div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    </div>
 
 
-@section Scripts{
+    @section Scripts{
 
-    <script>
-        $(document).ready(function () {
-            $("#txt_buscar").on("keyup", function () {
-                let value = $(this).val().toLowerCase();
-                $("#myTable tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        <script>
+            $(document).ready(function () {
+                $("#txt_buscar").on("keyup", function () {
+                    let value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
                 });
             });
-        });
-    </script>
+        </script>
 
-}
+    }
 
 
 

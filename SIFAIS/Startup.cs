@@ -31,6 +31,7 @@ using SIFAIS.Datos.EstadoPrestamo;
 using SIFAIS.Datos.ActivosFisicos;
 using SIFAIS.Datos.Responsable;
 using SIFAIS.Datos.ActivosPrestados;
+using SIFAIS.Datos.RepDonaciones;
 
 namespace SIFAIS
 {
@@ -82,6 +83,7 @@ namespace SIFAIS
             services.AddSingleton<IActivosFisicosBLL, ActivosFisicosBLL>();
             services.AddSingleton<IResponsableBLL, ResponsableBLL>();
             services.AddSingleton<IActivosPrestadosBLL, ActivosPrestadosBLL>();
+            services.AddSingleton<IRepDonacionesBLL, RepDonacionesBLL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -113,6 +115,8 @@ namespace SIFAIS
                     name: "default",
                     pattern: "{controller=Login}/{action=Index}");
             });
+
+            Rotativa.AspNetCore.RotativaConfiguration.Setup(env.WebRootPath, "../Rotativa");
         }
     }
 }

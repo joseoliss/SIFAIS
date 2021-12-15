@@ -46,6 +46,8 @@ namespace SIFAIS.Datos
         public virtual DbSet<ActivosFisicosView> ActivosFisicosViews { get; set; }
         public virtual DbSet<ResponsableActivoView> ResponsableActivoViews { get; set; }
         public virtual DbSet<ActivosPrestadosView> ActivosPrestadosViews { get; set; }
+        public virtual DbSet<DonacionesXTipoView> DonacionesXTipoViews { get; set; }
+        public virtual DbSet<DonantesXTipoView> DonantesXTipoViews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -796,6 +798,30 @@ namespace SIFAIS.Datos
                 entity.Property(e => e.Sede)
                     .IsRequired()
                     .HasMaxLength(25)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<DonacionesXTipoView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Donaciones_x_tipoView");
+
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<DonantesXTipoView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Donantes_x_tipoView");
+
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(50)
                     .IsUnicode(false);
             });
 

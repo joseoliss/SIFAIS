@@ -30,112 +30,114 @@
         <a class="h4 text-muted">Historial de Activos Prestados</a>
     </p>
     <div class="contenedor-buscador">
-        <label class="lbl-buscar">Bascar</label>
+        <label class="lbl-buscar">Buscar</label>
         <input type="text" id="txt_buscar" class="txt-buscar" />
     </div>
-    <table class="table table-hover table-bordered">
-        <thead class="t-head" id="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.IdArticulo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NombreActivo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DescripcionActivo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TipoActivo)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.Departamento)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LugarPrestamo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EstadoActivo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Cantidad)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FechaInicio)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FechaFin)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Responsable)
-                </th>
-            </tr>
-        </thead>
-        <tbody id="myTable">
-            @foreach (var item in Model)
-            {
+    <div style="overflow:scroll; height: 400px;">
+        <table class="table table-hover table-bordered">
+            <thead class="t-head" id="table">
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdArticulo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NombreActivo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DescripcionActivo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TipoActivo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Departamento)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LugarPrestamo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EstadoActivo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Cantidad)
-                    </td>
-                    <td>
-                        @{
-                            var fechaIni = item.FechaInicio.ToShortDateString();
-                            <p>@fechaIni</p>
-                        }
-                    </td>
-                    <td>
-                        @{
-                            var fechaFin = item.FechaFin.ToShortDateString();
-                            <p>@fechaFin</p>
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Responsable)
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdArticulo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NombreActivo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DescripcionActivo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TipoActivo)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Departamento)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LugarPrestamo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EstadoActivo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cantidad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaInicio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaFin)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Responsable)
+                    </th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody id="myTable">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdArticulo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreActivo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DescripcionActivo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TipoActivo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Departamento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LugarPrestamo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EstadoActivo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cantidad)
+                        </td>
+                        <td>
+                            @{
+                                var fechaIni = item.FechaInicio.ToShortDateString();
+                                <p>@fechaIni</p>
+                            }
+                        </td>
+                        <td>
+                            @{
+                                var fechaFin = item.FechaFin.ToShortDateString();
+                                <p>@fechaFin</p>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Responsable)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    </div>
 
 
-@section Scripts{
+    @section Scripts{
 
-    <script>
-        $(document).ready(function () {
-            $("#txt_buscar").on("keyup", function () {
-                let value = $(this).val().toLowerCase();
-                $("#myTable tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        <script>
+            $(document).ready(function () {
+                $("#txt_buscar").on("keyup", function () {
+                    let value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
                 });
             });
-        });
-    </script>
+        </script>
 
-}
+    }
 
 
 

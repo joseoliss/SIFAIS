@@ -25,7 +25,7 @@
                     <div>
                         <label class="font-weight-bold" asp-for="Donante.Nombre"></label>
                         <br />
-                        <input asp-for="Donante.Nombre" class="txt-form" />
+                        <input asp-for="Donante.Nombre" maxlength="50" class="txt-form" />
                         <br />
                         <span asp-validation-for="Donante.Nombre" class="text-danger"></span>
                     </div>
@@ -41,14 +41,14 @@
                     <div>
                         <label class="font-weight-bold" asp-for="Donante.Descripcion"></label>
                         <br />
-                        <textarea asp-for="Donante.Descripcion" class="txt-form"></textarea>
+                        <textarea asp-for="Donante.Descripcion" maxlength="500" class="txt-form"></textarea>
                         <br />
                         <span asp-validation-for="Donante.Descripcion" class="text-danger"></span>
                     </div>
                     <div>
                         <label class="font-weight-bold" asp-for="Donante.Direccion"></label>
                         <br />
-                        <textarea asp-for="Donante.Direccion" class="txt-form"></textarea>
+                        <textarea asp-for="Donante.Direccion" maxlength="500" class="txt-form"></textarea>
                         <br />
                         <span asp-validation-for="Donante.Direccion" class="text-danger"></span>
                     </div>
@@ -58,14 +58,14 @@
                     <div>
                         <label class="font-weight-bold" asp-for="Donante.CorreoElectronico"></label>
                         <br />
-                        <input asp-for="Donante.CorreoElectronico" class="txt-form" />
+                        <input asp-for="Donante.CorreoElectronico" maxlength="50" class="txt-form" />
                         <br />
                         <span asp-validation-for="Donante.CorreoElectronico" class="text-danger"></span>
                     </div>
                     <div>
                         <label class="font-weight-bold" asp-for="Donante.Telefono"></label>
                         <br />
-                        <input asp-for="Donante.Telefono" class="txt-form" />
+                        <input asp-for="Donante.Telefono" maxlength="50" class="txt-form" />
                         <br />
                         <span asp-validation-for="Donante.Telefono" class="text-danger"></span>
                     </div>
@@ -77,12 +77,12 @@
                         <br />
                         <input asp-for="Donante.Celular" class="txt-form" />
                         <br />
-                        <span asp-validation-for="Donante.Celular" class="text-danger"></span>
+                        <span asp-validation-for="Donante.Celular" maxlength="50" class="text-danger"></span>
                     </div>
                     <div>
                         <label class="font-weight-bold" asp-for="Donante.CodigoExterno"></label>
                         <br />
-                        <input asp-for="Donante.CodigoExterno" class="txt-form" />
+                        <input asp-for="Donante.CodigoExterno" maxlength="50" class="txt-form" />
                         <br />
                         <span asp-validation-for="Donante.CodigoExterno" class="text-danger"></span>
                     </div>

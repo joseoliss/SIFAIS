@@ -25,14 +25,14 @@
                     <div>
                         <label class="font-weight-bold" asp-for="Descripcion"></label>
                         <br />
-                        <input asp-for="Descripcion" class="txt-form" />
+                        <input asp-for="Descripcion" maxlength="50" class="txt-form" />
                         <br />
                         <span asp-validation-for="Descripcion" class="text-danger"></span>
                     </div>
                     <div>
                         <label class="font-weight-bold" asp-for="Detalles"></label>
                         <br />
-                        <input asp-for="Detalles" class="txt-form" />
+                        <input asp-for="Detalles" maxlength="500" class="txt-form" />
                         <br />
                         <span asp-validation-for="Detalles" class="text-danger"></span>
                     </div>
@@ -42,7 +42,7 @@
                     <div>
                         <label class="font-weight-bold" asp-for="Direccion"></label>
                         <br />
-                        <textarea type="textarea" asp-for="Direccion" class="txt-form"></textarea>
+                        <textarea type="textarea" asp-for="Direccion" maxlength="500" class="txt-form"></textarea>
                         <br />
                         <span asp-validation-for="Direccion" class="text-danger"></span>
                     </div>

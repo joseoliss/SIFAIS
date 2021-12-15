@@ -27,14 +27,14 @@
                     <div>
                         <label class="font-weight-bold" asp-for="Nombre"></label>
                         <br />
-                        <input asp-for="Nombre" class="txt-form" />
+                        <input asp-for="Nombre" maxlength="50" class="txt-form" />
                         <br />
                         <span asp-validation-for="Nombre" class="text-danger"></span>
                     </div>
                     <div>
                         <label class="font-weight-bold" asp-for="CorreoElectronico"></label>
                         <br />
-                        <input asp-for="CorreoElectronico" class="txt-form" />
+                        <input asp-for="CorreoElectronico" maxlength="50" class="txt-form" />
                         <br />
                         <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
                     </div>
@@ -43,14 +43,14 @@
                     <div>
                         <label class="font-weight-bold" asp-for="Direccion"></label>
                         <br />
-                        <textarea asp-for="Direccion" class="txt-form"></textarea>
+                        <textarea asp-for="Direccion" maxlength="500" class="txt-form"></textarea>
                         <br />
                         <span asp-validation-for="Direccion" class="text-danger"></span>
                     </div>
                     <div>
                         <label class="font-weight-bold" asp-for="Detalles"></label>
                         <br />
-                        <textarea asp-for="Detalles" class="txt-form"></textarea>
+                        <textarea asp-for="Detalles" maxlength="500" class="txt-form"></textarea>
                         <br />
                         <span asp-validation-for="Detalles" class="text-danger"></span>
                     </div>
@@ -59,7 +59,7 @@
                     <div>
                         <label class="font-weight-bold" asp-for="Telefono"></label>
                         <br />
-                        <input asp-for="Telefono" class="txt-form" />
+                        <input asp-for="Telefono" maxlength="50" class="txt-form" />
                         <br />
                         <span asp-validation-for="Telefono" class="text-danger"></span>
                     </div>

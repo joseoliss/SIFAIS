@@ -2,7 +2,7 @@
 /*********************************CONTENIDO PRINCIPAL************************************/
 
 .contenedor-contenido {
-    min-width: 1000px;
+    min-width:1000px;
     margin: 30px;
     padding: 20px;
     background: #E5E5E5;
@@ -12,9 +12,8 @@
 
 
 /**********************************LIST VIEW**************************************/
-
 /****CABECERA****/
-.contenedor-cabecera{
+.contenedor-cabecera {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

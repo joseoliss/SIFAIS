@@ -1,4 +1,4 @@
 ﻿function ToggleMenu() {
     $("#contenedor-sidebar").toggle();
-    //document.getElementById('contenedor-sidebar').classList.toggle('active');
+    //$(".contenedor-contenido").toggleClass('addPx');
 };

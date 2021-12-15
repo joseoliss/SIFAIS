@@ -91,14 +91,14 @@
                     <div>
                         <label class="font-weight-bold" asp-for="Donacion.Descripcion"></label>
                         <br />
-                        <input type="text" asp-for="Donacion.Descripcion" class="txt-form" />
+                        <input type="text" asp-for="Donacion.Descripcion" maxlength="50" class="txt-form" />
                         <br />
                         <span asp-validation-for="Donacion.Descripcion" class="text-danger"></span>
                     </div>
                     <div>
                         <label class="font-weight-bold" asp-for="Donacion.Cantidad"></label>
                         <br />
-                        <input type="text" asp-for="Donacion.Cantidad" class="txt-form" />
+                        <input type="text" asp-for="Donacion.Cantidad" maxlength="50" class="txt-form" />
                         <br />
                         <span asp-validation-for="Donacion.Cantidad" class="text-danger"></span>
                     </div>
@@ -107,7 +107,7 @@
                     <div>
                         <label class="font-weight-bold" asp-for="Donacion.Detalles"></label>
                         <br />
-                        <textarea asp-for="Donacion.Detalles" class="txt-form"></textarea>
+                        <textarea asp-for="Donacion.Detalles" maxlength="500" class="txt-form"></textarea>
                         <br />
                         <span asp-validation-for="Donacion.Detalles" class="text-danger"></span>
                     </div>

@@ -35,109 +35,111 @@
         }
     </p>
     <div class="contenedor-buscador">
-        <label class="lbl-buscar">Bascar</label>
+        <label class="lbl-buscar">Buscar</label>
         <input type="text" id="txt_buscar" class="txt-buscar" />
     </div>
-    <table class="table table-hover table-bordered">
-        <thead class="t-head" id="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.FechaDonacion)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Donante)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Mensajero)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DocumentacionSifais)
-                </th>
+    <div style="overflow:scroll; height: 400px;">
+        <table class="table table-hover table-bordered">
+            <thead class="t-head" id="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaDonacion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Donante)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Mensajero)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DocumentacionSifais)
+                    </th>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.TipoDonacion)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Descripcion)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Cantidad)
-                </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TipoDonacion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cantidad)
+                    </th>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.Espacio)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ResponsableDonacion)
-                </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Espacio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ResponsableDonacion)
+                    </th>
 
-                @if (Convert.ToInt32(User.Identity.GetUserRolId()) == 1)
-                {
-                    <th></th>
-                }
-            </tr>
-        </thead>
-        <tbody id="myTable">
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td>
-                    @{
-                        var fecha = item.FechaDonacion.ToShortDateString();
-                        <p>@fecha</p>
+                    @if (Convert.ToInt32(User.Identity.GetUserRolId()) == 1)
+                    {
+                        <th></th>
                     }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Donante)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Mensajero)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DocumentacionSifais)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TipoDonacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cantidad)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Espacio)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ResponsableDonacion)
-                </td>
-                @if (Convert.ToInt32(User.Identity.GetUserRolId()) == 1)
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                @foreach (var item in Model)
                 {
-                    <td style="display:flex; flex-direction:row; gap: 4px;">
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn-details"><i class="fa fa-info" aria-hidden="true"></i></a>
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                    </td>
+                    <tr>
+                        <td>
+                            @{
+                                var fecha = item.FechaDonacion.ToShortDateString();
+                                <p>@fecha</p>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Donante)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Mensajero)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DocumentacionSifais)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TipoDonacion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cantidad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Espacio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ResponsableDonacion)
+                        </td>
+                        @if (Convert.ToInt32(User.Identity.GetUserRolId()) == 1)
+                        {
+                            <td style="display:flex; flex-direction:row; gap: 4px;">
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn-details"><i class="fa fa-info" aria-hidden="true"></i></a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                            </td>
+                        }
+
+                    </tr>
                 }
-
-            </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
+    </div>
 
 
-@section Scripts{
+    @section Scripts{
 
-    <script>
-        $(document).ready(function () {
-            $("#txt_buscar").on("keyup", function () {
-                let value = $(this).val().toLowerCase();
-                $("#myTable tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        <script>
+            $(document).ready(function () {
+                $("#txt_buscar").on("keyup", function () {
+                    let value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
                 });
             });
-        });
-    </script>
+        </script>
 
-}
+    }
 

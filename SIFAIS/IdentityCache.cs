@@ -20,5 +20,11 @@ namespace SIFAIS
             var claim = ((ClaimsIdentity)identity).FindFirst("UserRole");
             return (claim != null) ? claim.Value : identity.Name;
         }
+
+        public static string GetUserName(this IIdentity identity)
+        {
+            var claim = ((ClaimsIdentity)identity).FindFirst("UserName");
+            return (claim != null) ? claim.Value : identity.Name;
+        }
     }
 }
