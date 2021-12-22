@@ -11,6 +11,7 @@ namespace SIFAIS.Datos.ActivosFisicos
     public interface IActivosFisicosBLL
     {
         Respuesta ListActivosFisicos(ApplicationDbContext context);
+        Respuesta ListActivosFisicosRep(ApplicationDbContext context, string Tipo, string Estado, DateTime Desde, DateTime Hasta);
         Respuesta AddActivosFisicos(ApplicationDbContext context, TblActivosFisico oActivosFisicos);
         Respuesta EditActivosFisicos(ApplicationDbContext context, TblActivosFisico oActivosFisicos);
         Respuesta DeleteActivosFisicos(ApplicationDbContext context, int id);

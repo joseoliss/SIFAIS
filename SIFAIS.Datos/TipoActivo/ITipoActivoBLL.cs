@@ -31,5 +31,6 @@ namespace SIFAIS.Datos.TipoActivo
         /// <param name="context">Contexto de bd</param>
         /// <returns></returns>
         IEnumerable<SelectListItem> GetListTipoActivo(ApplicationDbContext context);
+        List<SelectListItem> GetListTipoActivoRep(ApplicationDbContext context);
     }
 }

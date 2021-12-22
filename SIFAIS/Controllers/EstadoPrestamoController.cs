@@ -87,7 +87,7 @@ namespace SIFAIS.Controllers
         public IActionResult Delete(int id)
         {
             var oResultado = _EstadoPrestamoBLL.DeleteEstadoPrestamo(_context, id);
-            if (oResultado.Estado == 1) return RedirectToAction(nameof(Index), "EstadoPrestamo", new { mensaje = "EstadoPrestamo eliminado con éxito!" });
+            if (oResultado.Estado == 1) return RedirectToAction(nameof(Index), "EstadoPrestamo", new { mensaje = "Estado Préstamo eliminado con éxito!" });
             return RedirectToAction(nameof(Index), "EstadoPrestamo", new { mensaje = oResultado.Mensaje });
         }
     }

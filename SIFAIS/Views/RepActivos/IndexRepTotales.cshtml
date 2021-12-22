@@ -1,0 +1,88 @@
+﻿@model SIFAIS.Modelos.Views.RepTotalesActivosView
+@{
+    ViewData["Title"] = "Totales Activos";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte Totales Activos</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <style>
+        .linea {
+            border-top: 1px solid black;
+            height: 2px;
+            width: 100%;
+            padding: 0;
+            margin: 20px auto 0 auto;
+            padding-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div style="font-size: 18px; font-family:sans-serif">
+        <img src="~/img/logo.png" style="width: 120px; height:50px;" />
+        <h2 class="text-center pb-3">Totales Activos</h2>
+        <h5>Generado por: <b>@User.Identity.GetUserName()</b></h5>
+        <h5 style="padding-bottom: 10px;">Fecha de creación: <b>@DateTime.Now.ToShortDateString()</b></h5>
+        <div class="linea"></div>
+        @foreach (var item in Model.TotalActivosInicioAñoView)
+        {
+            <div>
+                <h5>Total de activos a inicio de año: @item.TotalIniAño</h5>
+            </div>
+        }
+        @foreach (var item in Model.TotalIngresosEnElAñoView)
+        {
+            <div>
+                <h5>Total de activos ingresados en el año: @item.TotalIngresosEnElAño</h5>
+            </div>
+        }
+        @foreach (var item in Model.TotalActivosView)
+        {
+            <div>
+                <h5>Total de activos a final de año: @item.Cantidad</h5>
+            </div>
+        }
+        @foreach (var item in Model.TotalActivosActivosView)
+        {
+            <div>
+                <h5>Total de activos en estado activo: @item.CantidadActivosActivos</h5>
+            </div>
+        }
+        @foreach (var item in Model.TotalActivosPrestadosView)
+        {
+            <div>
+                <h5>Total de activos prestados: @item.CantidadActivosActivos</h5>
+            </div>
+        }
+        <div>
+            <h5>Total de activos por estado</h5>
+        </div>
+        @foreach (var item in Model.TotalActivosXEstadoView)
+        {
+            <div>
+                <h5 style="padding-left: 15px">@item.Descripcion: @item.Cantidad</h5>
+            </div>
+        }
+        <div>
+            <h5>Total de activos por descripción</h5>
+        </div>
+        @foreach (var item in Model.TotalActivosXdescripcionView)
+        {
+            <div>
+                <h5 style="padding-left: 15px">@item.Nombre: @item.Cantidad</h5>
+            </div>
+        }
+    </div>
+</body>
+</html>
+
+
+
+
+
+

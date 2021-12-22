@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using SIFAIS.Modelos.Datos;
@@ -48,6 +49,14 @@ namespace SIFAIS.Datos
         public virtual DbSet<ActivosPrestadosView> ActivosPrestadosViews { get; set; }
         public virtual DbSet<DonacionesXTipoView> DonacionesXTipoViews { get; set; }
         public virtual DbSet<DonantesXTipoView> DonantesXTipoViews { get; set; }
+        public virtual DbSet<ReporteDonacionesView> ReporteDonacionesView { get; set; }
+        public virtual DbSet<RepTotalActivosActivosView> RepTotalActivosActivosViews { get; set; }
+        public virtual DbSet<RepTotalActivosInicioAñoView> RepTotalActivosInicioAñoViews { get; set; }
+        public virtual DbSet<RepTotalActivosPrestadosView> RepTotalActivosPrestadosViews { get; set; }
+        public virtual DbSet<RepTotalActivosView> RepTotalActivosViews { get; set; }
+        public virtual DbSet<RepTotalActivosXestadoView> RepTotalActivosXestadoViews { get; set; }
+        public virtual DbSet<RepTotalIngresosEnElAñoView> RepTotalIngresosEnElAñoViews { get; set; }
+        public virtual DbSet<RepTotalActivosXdescripcionView> RepTotalActivosXdescripcionViews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -60,36 +69,38 @@ namespace SIFAIS.Datos
                 entity.ToView("ActivosFisicosView");
 
                 entity.Property(e => e.CodArticulo)
-                    .HasMaxLength(25)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Condicion)
                     .IsRequired()
-                    .HasMaxLength(25)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Departamento)
                     .IsRequired()
-                    .HasMaxLength(25)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Descripcion)
-                    .HasMaxLength(100)
+                    .HasMaxLength(500)
                     .IsUnicode(false);
+
+                entity.Property(e => e.FechaDeIngreso).HasColumnType("datetime");
 
                 entity.Property(e => e.Nombre)
                     .IsRequired()
-                    .HasMaxLength(25)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Sede)
                     .IsRequired()
-                    .HasMaxLength(25)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Tipo)
                     .IsRequired()
-                    .HasMaxLength(25)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
             });
 
@@ -820,6 +831,114 @@ namespace SIFAIS.Datos
                 entity.ToView("Donantes_x_tipoView");
 
                 entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<ReporteDonacionesView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("ReporteDonacionesView");
+
+                entity.Property(e => e.Cantidad)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Documentacion)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Espacio)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FechaDonacion).HasColumnType("datetime");
+
+                entity.Property(e => e.Mensajero)
+                    .IsRequired()
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Origen)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Responsable)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TipoDonacion)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<RepTotalActivosActivosView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("RepTotalActivosActivosView");
+            });
+
+            modelBuilder.Entity<RepTotalActivosInicioAñoView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("RepTotalActivosInicioAñoView");
+            });
+
+            modelBuilder.Entity<RepTotalActivosPrestadosView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("RepTotalActivosPrestadosView");
+            });
+
+            modelBuilder.Entity<RepTotalActivosView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("RepTotalActivosView");
+            });
+
+            modelBuilder.Entity<RepTotalActivosXestadoView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("RepTotalActivosXEstadoView");
+
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<RepTotalIngresosEnElAñoView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("RepTotalIngresosEnElAñoView");
+            });
+
+            modelBuilder.Entity<RepTotalActivosXdescripcionView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("RepTotalActivosXDescripcionView");
+
+                entity.Property(e => e.Nombre)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);

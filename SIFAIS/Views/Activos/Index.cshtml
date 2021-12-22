@@ -102,7 +102,10 @@
                             @if (Convert.ToInt32(User.Identity.GetUserRolId()) == 1)
                             {
                                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                <a asp-action="Create" asp-controller="ActivosPrestados" asp-route-id="@item.Id" class="btn-share"><i class="fa fa-share-square-o" aria-hidden="true"></i></a>
+                                @if (item.Estado)
+                                {
+                                    <a asp-action="Create" asp-controller="ActivosPrestados" asp-route-id="@item.Id" class="btn-share"><i class="fa fa-share-square-o" aria-hidden="true"></i></a>
+                                }
                             }
                         </td>
                     </tr>

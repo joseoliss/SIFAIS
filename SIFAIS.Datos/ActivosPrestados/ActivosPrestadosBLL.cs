@@ -250,5 +250,53 @@ namespace SIFAIS.Datos.ActivosPrestados
             }
             return oRespuesta;
         }
+
+        public Respuesta ListActivosPrestadosRep(ApplicationDbContext context, string Tipo, string Estado, DateTime Desde, DateTime Hasta)
+        {
+            string TipoActivo = Tipo == "%%" ? "" : Tipo;
+            string EstadoActivo = Estado == "%%" ? "" : Estado;
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = (from a in context.ActivosPrestadosViews
+                                    where a.Estado == true
+                                    && a.TipoActivo.Contains(TipoActivo)
+                                    && a.EstadoActivo.Contains(EstadoActivo)
+                                    && a.FechaInicio >= Desde
+                                    && a.FechaInicio <= Hasta
+                                    select a).ToList();
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al cargar los datos!";
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
+        }
+
+        public Respuesta ListHistorialPrestamosRep(ApplicationDbContext context, string Tipo, string Estado, DateTime Desde, DateTime Hasta)
+        {
+            string TipoActivo = Tipo == "%%" ? "" : Tipo;
+            string EstadoActivo = Estado == "%%" ? "" : Estado;
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = (from a in context.ActivosPrestadosViews
+                                    where a.Estado == false
+                                    && a.TipoActivo.Contains(TipoActivo)
+                                    && a.EstadoActivo.Contains(EstadoActivo)
+                                    && a.FechaInicio >= Desde
+                                    && a.FechaInicio <= Hasta
+                                    select a).ToList();
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al cargar los datos!";
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
+        }
     }
 }

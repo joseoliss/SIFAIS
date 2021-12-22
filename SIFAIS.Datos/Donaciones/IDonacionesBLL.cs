@@ -15,5 +15,6 @@ namespace SIFAIS.Datos.Donaciones
         Respuesta EditDonacion(ApplicationDbContext context, TblDonacione oDonacion);
         Respuesta DeleteDonacion(ApplicationDbContext context, int id);
         Respuesta GetById(ApplicationDbContext context, int id);
+        Respuesta ListRepDonaciones(ApplicationDbContext context, string Origen, string Tipo, DateTime Desde, DateTime Hasta);
     }
 }

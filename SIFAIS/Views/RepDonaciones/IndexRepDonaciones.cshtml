@@ -1,5 +1,6 @@
 ﻿@model SIFAIS.Models.RepDonantesVM
 @{
+    ViewData["Title"] = "Listado de Donantes";
     Layout = null;
 }
 <!DOCTYPE html>
@@ -27,9 +28,6 @@
                         <h5><b>Tipo</b></h5>
                     </th>
                     <th>
-                        <h5><b>Código externo</b></h5>
-                    </th>
-                    <th>
                         <h5><b>Estado</b></h5>
                     </th>
                 </tr>
@@ -43,9 +41,6 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.TipoDonante)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CodigoExterno)
                         </td>
                         <td>
                             @if (@item.Estado)

@@ -5,6 +5,8 @@ using SIFAIS.Datos;
 using SIFAIS.Datos.Donaciones;
 using SIFAIS.Datos.Donante;
 using SIFAIS.Datos.RepDonaciones;
+using SIFAIS.Datos.TipoDonacion;
+using SIFAIS.Modelos.Views;
 using SIFAIS.Models;
 using System;
 using System.Collections.Generic;
@@ -22,12 +24,14 @@ namespace SIFAIS.Controllers
         private IDonanteBLL _donanteBLL;
         private IRepDonacionesBLL _repDonacionBLL;
         private IDonanteBLL _Donante;
+        private ITipoDonacionBLL _tipDonacion;
         public RepDonacionesController(
             ApplicationDbContext context,
             IDonacionesBLL donacionBLL,
             IDonanteBLL donanteBLL,
             IRepDonacionesBLL repDonacionBLL,
-            IDonanteBLL Donante
+            IDonanteBLL Donante,
+            ITipoDonacionBLL tipDonacion
         )
         {
             _context = context;
@@ -35,15 +39,30 @@ namespace SIFAIS.Controllers
             _donanteBLL = donanteBLL;
             _repDonacionBLL = repDonacionBLL;
             _Donante = Donante;
+            _tipDonacion = tipDonacion;
         }
         #endregion
 
         public IActionResult Index()
         {
-
             return View();
         }
 
+        public IActionResult IndexDonaciones()
+        {
+            RepPreviewDonacionesVM repPreviewDonacionesVM = new RepPreviewDonacionesVM();
+            repPreviewDonacionesVM.Donacion = new Modelos.Datos.TblDonacione();
+            repPreviewDonacionesVM.Donante = new Modelos.Datos.TblDonante();
+            repPreviewDonacionesVM.Desde = DateTime.Now.AddMonths(-1);
+            repPreviewDonacionesVM.Hasta = DateTime.Now;
+            repPreviewDonacionesVM.lstTipoDonacion = _tipDonacion.GetListTipoDonacionesRep(_context);     
+            repPreviewDonacionesVM.lstDonante = _donanteBLL.GetListDonanteRep(_context);     
+
+            return View(repPreviewDonacionesVM);
+        }
+
+
+        #region VISTAS QUE GENERAN REPORTES
         [HttpGet]
         public IActionResult IndexRepGeneral()
         {
@@ -55,9 +74,9 @@ namespace SIFAIS.Controllers
                 lstDonantesXTipo = (IEnumerable<Modelos.Views.DonantesXTipoView>)_repDonacionBLL.ListDonantesXTipo(_context).Datos
             };
 
-            return new ViewAsPdf("IndexRepGeneral", RepDonacionVM) 
-            { 
-                
+            return new ViewAsPdf("IndexRepGeneral", RepDonacionVM)
+            {
+
             };
         }
 
@@ -76,5 +95,19 @@ namespace SIFAIS.Controllers
 
             };
         }
+
+        [HttpPost]
+        public IActionResult ReporteDonaciones(RepPreviewDonacionesVM repDonaciones)
+        {
+            repDonaciones.lstDonaciones = (IEnumerable<ReporteDonacionesView>)_donacionBLL.ListRepDonaciones(_context, repDonaciones.Donante.Nombre, repDonaciones.Donacion.Descripcion, repDonaciones.Desde, repDonaciones.Hasta).Datos;
+
+            return new ViewAsPdf("ReporteDonaciones", repDonaciones)
+            {
+
+            };
+        }
+
+        #endregion
+
     }
 }

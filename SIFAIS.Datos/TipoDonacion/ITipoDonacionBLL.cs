@@ -32,5 +32,6 @@ namespace SIFAIS.Datos.TipoDonacion
         /// <param name="context">Contexto de bd</param>
         /// <returns></returns>
         IEnumerable<SelectListItem> GetListTipoDonaciones(ApplicationDbContext context);
+        List<SelectListItem> GetListTipoDonacionesRep(ApplicationDbContext context);
     }
 }

@@ -156,5 +156,29 @@ namespace SIFAIS.Datos.ActivosFisicos
             return oRespuesta;
         }
 
+        public Respuesta ListActivosFisicosRep(ApplicationDbContext context, string Tipo, string Estado, DateTime Desde, DateTime Hasta)
+        {
+            string TipoActivo = Tipo == "%%" ? "" : Tipo;
+            string EstadoActivo = Estado == "%%" ? "" : Estado;
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = (from a in context.ActivosFisicosViews
+                                    where a.Cantidad > 0
+                                    && a.Tipo.Contains(TipoActivo)
+                                    && a.Condicion.Contains(EstadoActivo)
+                                    && a.FechaDeIngreso >= Desde
+                                    && a.FechaDeIngreso <= Hasta
+                                    select a).ToList();
+
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al cargar los datos!";
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
+        }
     }
 }

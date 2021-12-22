@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "Reportes de Activos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="contenedor-contenido">
+    <p class="contenedor-cabecera">
+        <a class="h4 text-muted">Reportes de Activos</a>
+    </p>
+    <div class="form-group">
+        <a target="_blank" class="btn btn-outline-primary form-control" asp-action="IndexRepTotales" asp-controller="RepActivos">Totales Activos</a>
+    </div>
+    <div></div>
+    <div class="form-group">
+        <a target="_blank" class="btn btn-outline-primary form-control" asp-action="IndexListadoActivos" asp-controller="RepActivos">Listado de Activos</a>
+    </div>
+    <div></div>
+    <div class="form-group">
+        <a target="_blank" class="btn btn-outline-primary form-control" asp-action="IndexListadoPrestamos" asp-controller="RepActivos">Listado de Préstamos</a>
+    </div>
+    <div></div>
+    <div class="form-group">
+        <a target="_blank" class="btn btn-outline-primary form-control" asp-action="IndexHistorialPrestamos" asp-controller="RepActivos">Historial de Préstamos</a>
+    </div>
+    <div></div>
+    <div class="form-group">
+        <a target="_blank" class="btn btn-outline-primary form-control" asp-action="IndexDonaciones" asp-controller="RepActivos">Listado de responsables</a>
+    </div>
+    <div></div>
+
+</div>
+

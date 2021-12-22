@@ -26,6 +26,7 @@ namespace SIFAIS.Modelos.Views
 
         [Display(Name = "Código")]
         public string CodArticulo { get; set; }
-
+        public bool Estado { get; set; }
+        public DateTime FechaDeIngreso { get; set; }
     }
 }

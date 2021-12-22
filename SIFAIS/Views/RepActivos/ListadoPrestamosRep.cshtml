@@ -1,0 +1,102 @@
+﻿@model SIFAIS.Models.RepPreviewListadoActivosVM
+@{
+    ViewData["Title"] = "Listado Préstamos";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte Listado de Préstamos</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div style="font-size: 18px; font-family:sans-serif">
+        <img src="~/img/logo.png" style="width: 120px; height:50px;" />
+        <h2 class="text-center pb-3">Listado de Préstamos</h2>
+        <h5>Generado por: <b>@User.Identity.GetUserName()</b></h5>
+        <h5 style="padding-bottom: 25px;">Fecha de creación: <b>@DateTime.Now.ToShortDateString()</b></h5>
+        <table class="table">
+            <thead class="t-head" id="table">
+                <tr>
+                    <th>
+                        <h5><b>ID</b></h5>
+                    </th>
+                    <th>
+                        <h5><b>Nombre</b></h5>
+                    </th>
+                    <th>
+                        <h5><b>Cantidad</b></h5>
+                    </th>
+                    <th>
+                        <h5><b>Tipo</b></h5>
+                    </th>
+                    <th>
+                        <h5><b>Departamento</b></h5>
+                    </th>
+                    <th>
+                        <h5><b>Condición</b></h5>
+                    </th>
+                    <th>
+                        <h5><b>Responsable</b></h5>
+                    </th>
+                    <th>
+                        <h5><b>Inicio Préstamo</b></h5>
+                    </th>
+                    <th>
+                        <h5><b>Fin Préstamo</b></h5>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.lstPrestamos)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreActivo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cantidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoActivo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Departamento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EstadoActivo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Responsable)
+                    </td>
+                    <td>
+                        @{
+                            var fechaini = item.FechaFin.ToShortDateString();
+                            <p>@fechaini</p>
+                        }
+                    </td>
+                    <td>
+                        @{
+                            var fechafin = item.FechaInicio.ToShortDateString();
+                            <p>@fechafin</p>
+                        }
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
+
+
+
+

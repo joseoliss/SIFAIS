@@ -119,5 +119,29 @@ namespace SIFAIS.Datos.Donaciones
             }
             return oRespuesta;
         }
+
+
+        public Respuesta ListRepDonaciones(ApplicationDbContext context, string Origen, string Tipo, DateTime Desde, DateTime Hasta)
+        {
+            string tipoDonacion = Tipo == "%%" ? "" : Tipo; 
+            string Donador = Origen == "%%" ? "" : Origen; 
+            Respuesta oRespuesta = new Respuesta();
+            try
+            {
+                oRespuesta.Datos = (from r in context.ReporteDonacionesView
+                                    where r.TipoDonacion.Contains(tipoDonacion)
+                                    && r.Origen.Contains(Donador)
+                                    && r.FechaDonacion >= Desde
+                                    && r.FechaDonacion <= Hasta
+                                    select r).ToList();
+                oRespuesta.Estado = 1;
+            }
+            catch (Exception ex)
+            {
+                oRespuesta.Mensaje = "¡Ha ocurrido un error al cargar los datos!";
+                oRespuesta.Estado = 0;
+            }
+            return oRespuesta;
+        }
     }
 }

@@ -31,5 +31,6 @@ namespace SIFAIS.Datos.EstadoActivos
         /// <param name="context">Contexto de bd</param>
         /// <returns></returns>
         IEnumerable<SelectListItem> GetListEstadoActivo(ApplicationDbContext context);
+        List<SelectListItem> GetListEstadoActivoRep(ApplicationDbContext context);
     }
 }

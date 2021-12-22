@@ -119,6 +119,25 @@ namespace SIFAIS.Datos.TipoActivo
             });
         }
 
+        public List<SelectListItem> GetListTipoActivoRep(ApplicationDbContext context)
+        {
+            List<SelectListItem> lst = new List<SelectListItem>();
+            SelectListItem lstItem = new SelectListItem()
+            {
+                Text = "-Todos-",
+                Value = "%%"
+            };
+            lst = (from s in context.TblTipoActivos
+                   where s.Estado == true
+                   select s).Select(i => new SelectListItem()
+                   {
+                       Text = i.Descripcion,
+                       Value = i.Descripcion
+                   }).ToList();
+            lst.Insert(0, lstItem);
+            return lst;
+        }
+
         public Respuesta ListTipoActivo(ApplicationDbContext context)
         {
             Respuesta oRespuesta = new Respuesta();

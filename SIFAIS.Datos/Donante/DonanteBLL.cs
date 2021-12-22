@@ -129,6 +129,25 @@ namespace SIFAIS.Datos.Donante
             });
         }
 
+        public List<SelectListItem> GetListDonanteRep(ApplicationDbContext context)
+        {
+            List<SelectListItem> lst = new List<SelectListItem>();
+            SelectListItem lstItem = new SelectListItem()
+            {
+                Text = "-Todos-",
+                Value = "%%"
+            };
+            lst = (from s in context.TblDonantes
+                    where s.Estado == true
+                    select s).Select(i => new SelectListItem()
+                    {
+                        Text = i.Nombre,
+                        Value = i.Nombre
+                    }).ToList();
+            lst.Insert(0,lstItem);
+            return lst;
+        }
+
         public Respuesta ListDonante(ApplicationDbContext context)
         {
             Respuesta oRespuesta = new Respuesta();

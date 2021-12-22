@@ -119,6 +119,25 @@ namespace SIFAIS.Datos.EstadoActivos
             });
         }
 
+        public List<SelectListItem> GetListEstadoActivoRep(ApplicationDbContext context)
+        {
+            List<SelectListItem> lst = new List<SelectListItem>();
+            SelectListItem lstItem = new SelectListItem()
+            {
+                Text = "-Todos-",
+                Value = "%%"
+            };
+            lst = (from s in context.TblEstadoActivos
+                   where s.Estado == true
+                   select s).Select(i => new SelectListItem()
+                   {
+                       Text = i.Descripcion,
+                       Value = i.Descripcion
+                   }).ToList();
+            lst.Insert(0, lstItem);
+            return lst;
+        }
+
         public Respuesta ListEstadoActivo(ApplicationDbContext context)
         {
             Respuesta oRespuesta = new Respuesta();
