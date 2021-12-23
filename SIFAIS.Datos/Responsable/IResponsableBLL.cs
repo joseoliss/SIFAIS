@@ -30,5 +30,6 @@ namespace SIFAIS.Datos.Responsable
         /// <param name="context">Contexto de bd</param>
         /// <returns></returns>
         IEnumerable<SelectListItem> GetListResponsable(ApplicationDbContext context);
+        List<SelectListItem> GetListResponsableRep(ApplicationDbContext context);
     }
 }

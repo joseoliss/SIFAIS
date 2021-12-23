@@ -34,6 +34,12 @@
                     </div>
                 </div>
                 <div>
+                    <label>Responsable</label>
+                    <div>
+                        @Html.DropDownListFor(m => m.ResponsablePrestamo.Nombre, Model.lstResponsablePrestamo, new { @class = "txt-form" })
+                    </div>
+                </div>
+                <div>
                     <label>Fecha de ingreso Desde</label>
                     <br />
                     <input type="date" asp-for="Desde" class="txt-form" />

@@ -251,10 +251,11 @@ namespace SIFAIS.Datos.ActivosPrestados
             return oRespuesta;
         }
 
-        public Respuesta ListActivosPrestadosRep(ApplicationDbContext context, string Tipo, string Estado, DateTime Desde, DateTime Hasta)
+        public Respuesta ListActivosPrestadosRep(ApplicationDbContext context, string Tipo, string Estado, string Responsable, DateTime Desde, DateTime Hasta)
         {
             string TipoActivo = Tipo == "%%" ? "" : Tipo;
             string EstadoActivo = Estado == "%%" ? "" : Estado;
+            string ResponsablePrestamo = Responsable == "%%" ? "" : Responsable;
             Respuesta oRespuesta = new Respuesta();
             try
             {
@@ -262,6 +263,7 @@ namespace SIFAIS.Datos.ActivosPrestados
                                     where a.Estado == true
                                     && a.TipoActivo.Contains(TipoActivo)
                                     && a.EstadoActivo.Contains(EstadoActivo)
+                                    && a.Responsable.Contains(ResponsablePrestamo)
                                     && a.FechaInicio >= Desde
                                     && a.FechaInicio <= Hasta
                                     select a).ToList();
@@ -275,10 +277,11 @@ namespace SIFAIS.Datos.ActivosPrestados
             return oRespuesta;
         }
 
-        public Respuesta ListHistorialPrestamosRep(ApplicationDbContext context, string Tipo, string Estado, DateTime Desde, DateTime Hasta)
+        public Respuesta ListHistorialPrestamosRep(ApplicationDbContext context, string Tipo, string Estado, string Responsable, DateTime Desde, DateTime Hasta)
         {
             string TipoActivo = Tipo == "%%" ? "" : Tipo;
             string EstadoActivo = Estado == "%%" ? "" : Estado;
+            string ResponsablePrestamo = Responsable == "%%" ? "" : Responsable;
             Respuesta oRespuesta = new Respuesta();
             try
             {
@@ -286,6 +289,7 @@ namespace SIFAIS.Datos.ActivosPrestados
                                     where a.Estado == false
                                     && a.TipoActivo.Contains(TipoActivo)
                                     && a.EstadoActivo.Contains(EstadoActivo)
+                                    && a.Responsable.Contains(ResponsablePrestamo)
                                     && a.FechaInicio >= Desde
                                     && a.FechaInicio <= Hasta
                                     select a).ToList();

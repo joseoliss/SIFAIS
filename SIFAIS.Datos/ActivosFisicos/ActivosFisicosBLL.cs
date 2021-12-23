@@ -160,6 +160,7 @@ namespace SIFAIS.Datos.ActivosFisicos
         {
             string TipoActivo = Tipo == "%%" ? "" : Tipo;
             string EstadoActivo = Estado == "%%" ? "" : Estado;
+
             Respuesta oRespuesta = new Respuesta();
             try
             {

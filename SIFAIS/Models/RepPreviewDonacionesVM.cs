@@ -13,10 +13,12 @@ namespace SIFAIS.Models
         public TblActivosFisico Activos { get; set; }
         public TblTipoActivo TipoActivo { get; set; }
         public TblEstadoActivo EstadoActivo { get; set; }
+        public TblResponsable ResponsablePrestamo { get; set; }
         public DateTime Desde { get; set; }
         public DateTime Hasta { get; set; }
         public IEnumerable<SelectListItem> lstTipoActivo { get; set; }
         public IEnumerable<SelectListItem> lstEstadoActivo { get; set; }
+        public IEnumerable<SelectListItem> lstResponsablePrestamo { get; set; }
 
         /// <summary>
         /// Retorna la lista de los activos filtrados

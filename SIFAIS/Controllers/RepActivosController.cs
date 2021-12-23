@@ -5,6 +5,7 @@ using SIFAIS.Datos.ActivosFisicos;
 using SIFAIS.Datos.ActivosPrestados;
 using SIFAIS.Datos.EstadoActivos;
 using SIFAIS.Datos.RepActivos;
+using SIFAIS.Datos.Responsable;
 using SIFAIS.Datos.TipoActivo;
 using System;
 using System.Collections.Generic;
@@ -21,14 +22,16 @@ namespace SIFAIS.Controllers
         private IEstadoActivosBLL _EstadoActivo;
         private ITipoActivoBLL _tipoActivo;
         private IActivosFisicosBLL _activosFisicosBLL; 
-        private IActivosPrestadosBLL _ActivosPrestadosBLL; 
+        private IActivosPrestadosBLL _ActivosPrestadosBLL;
+        private IResponsableBLL _responsableBLL;
         public RepActivosController(
             ApplicationDbContext context,
             IRepActivosBLL repActivosBLL,
             IEstadoActivosBLL estadoActivo,
             ITipoActivoBLL tipoActivo,
             IActivosFisicosBLL activosFisicosBLL,
-            IActivosPrestadosBLL ActivosPrestadosBLL
+            IActivosPrestadosBLL ActivosPrestadosBLL,
+            IResponsableBLL responsableBLL
         )
         {
             _context = context;
@@ -37,6 +40,7 @@ namespace SIFAIS.Controllers
             _tipoActivo = tipoActivo;
             _activosFisicosBLL = activosFisicosBLL;
             _ActivosPrestadosBLL = ActivosPrestadosBLL;
+            _responsableBLL = responsableBLL;
         }
         #endregion
         public IActionResult Index()
@@ -69,10 +73,12 @@ namespace SIFAIS.Controllers
                 Activos = new Modelos.Datos.TblActivosFisico(),
                 TipoActivo = new Modelos.Datos.TblTipoActivo(),
                 EstadoActivo = new Modelos.Datos.TblEstadoActivo(),
+                ResponsablePrestamo = new Modelos.Datos.TblResponsable(),
                 Desde = DateTime.Now.AddMonths(-1),
                 Hasta = DateTime.Now,
                 lstEstadoActivo = _EstadoActivo.GetListEstadoActivoRep(_context),
-                lstTipoActivo = _tipoActivo.GetListTipoActivoRep(_context)
+                lstTipoActivo = _tipoActivo.GetListTipoActivoRep(_context),
+                lstResponsablePrestamo = _responsableBLL.GetListResponsableRep(_context)
             };
 
             return View(RepPreviewListadoActivosVM);
@@ -86,14 +92,18 @@ namespace SIFAIS.Controllers
                 Activos = new Modelos.Datos.TblActivosFisico(),
                 TipoActivo = new Modelos.Datos.TblTipoActivo(),
                 EstadoActivo = new Modelos.Datos.TblEstadoActivo(),
+                ResponsablePrestamo = new Modelos.Datos.TblResponsable(),
                 Desde = DateTime.Now.AddMonths(-1),
                 Hasta = DateTime.Now,
                 lstEstadoActivo = _EstadoActivo.GetListEstadoActivoRep(_context),
-                lstTipoActivo = _tipoActivo.GetListTipoActivoRep(_context)
+                lstTipoActivo = _tipoActivo.GetListTipoActivoRep(_context),
+                lstResponsablePrestamo = _responsableBLL.GetListResponsableRep(_context)
             };
 
             return View(RepPreviewListadoActivosVM);
         }
+
+
 
         #region VISTAS QUE GENERAN REPORTES
         [HttpGet]
@@ -101,6 +111,16 @@ namespace SIFAIS.Controllers
         {
             var resultado = _repActivosBLL.ListRepTotalesActivo(_context);
             return new ViewAsPdf("IndexRepTotales", resultado.Datos)
+            {
+
+            };
+        }
+
+        [HttpGet]
+        public IActionResult IndexListadoResponsables()
+        {
+            var resultado = _responsableBLL.ListResponsable(_context);
+            return new ViewAsPdf("IndexListadoResponsables", resultado.Datos)
             {
 
             };
@@ -127,6 +147,7 @@ namespace SIFAIS.Controllers
             RepPreviewListadoActivosVM.lstPrestamos = (IEnumerable<Modelos.Views.ActivosPrestadosView>)_ActivosPrestadosBLL.ListActivosPrestadosRep(
                                                                                                                                                 _context, RepPreviewListadoActivosVM.TipoActivo.Descripcion,
                                                                                                                                                 RepPreviewListadoActivosVM.EstadoActivo.Descripcion,
+                                                                                                                                                RepPreviewListadoActivosVM.ResponsablePrestamo.Nombre,
                                                                                                                                                 RepPreviewListadoActivosVM.Desde,
                                                                                                                                                 RepPreviewListadoActivosVM.Hasta
                                                                                                                                             ).Datos;
@@ -139,9 +160,10 @@ namespace SIFAIS.Controllers
         [HttpPost]
         public IActionResult HistorialPrestamosRep(SIFAIS.Models.RepPreviewListadoActivosVM RepPreviewListadoActivosVM)
         {
-            RepPreviewListadoActivosVM.lstPrestamos = (IEnumerable<Modelos.Views.ActivosPrestadosView>)_ActivosPrestadosBLL.ListActivosPrestadosRep(
+            RepPreviewListadoActivosVM.lstPrestamos = (IEnumerable<Modelos.Views.ActivosPrestadosView>)_ActivosPrestadosBLL.ListHistorialPrestamosRep(
                                                                                                                                                 _context, RepPreviewListadoActivosVM.TipoActivo.Descripcion,
                                                                                                                                                 RepPreviewListadoActivosVM.EstadoActivo.Descripcion,
+                                                                                                                                                RepPreviewListadoActivosVM.ResponsablePrestamo.Nombre,
                                                                                                                                                 RepPreviewListadoActivosVM.Desde,
                                                                                                                                                 RepPreviewListadoActivosVM.Hasta
                                                                                                                                             ).Datos;

@@ -139,5 +139,26 @@ namespace SIFAIS.Datos.Responsable
             }
             return oRespuesta;
         }
+
+        public List<SelectListItem> GetListResponsableRep(ApplicationDbContext context)
+        {
+            List<SelectListItem> lst = new List<SelectListItem>();
+            SelectListItem lstItem = new SelectListItem()
+            {
+                Text = "-Todos-",
+                Value = "%%"
+            };
+
+            lst = (from s in context.TblResponsables
+                   where s.Estado == true
+                   select s).Select(i => new SelectListItem()
+                   {
+                       Text = i.Nombre,
+                       Value = i.Nombre
+                   }).ToList();
+
+            lst.Insert(0, lstItem);
+            return lst;
+        }
     }
 }

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<SIFAIS.Modelos.Views.ResponsableActivoView>
+@{
+    Layout = null;
+    int total = 0;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Responsables</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <style>
+        .linea {
+            border-top: 1px solid black;
+            height: 2px;
+            width: 100%;
+            padding: 0;
+            margin: 20px auto 0 auto;
+            padding-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div style="font-size: 18px; font-family:sans-serif">
+        <img src="~/img/logo.png" style="width: 120px; height:50px;" />
+        <h2 class="text-center pb-3">Listado de Responsables</h2>
+        <h5>Generado por: <b>@User.Identity.GetUserName()</b></h5>
+        <h5 style="padding-bottom: 10px;">Fecha de creación: <b>@DateTime.Now.ToShortDateString()</b></h5>
+        <table class="table">
+            <thead class="t-head" id="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CorreoElectronico)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Celular)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Estado)
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                @foreach (var item in Model)
+                {
+                    total = total + 1;
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CorreoElectronico)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Celular)
+                        </td>
+                        <td>
+                            @if (@item.Estado)
+                            {
+                                <p>Activo</p>
+                            }
+                            else
+                            {
+                                <p>Inactivo</p>
+                            }
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+            <tr style="padding-bottom: 10px;"><td>TOTAL: @total</td></tr>
+        </table>
+
+    </div>
+</body>
+</html>
+
+
+
+
+
+
